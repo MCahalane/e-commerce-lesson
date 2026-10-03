@@ -553,7 +553,14 @@
   .case-reading h4 { margin:18px 0 6px; font-size:1.02rem; }
   .case-reading h4:first-child { margin-top:0; }
   .case-reading p { margin:0 0 .8rem; line-height:1.65; }
-  .case-timeline { display:grid; grid-template-columns:repeat(9,minmax(0,1fr)); gap:6px; margin:18px 0 26px; }
+  .case-bg { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,420px); gap:20px 32px; align-items:start; margin:22px 0; }
+  .case-glance { display:grid; grid-template-columns:minmax(0,110px) minmax(0,1fr); gap:8px 14px; margin:0; padding:16px 18px; background:#fff; border:2px solid var(--black); border-top:8px solid var(--yellow); }
+  .case-glance dt { font-weight:900; }
+  .case-glance dd { margin:0; }
+  .case-map.photo { margin:0; }
+  .case-figs { display:grid; grid-template-columns:minmax(0,1fr); gap:16px; max-width:900px; }
+  .case-figs figure.photo { margin:0; }
+  .case-timeline { display:grid; grid-template-columns:repeat(8,minmax(0,1fr)); gap:6px; margin:18px 0 26px; }
   .case-timeline span { padding:10px 8px; background:#fff; border:1px solid var(--line); border-top:5px solid var(--yellow); font-size:.8rem; line-height:1.3; min-width:0; }
   .case-timeline strong { display:block; font-size:.95rem; }
   .case-intro { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:18px 36px; margin:0 0 6px; }
@@ -659,7 +666,7 @@
     .module-recap ul { grid-template-columns:1fr; }
     .media-lesson { grid-template-columns:1fr; }
     .tips-groups, .outcomes li, .case-who { grid-template-columns:1fr; }
-    .is-note, .case-intro { grid-template-columns:1fr; }
+    .is-note, .case-intro, .case-bg, .case-figs { grid-template-columns:1fr; }
     .case-timeline { grid-template-columns:repeat(3,minmax(0,1fr)); }
     .case-intro-icon { grid-column:1; grid-row:1; justify-self:start; }
     .case-intro-icon svg { width:120px; }
@@ -722,7 +729,7 @@
           <a href="#p1-payments" data-stage-link="5">5 · Payments get easy</a>
           <a href="#p1-ai" data-stage-link="6">6 · AI changes the game</a>
           <a href="#p1-review" data-stage-link="7">7 · Review understanding</a>
-          <a href="#p1-case" data-stage-link="8">8 · Teaching case: Afterpay</a>
+          <a href="#p1-case" data-stage-link="8">8 · Teaching case: AMARO</a>
         </div>
       </div>
       <div class="nav-group" data-group="part2">
@@ -820,7 +827,7 @@
         <p>By the end of this module, you will be able to:</p>
         <ol class="outcomes">
           <li><span class="lo-num">LO1</span><div><p><strong>Explain</strong> how e-commerce has evolved from the dot-com era to AI-enabled commerce, and what each stage made possible for businesses.</p><span class="lo-meta"><span class="lo-level">Understand</span> Part 1</span></div></li>
-          <li><span class="lo-num">LO2</span><div><p><strong>Classify</strong> e-commerce businesses by who trades with whom, where they sell and how they make money, and <strong>compare</strong> the value and risks of different business models, including in a real business case.</p><span class="lo-meta"><span class="lo-level">Analyse</span> Part 1 · Afterpay teaching case · Part 3 business case</span></div></li>
+          <li><span class="lo-num">LO2</span><div><p><strong>Classify</strong> e-commerce businesses by who trades with whom, where they sell and how they make money, and <strong>compare</strong> the value and risks of different business models, including in a real business case.</p><span class="lo-meta"><span class="lo-level">Analyse</span> Part 1 · AMARO teaching case · Part 3 business case</span></div></li>
           <li><span class="lo-num">LO3</span><div><p><strong>Describe</strong> the information systems behind an online sale (storefront, payment platform, database, hosting and webhooks) and <strong>trace</strong> how data flows between them.</p><span class="lo-meta"><span class="lo-level">Understand</span> Part 1 payments · Part 2</span></div></li>
           <li><span class="lo-num">LO4</span><div><p><strong>Build and test</strong> a working online shop in a test environment, using an AI assistant and cloud services.</p><span class="lo-meta"><span class="lo-level">Apply · Create</span> Part 2</span></div></li>
           <li><span class="lo-num">LO5</span><div><p><strong>Analyse</strong> how the design of an online shop's systems controls business risks such as price tampering, overselling, fraud and lost orders.</p><span class="lo-meta"><span class="lo-level">Analyse</span> Part 2</span></div></li>
@@ -880,9 +887,9 @@
         <div class="module-overview" id="p1-intro">
           <h3>What will you learn?</h3>
           <p><strong>Purpose:</strong> understand how selling online developed, so you can see why today's tools work the way they do.</p>
-          <p><strong>Key ideas:</strong> e-commerce and e-business, who sells to whom, business models, the dot-com era, Web 2.0, showrooming and middlemen, how a card payment works, AI in e-commerce, and a real teaching case (Afterpay).</p>
+          <p><strong>Key ideas:</strong> e-commerce and e-business, who sells to whom, business models, the dot-com era, Web 2.0, showrooming and middlemen, how a card payment works, AI in e-commerce, and a real teaching case (AMARO).</p>
           <p><strong>By the end:</strong> you can explain how an online business makes money, what each era made easier for a small business, and what new questions AI raises.</p>
-          <p class="lo-covers"><strong>Learning outcomes:</strong> LO1 and LO2 (applied in the Afterpay teaching case), and an introduction to LO3 and LO7.</p>
+          <p class="lo-covers"><strong>Learning outcomes:</strong> LO1 and LO2 (applied in the AMARO teaching case), and an introduction to LO3 and LO7.</p>
         </div>
         <p class="time-note"><strong>About 1½–2 hours</strong>, including the teaching case, plus three optional videos.</p>
         <div class="scenario-thread"><div class="scenario-label">Running example</div><p><strong>Imagine selling second-hand textbooks online.</strong> In 1997 you would need a bank's permission to take cards and weeks of setup. By 2011 a few lines of code would do it. Today an AI assistant can build the whole shop with you. Part 1 explains how that changed.</p></div>
@@ -894,7 +901,7 @@
           <a href="#p1-payments"><strong>Payments get easy</strong><span>From bank paperwork to Stripe, and the nine steps of a card payment.</span></a>
           <a href="#p1-ai"><strong>AI changes the game</strong><span>Recommendations, fraud checks, vibe coding and AI agents.</span></a>
           <a href="#p1-review"><strong>Review understanding</strong><span>Six questions across Part 1.</span></a>
-          <a href="#p1-case"><strong>Teaching case: Afterpay</strong><span>How an Australian start-up changed how people pay online.</span></a>
+          <a href="#p1-case"><strong>Teaching case: AMARO</strong><span>A Brazilian fashion brand weighs becoming a platform.</span></a>
         </div>
 
         <section id="p1-define" class="required-section" data-stage="1">
@@ -1330,130 +1337,159 @@
             </div>
           </div>
         </section>
-        <!-- Teaching case: Afterpay. Written for this module from widely reported public information
-             (company announcements, news coverage and Australian Government material). Not a published teaching
-             case, and not endorsed by Afterpay or Block, Inc. Fees in the activities are illustrative examples. -->
+        <!-- Teaching case activity. Adapted (shortened, paraphrased and reorganised) from:
+             Silva, W. J. da, Araújo, G. da C., Rehder, A., & Pedroso, M. C. (2024). Amaro's business model innovation:
+             DNVB or platform? Revista de Gestão, 31(4), 371–382. https://doi.org/10.1108/REGE-08-2022-0115
+             Licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Figures 1 and 2 reproduced from the
+             article. Not endorsed by the authors, the journal, Emerald Publishing or AMARO. -->
         <section id="p1-case" class="required-section" data-stage="8">
-          <h2>Teaching case: Afterpay <span class="section-time">About 40 min</span></h2>
+          <h2>Teaching case: AMARO <span class="section-time">About 40 min</span></h2>
           <div class="case-intro"><div class="case-intro-icon" aria-hidden="true"><svg viewBox="0 0 160 120">
-              <rect x="10" y="22" width="78" height="50" rx="6" fill="#ffe600" stroke="#231f20" stroke-width="4"/><rect x="10" y="32" width="78" height="9" fill="#231f20"/><rect x="20" y="52" width="26" height="7" fill="#231f20"/>
-              <g fill="#fff" stroke="#231f20" stroke-width="3"><circle cx="104" cy="90" r="11"/><circle cx="126" cy="90" r="11"/><circle cx="148" cy="90" r="11"/><circle cx="82" cy="90" r="11"/></g>
-              <g fill="#231f20"><circle cx="82" cy="90" r="5"/></g>
-              <path d="M50 74 Q60 92 70 90" fill="none" stroke="#806d00" stroke-width="3"/>
-              <text x="115" y="50" text-anchor="middle" font-family="Arial" font-weight="900" font-size="22" fill="#231f20">÷4</text>
-            </svg><span>Buy now · pay in four</span></div>
-            <p>So far Part 1 has used an invented shop, Uni Textbook Swap. To finish, you will study a <strong>real Australian e-commerce business</strong>: Afterpay, the Sydney start-up that changed how millions of people pay online, and then sold for one of the biggest prices in Australian corporate history. It brings together almost everything in Part 1: business models, platforms, payments and the rules that follow new technology.</p>
+              <path d="M30 40 L50 30 Q56 40 62 30 L82 40 L76 54 L68 50 L68 92 L44 92 L44 50 L36 54 Z" fill="#ffe600" stroke="#231f20" stroke-width="4" stroke-linejoin="round"/>
+              <path d="M90 62 H108" stroke="#806d00" stroke-width="4"/><path d="M104 56 L112 62 L104 68" fill="none" stroke="#806d00" stroke-width="4" stroke-linejoin="round"/>
+              <rect x="116" y="34" width="36" height="56" rx="4" fill="#fff" stroke="#231f20" stroke-width="4"/>
+              <g fill="#231f20"><rect x="122" y="42" width="10" height="10"/><rect x="136" y="42" width="10" height="10"/><rect x="122" y="56" width="10" height="10"/><rect x="136" y="56" width="10" height="10"/><rect x="122" y="70" width="10" height="10"/></g>
+              <rect x="136" y="70" width="10" height="10" fill="#ffe600" stroke="#231f20" stroke-width="2"/>
+            </svg><span>From brand to platform</span></div>
+            <p>So far Part 1 has used an invented shop, Uni Textbook Swap. To finish, you will study a <strong>real e-commerce business</strong>: AMARO, a Brazilian fashion company that was born online, sold its own products directly to customers, and then had to decide whether to become a platform for other brands too. The case brings together almost everything in Part 1: business models, disintermediation, omnichannel selling, platforms, data and AI.</p>
           </div>
           <div class="case-source" role="note">
-            <div class="case-source-label">About this case</div>
-            <p>This teaching case was written for this module from widely reported public information, including company announcements, news coverage and Australian Government material. It is not a published teaching case, and it is not endorsed by Afterpay or Block, Inc. Fees used in the activities are illustrative examples, not Afterpay's actual prices.</p>
-            <p><strong>Find out more:</strong> <a href="https://www.afterpay.com" target="_blank" rel="noopener">afterpay.com</a> · <a href="https://block.xyz" target="_blank" rel="noopener">block.xyz</a> (Afterpay's owner) · <a href="https://moneysmart.gov.au" target="_blank" rel="noopener">moneysmart.gov.au</a> (search “buy now pay later”)</p>
+            <div class="case-source-label">Case source</div>
+            <p>This activity is adapted from “Amaro's business model innovation: DNVB or platform?” by Wellington Jose da Silva, Giselle da Costa Araújo, Adriano Rehder and Marcelo Caldeira Pedroso, published in <em>Revista de Gestão</em>, 31(4), 371–382 (2024).</p>
+            <p><strong>Read the original case here:</strong> <a href="https://www.emerald.com/rege/article/31/4/371/1218400/Amaro-s-business-model-innovation-DNVB-or-platform" target="_blank" rel="noopener">emerald.com: Amaro's business model innovation: DNVB or platform?</a></p>
+            <p>The original case is published under the <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">Creative Commons Attribution 4.0 (CC BY 4.0)</a> licence, which permits adaptation with attribution. This learning activity has been shortened, paraphrased and reorganised for this module, and Figures 1 and 2 are reproduced from the article. It is not a replacement for the original case. The authors note that the strategic dilemma in the case is partly fictional, created for teaching.</p>
+            <p class="case-source-small">This module is independent. It is not endorsed by the case authors, <em>Revista de Gestão</em>, Emerald Publishing or AMARO. Logos in the figures are trademarks of their owners.</p>
           </div>
+
           <h3>Why this case?</h3>
           <div class="grid two">
-            <div class="card"><div class="icon-badge" aria-hidden="true">1</div><h3>A real Part 1 story</h3><p>Afterpay grew out of exactly the shift you studied in Part 1: shopping moving online, onto phones, with payments built into the checkout.</p></div>
-            <div class="card"><div class="icon-badge" aria-hidden="true">2</div><h3>A business model you can see</h3><p>Shoppers paid nothing extra if they paid on time. So who paid? The answer is a lesson in two-sided platforms that applies far beyond payments.</p></div>
-            <div class="card"><div class="icon-badge" aria-hidden="true">3</div><h3>Your shop's decision too</h3><p>Every online shop, including the one you build in Part 2, must decide whether to offer buy now, pay later at checkout, and whether it is worth the higher fee.</p></div>
-            <div class="card"><div class="icon-badge" aria-hidden="true">4</div><h3>Innovation, then regulation</h3><p>Afterpay shows a pattern you will meet throughout your career: a new technology grows fast, concerns follow, and rules catch up.</p></div>
+            <div class="card"><div class="icon-badge" aria-hidden="true">1</div><h3>E-commerce as the whole business</h3><p>For AMARO, the website wasn't an extra sales channel bolted onto shops. It was the foundation of the company, just as it is for the shop you build in Part 2.</p></div>
+            <div class="card"><div class="icon-badge" aria-hidden="true">2</div><h3>Part 1 ideas in one company</h3><p>Selling direct, cutting out middlemen, omnichannel stores, data and AI, and finally a marketplace: AMARO's story walks through Part 1 in a single business.</p></div>
+            <div class="card"><div class="icon-badge" aria-hidden="true">3</div><h3>Information systems at the centre</h3><p>Customer data shaped what AMARO designed, made and stocked. It shows information systems driving the business, not just supporting it.</p></div>
+            <div class="card"><div class="icon-badge" aria-hidden="true">4</div><h3>A real strategic dilemma</h3><p>Should a successful brand stay focused on its own products, or open its website to other brands? There is no single right answer, which makes it a good test of your judgement.</p></div>
           </div>
           <h3>What this case will teach you</h3>
           <ol class="steps">
-            <li><strong>Explain</strong> how a buy now, pay later service works for shoppers, retailers and the provider. <span class="lo-level">LO1 · LO3</span></li>
-            <li><strong>Analyse</strong> Afterpay as a two-sided platform, and how network effects drove its growth. <span class="lo-level">LO2</span></li>
-            <li><strong>Evaluate</strong> whether offering buy now, pay later is worth it for a small online shop. <span class="lo-level">LO2 · LO6</span></li>
-            <li><strong>Assess</strong> the ethical and regulatory questions raised when credit becomes a one-tap checkout button. <span class="lo-level">LO6 · LO7</span></li>
+            <li><strong>Explain</strong> what a digitally native vertical brand (DNVB) is, and how it uses e-commerce to sell directly to customers. <span class="lo-level">LO1 · LO2</span></li>
+            <li><strong>Describe</strong> how AMARO's information systems and data connected the website, design, stock and stores. <span class="lo-level">LO3</span></li>
+            <li><strong>Compare</strong> a DNVB with a platform (vertical marketplace) business model. <span class="lo-level">LO2</span></li>
+            <li><strong>Evaluate</strong> the opportunities and challenges of moving from one model to the other. <span class="lo-level">LO2 · LO6</span></li>
           </ol>
+
+          <div class="case-bg">
+            <div class="case-bg-text">
+              <h3 style="margin-top:0;">The case at a glance</h3>
+              <dl class="case-glance">
+                <dt>Company</dt><dd>AMARO, a fashion and lifestyle brand for women</dd>
+                <dt>Where</dt><dd>São Paulo, Brazil</dd>
+                <dt>Founded</dt><dd>2012, by Dominique Oliver, Lodovico Brioschi and Roberto Thiele</dd>
+                <dt>Model</dt><dd>Digitally native vertical brand (DNVB): designs its own products and sells them directly to customers</dd>
+                <dt>By 2020</dt><dd>17 Guide Shops, about 400 employees, and around a quarter of sales made in stores</dd>
+                <dt>The dilemma</dt><dd>End of 2020: stay a DNVB, or grow into a platform for other brands?</dd>
+              </dl>
+            </div>
+            <figure class="case-map photo">
+              <img src="shots/brazil-sao-paulo-map.webp" alt="Map of Brazil in South America, with an inset of the state of São Paulo showing AMARO's headquarters in the city of São Paulo" loading="lazy">
+              <figcaption><strong>Where the case happens.</strong> AMARO is based in São Paulo, Brazil's largest city. Map supplied for this module.</figcaption>
+            </figure>
+          </div>
 
           <h3>The case</h3>
           <div class="case-reading">
-            <h4>A Sydney idea</h4>
-            <p>In 2014, Nick Molnar was in his early twenties and running an online jewellery business from Sydney. He noticed something about his customers, especially younger ones: many of them didn't want to use credit cards. They had seen friends and parents struggle with card debt and interest, and they distrusted products that made money when people fell behind. Yet they still wanted to buy things before payday.</p>
-            <p>Molnar shared the problem with his neighbour, Anthony Eisen, an experienced investment executive. Together they designed a different way to pay: split the price of a purchase into four equal parts, take the first part at checkout, and the rest every two weeks. No interest, and no long application. If the shopper paid on time, they paid no more than the price on the tag. They called it Afterpay, and began signing up retailers in 2015.</p>
+            <h4>A fashion brand built on e-commerce</h4>
+            <p>AMARO is a Brazilian fashion and lifestyle company built around a simple idea: could a fashion brand use digital technology to sell directly to customers, rather than relying on traditional department stores, wholesalers and other intermediaries? Founded in São Paulo in 2012, AMARO began as an online-only fashion business for digitally connected women. From the beginning, its founders saw e-commerce not simply as another sales channel, but as the foundation of the business. AMARO would control its brand, its relationship with customers and much of the journey from product design through to sale and delivery. This approach made it an example of what became known as a <strong>digitally native vertical brand</strong>, or <strong>DNVB</strong>.</p>
 
-            <h4>How it worked for shoppers</h4>
-            <p>For a shopper, Afterpay appeared as an option at the online checkout, beside cards and PayPal. A first-time user signed up in minutes with a debit or credit card. Afterpay made a quick decision about how much each person could spend, starting with small amounts and allowing more for people who repaid reliably. A $100 pair of shoes became four payments of $25, and the shoes were shipped straight away. Customers who missed a payment were charged a late fee, which was capped, and they couldn't use the service again until they caught up.</p>
+            <h4>The founders and the idea</h4>
+            <p>The idea came from Dominique Oliver, who had worked in investment banking in New York, advising fashion companies in financial difficulty. He saw both the problems facing traditional fashion businesses and how quickly his colleagues were turning to online shopping. He believed Brazil offered an unusual opportunity: online fashion retail there was far less developed than in the United States and Europe, so there was plenty of room to grow. Oliver moved to Brazil in 2011, developed the business plan, and founded AMARO with Lodovico Brioschi and technology specialist Roberto Thiele. Technology was not added to an existing retailer later; it was part of the company's identity from the start.</p>
 
-            <h4>How it made money: the retailer pays</h4>
-            <p>The surprising part was who paid. Because shoppers paid no interest, Afterpay earned most of its income from the <strong>retailers</strong>, which paid a fee on every Afterpay sale: a percentage of the price plus a small fixed amount. That fee was well above what retailers paid for card payments. Afterpay also paid the retailer the full price up front and took on the risk that the shopper wouldn't pay. Late fees added some income, but Afterpay argued that its business worked best when customers paid on time, not when they fell behind.</p>
-            <p>Why would retailers pay more? Afterpay's pitch was that it brought them more sales: shoppers were less likely to abandon their carts, often spent more per order, and discovered new stores through Afterpay's own app, which grew into a shopping directory sending millions of visits to retailers. In effect, the higher fee was part payment processing and part marketing.</p>
+            <h4>Cutting out the middlemen</h4>
+            <p>AMARO's model differed from a conventional fashion retailer's. Instead of buying finished products from brands and reselling them, AMARO designed its own products and sold them directly to consumers. Removing traditional intermediaries gave it more control over pricing, products, customer data and the overall shopping experience. The model also connected activities that traditional retailers often keep separate: data from e-commerce could shape product design, merchandising and stock decisions, while information about sales and returns fed back into future products. AMARO described itself as both digitally native and vertically integrated, combining elements of a fashion company, a technology company and an online retailer.</p>
 
-            <h4>A platform that fed itself</h4>
-            <p>Afterpay sat between two groups: shoppers and retailers. The more retailers accepted it, the more useful it was to shoppers; the more shoppers used it, the more retailers felt they had to offer it or lose sales to competitors who did. This is the network effect from Part 1, working on both sides at once. Fashion and beauty brands, popular with young shoppers, signed up first; department stores and big chains followed.</p>
+            <h4>Guide Shops: bringing the website into the street</h4>
+            <p>Selling clothing entirely online created a problem. Customers often want to touch clothing, check its quality and try it on before buying. AMARO responded in 2015 by opening its first <strong>Guide Shop</strong>: a small physical store designed to complement, not replace, e-commerce. Customers could see and try the products, then buy through AMARO's digital system, with the items delivered afterwards. The stores also built trust in an unfamiliar online brand. AMARO had become an <strong>omnichannel</strong> retailer, connecting its website and mobile apps with physical locations. By 2020 it operated 17 Guide Shops, and the physical channel accounted for roughly a quarter of sales.</p>
 
-            <h4>Going global, and the pandemic boom</h4>
-            <p>Afterpay listed on the Australian Securities Exchange (ASX) in 2016. It launched in the United States in 2018 and in the United Kingdom in 2019, where it traded as Clearpay. When the COVID-19 pandemic pushed shopping online in 2020, Afterpay's growth accelerated sharply. Its customers and the value of purchases made with it climbed into the millions and billions, and it became one of the most valuable technology companies on the ASX, even though its profits were small or negative as it spent heavily to grow.</p>
+            <h4>Data-driven design and supply</h4>
+            <p>Behind the website sat a highly integrated operating model. AMARO used technology throughout product development, manufacturing planning, inventory management and distribution. Its designers introduced around 100 to 120 new styles each week, and new products could reach the website within about 19 days. Data helped the merchandising team identify which colours, materials, styles and price points were performing well. Rather than separating information systems from the fashion business, AMARO used information generated by customers to decide what it would make and sell next. This let it respond quickly to changing tastes while trying to avoid unnecessary stock.</p>
 
-            <h4>The systems behind the button</h4>
-            <p>Behind a simple button sat demanding information systems. Afterpay had to decide, in about a second at each checkout, whether to approve a purchase, using what it knew about that shopper's history. It had to connect to thousands of retailers' websites, often through ready-made plugins for e-commerce platforms such as Shopify, so a small shop could add it without a developer. It had to collect millions of instalments on time, run an app, detect fraud and pay retailers quickly. The data it gathered about spending was itself valuable: it helped Afterpay set spending limits and show retailers who their customers were.</p>
+            <h4>A platform built in-house</h4>
+            <p>Data also played a central role in AMARO's e-commerce platform. The company built much of its retail technology itself, including systems connecting search, shopping carts, payments, product information, promotions and customer accounts. Artificial intelligence and predictive analytics supported personalised recommendations and demand forecasting. Data from purchases, returns, website browsing and social media helped identify emerging trends and estimate how products might perform. For AMARO, customer data was not just something collected after a sale. It was a resource that informed decisions across marketing, operations and product development.</p>
 
-            <h4>Competition and criticism</h4>
-            <p>Success attracted rivals. Zip in Australia, Klarna from Sweden, Affirm in the United States and later PayPal all offered their own versions of buy now, pay later. Consumer advocates raised concerns: some young people were juggling several services at once, missing payments and paying late fees, and buy now, pay later could encourage spending that people could not really afford. Because the products charged no interest, they had fallen outside Australia's main credit laws, so providers did not have to run the same affordability checks as banks.</p>
+            <h4>One customer journey, many channels</h4>
+            <p>AMARO also focused strongly on the overall customer journey. Customers could move between the website, the mobile app, Guide Shops, social media and other channels, and Guide Shops doubled as points for collecting and returning online orders. When COVID-19 closed its stores in 2020, AMARO expanded its use of WhatsApp so that store staff could keep helping customers remotely. This illustrates an important principle of omnichannel e-commerce: the aim is not simply to run several channels, but to connect them so the customer experiences the business as a single organisation.</p>
 
-            <h4>The $39 billion deal</h4>
-            <p>In August 2021, Square, the US payments company co-founded by Jack Dorsey and now called <strong>Block, Inc.</strong>, agreed to buy Afterpay for about US$29 billion (roughly A$39 billion), paid in Square shares. It was widely reported as the largest acquisition of an Australian company. Square wanted to connect Afterpay's shoppers with its own two networks: the millions of businesses using Square's payment terminals and the consumers using its Cash App. The deal was completed in early 2022, and Afterpay became part of Block.</p>
+            <h4>The pandemic opens a door</h4>
+            <p>The pandemic also created a new strategic opportunity. Many smaller fashion businesses suddenly lost access to their physical stores and lacked the e-commerce capabilities to reach customers online. AMARO already had a recognised brand, online traffic, customer data, digital infrastructure, logistics and experience in online customer service. Instead of using these resources only to sell its own products, it began asking whether they could also sell other brands' products. This led to the launch of <strong>AMARO Collective</strong> in 2020, a trial initially involving seven carefully selected partner brands.</p>
 
-            <h4>The rules catch up</h4>
-            <p>As buy now, pay later spread, governments acted. In Australia, Parliament passed laws in 2024 that treat buy now, pay later as a form of credit. Since June 2025, providers have needed a credit licence and must check that a product is suitable for each customer, with lighter rules than for credit cards. For providers, regulation means higher compliance costs. For shoppers, it means more protection. And for retailers, it raises a question this case leaves with you: what is the right balance between making buying easy and helping customers buy responsibly?</p>
+            <h4>AMARO Collective: a marketplace inside the shop</h4>
+            <p>AMARO Collective changed the role of the company's e-commerce system. Customers could now find complementary products from partner brands alongside AMARO's own. AMARO curated which brands appeared, managed the online shopping experience, and handled the sale, delivery and after-sales service, while partner brands paid AMARO a <strong>commission</strong> on their sales. Partners gained access to AMARO's audience and e-commerce expertise, and AMARO could widen its range without designing every product itself. Data became part of the offer too: AMARO shared anonymised insights with partners about customer preferences, locations and devices. What had begun as the website of one vertically integrated brand was starting to work like a digital platform, specifically a <strong>vertical marketplace</strong> focused on women.</p>
+
+            <h4>Control or variety?</h4>
+            <p>This created an important strategic tension. AMARO's original advantage came partly from <strong>control</strong>: as a DNVB, it controlled the products it designed, the brand it presented, the information it collected and much of the customer's experience. A platform offered a different advantage. More partner brands could increase variety, attract new customers and let the business grow beyond what AMARO could produce itself. But more variety could also make AMARO less distinctive, and managing external brands raises questions about quality, fulfilment, customer experience, data sharing and how AMARO's own products compete with its partners'. Would platform growth strengthen AMARO's value proposition, or gradually turn it into something different?</p>
+
+            <h4>The decision</h4>
+            <p>By the end of 2020, AMARO faced a strategic choice about what kind of e-commerce company it wanted to be. One option was to strengthen the DNVB model, investing further in its own products, data, online channels and Guide Shops. Another was to move further towards a platform, adding more external brands and using AMARO's technology, customer relationships and infrastructure to connect other businesses with consumers. A third question cut across both: how much should AMARO invest in physical stores versus digital technology as shopping habits changed? The decision was not simply about adding products to a website. It was about the business model itself: should AMARO mainly create and sell products, or create the digital environment through which other businesses sell too?</p>
           </div>
-          <div class="case-timeline" role="img" aria-label="Afterpay timeline: 2014 idea in Sydney; 2015 first retailers; 2016 listed on the ASX; 2018 United States launch; 2019 United Kingdom launch as Clearpay; 2020 pandemic online shopping boom; 2021 Square agrees to buy Afterpay for about A$39 billion; 2022 deal completed; 2025 new Australian credit rules apply.">
-            <span><strong>2014</strong>Idea in Sydney</span><span><strong>2015</strong>First retailers</span><span><strong>2016</strong>Lists on ASX</span><span><strong>2018</strong>USA launch</span><span><strong>2019</strong>UK, as Clearpay</span><span><strong>2020</strong>Pandemic boom</span><span><strong>2021</strong>Square deal agreed</span><span><strong>2022</strong>Joins Block</span><span><strong>2025</strong>Credit rules apply</span>
+          <div class="case-timeline" role="img" aria-label="AMARO timeline: 2011 Dominique Oliver moves to Brazil; 2012 operations begin in São Paulo and first sale; 2013 dedicated distribution centre; 2015 first Guide Shop; 2017 iOS and Android apps; 2020 17 Guide Shops, COVID-19 and WhatsApp service; 2020 AMARO Collective launches with seven partner brands; end of 2020 the strategic decision.">
+            <span><strong>2011</strong>Oliver moves to Brazil</span><span><strong>2012</strong>Opens in São Paulo; first sale</span><span><strong>2013</strong>Own distribution centre</span><span><strong>2015</strong>First Guide Shop</span><span><strong>2017</strong>Mobile apps launch</span><span><strong>2020</strong>17 Guide Shops; COVID-19</span><span><strong>2020</strong>AMARO Collective, 7 brands</span><span><strong>End 2020</strong>The decision</span>
           </div>
 
-          <h3>Your shop's decision: should Uni Textbook Swap offer buy now, pay later?</h3>
-          <div class="viz" id="bnpl-calc">
-            <div class="viz-head"><h3>Is the higher fee worth it?</h3><span class="viz-tag">Try it</span></div>
-            <p style="margin:0 0 16px;">Buy now, pay later costs a shop more per sale than a card, but may bring extra sales. Move the sliders to compare a month with and without it. All rates are <strong>illustrative examples</strong>, not any provider's real prices.</p>
-            <div class="calc">
-              <div class="calc-inputs">
-                <label for="b-orders"><span class="row"><span>Orders a month by card</span><output id="bo-orders"></output></span><input type="range" id="b-orders" min="10" max="200" step="5" value="60"></label>
-                <label for="b-price"><span class="row"><span>Average order</span><output id="bo-price"></output></span><input type="range" id="b-price" min="20" max="150" step="5" value="60"></label>
-                <label for="b-margin"><span class="row"><span>Profit per order before payment fees</span><output id="bo-margin"></output></span><input type="range" id="b-margin" min="5" max="40" step="1" value="18"></label>
-                <label for="b-card"><span class="row"><span>Card fee</span><output id="bo-card"></output></span><input type="range" id="b-card" min="1" max="3" step="0.05" value="1.75"></label>
-                <label for="b-bnpl"><span class="row"><span>Buy now, pay later fee</span><output id="bo-bnpl"></output></span><input type="range" id="b-bnpl" min="2" max="8" step="0.1" value="5"></label>
-                <label for="b-share"><span class="row"><span>Share of orders that switch to it</span><output id="bo-share"></output></span><input type="range" id="b-share" min="0" max="60" step="5" value="25"></label>
-                <label for="b-extra"><span class="row"><span>Extra orders it brings in</span><output id="bo-extra"></output></span><input type="range" id="b-extra" min="0" max="40" step="1" value="10"></label>
-              </div>
-              <div><div class="cac-out" id="bnpl-out"></div><div class="calc-result" id="bnpl-result" aria-live="polite"></div></div>
+          <h3>Where AMARO competes</h3>
+          <p>The case's authors used two positioning maps to show where AMARO sat in Brazil's markets. Use them to see who AMARO competed with as a brand, and who it would compete with as a platform.</p>
+          <div class="case-figs">
+            <figure class="photo"><img src="shots/amaro-fig1-fashion-positioning.png" alt="Figure 1: competitive positioning map of Brazil's fashion sector, plotting price against added value. Groups run from entry-level (such as Shein) through popular, intermediary (such as C&amp;A and Renner) and premium (including Zara, Farm and AMARO) to exclusive brands." loading="lazy"><figcaption><strong>Figure 1. As a fashion brand:</strong> AMARO sits in the premium group, offering high added value at a premium price. Source: Silva et al. (2024), CC BY 4.0.</figcaption></figure>
+            <figure class="photo"><img src="shots/amaro-fig2-marketplace-positioning.png" alt="Figure 2: competitive positioning map of Brazil's marketplace platforms, plotting scope of action against customer experience and brand. AMARO appears as a vertical player with a differentiated experience, alongside Madeira Madeira; Amazon and Magalu are broad multibrand platforms; Mercado Livre and Shopee are peer-to-peer plus multilateral." loading="lazy"><figcaption><strong>Figure 2. As a platform:</strong> AMARO is a <em>vertical</em> player (one category, one audience) with a differentiated customer experience, far from giants like Amazon and Mercado Livre. Source: Silva et al. (2024), CC BY 4.0.</figcaption></figure>
+          </div>
+
+          <h3>DNVB or platform? Sort the features</h3>
+          <div class="viz">
+            <div class="viz-head"><h3>Which model does each feature belong to?</h3><span class="viz-tag">Try it</span></div>
+            <p style="margin:0 0 14px;">Use the case to decide whether each feature describes AMARO as a DNVB, as a platform, or both.</p>
+            <div class="sorter" id="sort-amaro">
+              <div class="sort-item" data-right="0" data-why="As a DNVB, AMARO designs its own products, so it controls their quality, look and price."><div class="si-name">Designs every product it sells</div><div class="sort-btns"><button type="button">DNVB</button><button type="button">Platform</button><button type="button">Both</button></div><div class="sort-fb" aria-live="polite"></div></div>
+              <div class="sort-item" data-right="1" data-why="AMARO Collective's partner brands paid AMARO a commission on their sales, the marketplace model from Part 1."><div class="si-name">Earns a commission on other brands' sales</div><div class="sort-btns"><button type="button">DNVB</button><button type="button">Platform</button><button type="button">Both</button></div><div class="sort-fb" aria-live="polite"></div></div>
+              <div class="sort-item" data-right="2" data-why="AMARO's website, apps and data serve its own products and, through AMARO Collective, its partners' products too."><div class="si-name">Runs its own website, apps and customer data</div><div class="sort-btns"><button type="button">DNVB</button><button type="button">Platform</button><button type="button">Both</button></div><div class="sort-fb" aria-live="polite"></div></div>
+              <div class="sort-item" data-right="1" data-why="Adding partner brands widens the range without AMARO designing each product, a key platform advantage."><div class="si-name">Grows its range without designing new products</div><div class="sort-btns"><button type="button">DNVB</button><button type="button">Platform</button><button type="button">Both</button></div><div class="sort-fb" aria-live="polite"></div></div>
+              <div class="sort-item" data-right="1" data-why="With more external brands, AMARO risks looking less distinctive, and has less control over quality and fulfilment."><div class="si-name">Risks becoming less distinctive</div><div class="sort-btns"><button type="button">DNVB</button><button type="button">Platform</button><button type="button">Both</button></div><div class="sort-fb" aria-live="polite"></div></div>
             </div>
-            <p class="viz-note">Try setting extra orders to zero: the shop then pays more for the same sales. The case for buy now, pay later rests almost entirely on whether it brings new or bigger orders.</p>
+            <p class="sort-score" aria-live="polite"></p>
           </div>
 
           <h3>Bring your Part 1 toolkit</h3>
           <div class="comparison-wrap"><table class="comparison">
-            <thead><tr><th>Part 1 idea</th><th>Where it appears in the Afterpay case</th></tr></thead>
+            <thead><tr><th>Part 1 idea</th><th>Where it appears in the AMARO case</th></tr></thead>
             <tbody>
-              <tr><td>Who sells to whom</td><td>Afterpay serves shoppers (B2C) but is paid mainly by retailers (B2B). It sits between the two.</td></tr>
-              <tr><td>Business models</td><td>Retailer fees, late fees and, through its app, something close to affiliate marketing: sending shoppers to stores.</td></tr>
-              <tr><td>Network effects</td><td>More retailers attract more shoppers, and more shoppers pressure more retailers to sign up.</td></tr>
-              <tr><td>Payments</td><td>A new option beside cards and wallets at checkout, with the provider taking the credit risk.</td></tr>
-              <tr><td>The dot-com lesson</td><td>A very high value built on fast growth while profits stayed small. Who pays, and does each sale make money?</td></tr>
-              <tr><td>AI and data</td><td>Instant approval decisions and spending limits based on each shopper's history.</td></tr>
+              <tr><td>Who sells to whom</td><td>A B2C brand selling directly to women (direct to consumer); with AMARO Collective, it also works with other businesses (B2B).</td></tr>
+              <tr><td>Business models</td><td>Online direct selling at first, then marketplace commission on partner brands' sales.</td></tr>
+              <tr><td>Disintermediation</td><td>AMARO cut out department stores and wholesalers by designing and selling its own products.</td></tr>
+              <tr><td>Clicks-and-mortar and omnichannel</td><td>Born pure-play, then Guide Shops, apps, WhatsApp and collection points connected into one customer journey.</td></tr>
+              <tr><td>Platforms and network effects</td><td>More partner brands could attract more customers, and more customers could attract more brands.</td></tr>
+              <tr><td>AI and data</td><td>Predictive analytics for trends and demand, personalised recommendations, and anonymised data shared with partners.</td></tr>
             </tbody>
           </table></div>
 
-          <h3>Your analysis</h3>
-          <p>Answer in a few sentences each, using the case above. Your answers save in this browser, and your teacher may use them for a class discussion.</p>
+          <h3>Activity: from online retailer to digital platform</h3>
+          <p><strong>Instructions:</strong> read the AMARO case above and consider how its e-commerce business model evolved. Answer the question using specific examples from the case. Aim to explain not only <em>what</em> changed, but <em>why</em> the change mattered for the business.</p>
+          <div class="callout"><strong>Question:</strong> How did AMARO's use of e-commerce change as it moved from being a digitally native retailer to operating more like a platform, and what new opportunities and challenges did this create?</div>
           <div class="case-form" id="case-analysis">
-            <label><span class="case-q">1 · Who pays, and why? <small>LO2</small></span><span class="case-hint">Shoppers who pay on time pay nothing extra. Explain who pays for Afterpay, and why they agree to.</span><textarea data-mcase="classify" rows="3"></textarea></label>
-            <label><span class="case-q">2 · The platform <small>LO2</small></span><span class="case-hint">Describe Afterpay as a two-sided platform. How did network effects help it grow so fast, and how did competitors threaten that?</span><textarea data-mcase="model" rows="3"></textarea></label>
-            <label><span class="case-q">3 · The systems <small>LO3 · LO7</small></span><span class="case-hint">Name two information systems Afterpay needed behind its checkout button, and what could go wrong with each.</span><textarea data-mcase="channels" rows="3"></textarea></label>
-            <label><span class="case-q">4 · Your recommendation <small>LO6 · LO7</small></span><span class="case-hint">Should Uni Textbook Swap offer buy now, pay later? Use the calculator, then weigh the extra cost and sales against what you read about customer debt and the 2025 rules.</span><textarea data-mcase="recommend" rows="4"></textarea></label>
+            <label><span class="case-q">1 · Before <small>LO1 · LO2</small></span><span class="case-hint">How did AMARO originally use e-commerce to sell its own products directly to customers?</span><textarea data-mcase="before" rows="4"></textarea></label>
+            <label><span class="case-q">2 · Change <small>LO2 · LO3</small></span><span class="case-hint">What changed when AMARO began allowing other brands to sell through its platform?</span><textarea data-mcase="change" rows="4"></textarea></label>
+            <label><span class="case-q">3 · Impact <small>LO2 · LO6</small></span><span class="case-hint">Identify at least one opportunity and one challenge created by this shift, using examples from the case.</span><textarea data-mcase="impact" rows="4"></textarea></label>
             <div class="case-actions"><button type="button" class="viz-btn" id="mcase-copy">Copy my answers</button><span class="case-count" id="mcase-count" aria-live="polite"></span></div>
             <textarea class="case-fallback" id="mcase-fallback" rows="8" readonly hidden aria-label="Your case answers, ready to copy"></textarea>
           </div>
           <div class="why-matters">
             <div class="why-label">Why this matters to you</div>
-            <p>Afterpay shows how a simple idea at the checkout can reshape a whole industry, create a company worth billions, and then draw the attention of regulators. Whether you end up in accounting, finance, marketing, risk or information systems, you will judge new payment and platform technologies like this: what they cost, who really benefits, and what could go wrong for customers.</p>
+            <p>Many businesses you will work for or advise face AMARO's question: should we sell our own products, or become the place where others sell? Amazon, and many retailers since, have added marketplaces to their own shops. Judging whether that move strengthens a business or dilutes it, and what information systems it needs, is exactly the kind of decision business graduates are asked to support.</p>
           </div>
-          <div class="quick-check section-check" data-answer="2" data-explanation="Shoppers who pay on time pay no interest or fees, so most of Afterpay's income came from the fee retailers paid on each sale."><div class="question-number">Pause and check</div><h3>Where did most of Afterpay's income come from?</h3><div class="choices"><button class="choice">Interest charged to shoppers</button><button class="choice">Selling advertising in its app to banks</button><button class="choice">Fees paid by retailers on each sale</button></div><div class="feedback" aria-live="polite"></div></div>
-          <div class="quick-check section-check" data-answer="0" data-explanation="Each side attracted the other: more retailers made Afterpay more useful to shoppers, and more shoppers made it more important for retailers to offer. That is a network effect on a two-sided platform."><div class="question-number">Pause and check</div><h3>Retailers felt they had to offer Afterpay because so many shoppers used it. What does this show?</h3><div class="choices"><button class="choice">A network effect on a two-sided platform</button><button class="choice">Disintermediation</button><button class="choice">Showrooming</button></div><div class="feedback" aria-live="polite"></div></div>
-          <div class="quick-check section-check" data-answer="1" data-explanation="If the extra fee isn't matched by new or bigger orders, the shop pays more for the same sales. The value of buy now, pay later to a retailer depends on the extra sales it brings."><div class="question-number">Pause and check</div><h3>A shop adds buy now, pay later, but it brings no extra orders. What happens to its profit?</h3><div class="choices"><button class="choice">It rises, because customers can afford more.</button><button class="choice">It falls, because the shop pays a higher fee on the same sales.</button><button class="choice">It stays the same, because the provider pays the fee.</button></div><div class="feedback" aria-live="polite"></div></div>
-          <p class="case-reference"><strong>About this case:</strong> written for this module from public information about Afterpay and Block, Inc. Dates and amounts are as widely reported; check current details at the links above.</p>
+          <div class="quick-check section-check" data-answer="1" data-explanation="A DNVB is born online and vertically integrated: it designs its own products and sells them directly to customers, without traditional intermediaries."><div class="question-number">Pause and check</div><h3>What best describes a digitally native vertical brand (DNVB) like AMARO?</h3><div class="choices"><button class="choice">An online store that resells other brands' products at a discount</button><button class="choice">A brand born online that designs its own products and sells them directly to customers</button><button class="choice">A marketplace where shoppers sell second-hand items to each other</button></div><div class="feedback" aria-live="polite"></div></div>
+          <div class="quick-check section-check" data-answer="2" data-explanation="Partner brands in AMARO Collective paid AMARO a commission on their sales, while AMARO handled the sale, delivery and after-sales service."><div class="question-number">Pause and check</div><h3>How did AMARO earn money from partner brands in AMARO Collective?</h3><div class="choices"><button class="choice">By charging shoppers a membership fee</button><button class="choice">By buying the partners' stock and reselling it at a mark-up</button><button class="choice">Through a commission on the partners' sales</button></div><div class="feedback" aria-live="polite"></div></div>
+          <div class="quick-check section-check" data-answer="0" data-explanation="Guide Shops let customers see and try products, then buy through AMARO's digital system, linking physical and online channels into one omnichannel experience."><div class="question-number">Pause and check</div><h3>What was the main role of AMARO's Guide Shops?</h3><div class="choices"><button class="choice">To let customers see and try products, then buy through AMARO's digital system</button><button class="choice">To replace the website once the brand was well known</button><button class="choice">To stock partner brands that weren't allowed online</button></div><div class="feedback" aria-live="polite"></div></div>
+          <p class="case-reference"><strong>Reference:</strong> Silva, W. J. da, Araújo, G. da C., Rehder, A., &amp; Pedroso, M. C. (2024). Amaro's business model innovation: DNVB or platform? <em>Revista de Gestão</em>, 31(4), 371–382. <a href="https://doi.org/10.1108/REGE-08-2022-0115" target="_blank" rel="noopener">https://doi.org/10.1108/REGE-08-2022-0115</a>. Licensed under CC BY 4.0.</p>
         </section>
 
         <div class="module-recap" data-closure="part1" hidden>
           <h3>What should you take from Part 1?</h3>
-          <ul><li>Who sells to whom, and how a business makes money, matter more than how its website looks, as the Afterpay case shows for a real Australian business.</li><li>Each era, from Web 1.0 to Web 2.0 to easy payments, lowered the barriers to selling online; approval takes seconds, but the money arrives days later.</li><li>AI now recommends, detects fraud, writes content, builds shops and starts to shop for people, and it needs limits and human oversight.</li></ul>
+          <ul><li>Who sells to whom, and how a business makes money, matter more than how its website looks, as the AMARO case shows for a real fashion brand.</li><li>Each era, from Web 1.0 to Web 2.0 to easy payments, lowered the barriers to selling online; approval takes seconds, but the money arrives days later.</li><li>AI now recommends, detects fraud, writes content, builds shops and starts to shop for people, and it needs limits and human oversight.</li></ul>
         </div>
         <div class="celebration" data-closure="part1" role="note" hidden><strong>Part 1 complete.</strong><p>You know where today's tools came from. Now build your own shop.</p></div>
         <div class="part-transition" data-closure="part1" hidden><strong>Continue to Part 2</strong><p>Build and launch your own shop.</p><a href="#part2">Go to Part 2 →</a></div>
@@ -2360,7 +2396,8 @@ Requirements:
         </ul>
         <h3>Teaching case</h3>
         <ul>
-          <li>The Afterpay teaching case in Part 1 was written for this module from widely reported public information about Afterpay and Block, Inc. It is not endorsed by either company. See <a href="https://www.afterpay.com" target="_blank" rel="noopener">afterpay.com</a>, <a href="https://block.xyz" target="_blank" rel="noopener">block.xyz</a> and <a href="https://moneysmart.gov.au" target="_blank" rel="noopener">Moneysmart</a> on buy now, pay later.</li>
+          <li>Silva, W. J. da, Araújo, G. da C., Rehder, A., &amp; Pedroso, M. C. (2024). Amaro's business model innovation: DNVB or platform? <em>Revista de Gestão</em>, 31(4), 371–382. <a href="https://doi.org/10.1108/REGE-08-2022-0115" target="_blank" rel="noopener">https://doi.org/10.1108/REGE-08-2022-0115</a>. Full case: <a href="https://www.emerald.com/rege/article/31/4/371/1218400/Amaro-s-business-model-innovation-DNVB-or-platform" target="_blank" rel="noopener">Emerald</a>.</li>
+          <li><strong>Acknowledgement:</strong> the Part 1 teaching case activity was adapted (shortened, paraphrased and reorganised) from this case for educational purposes, under its <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a> licence. Figures 1 and 2 are reproduced from the article. The Brazil map was supplied for this module. This module is not endorsed by the authors, the journal, Emerald Publishing or AMARO.</li>
         </ul>
         <h3>E-commerce concepts</h3>
         <ul>
@@ -2380,7 +2417,7 @@ Requirements:
       </section>
     </div>
 
-    <footer><strong>Build Your Own Online Shop</strong> · Version 3 October 2026 (Afterpay teaching case) · A hands-on e-commerce module · Test mode only, no real payments. The diagrams are illustrations, and the screenshots come from an example shop built the same way. Logos are trademarks of their owners, used for identification and teaching (see Sources).</footer>
+    <footer><strong>Build Your Own Online Shop</strong> · Version 3 October 2026 (AMARO teaching case) · A hands-on e-commerce module · Test mode only, no real payments. The diagrams are illustrations, and the screenshots come from an example shop built the same way. Logos are trademarks of their owners, used for identification and teaching (see Sources).</footer>
   </main>
 </div>
 <button type="button" class="top-button" id="top-button" aria-label="Back to top"><span aria-hidden="true">↑</span><span class="top-label">Top</span></button>
@@ -2427,7 +2464,7 @@ Requirements:
       { first:'p1-payments', title:'Payments get easy', purpose:'Compare taking card payments in 2000 with doing it through Stripe today, and follow one payment through nine steps.', output:'Why payment platforms matter', takeaway:'You can explain what Stripe made easier for small businesses.' },
       { first:'p1-ai', title:'AI changes the game', purpose:'See six ways AI is used in e-commerce today, from recommendations to AI agents that shop.', output:'AI in e-commerce', takeaway:'You can describe how AI is changing online shopping, and the questions it raises.' },
       { first:'p1-review', title:'Review understanding', purpose:'Apply ideas from across Part 1 to six new questions.', output:'Part 1 reviewed', takeaway:'Next, apply these ideas to a real business case.' },
-      { first:'p1-case', title:'Teaching case: Afterpay', purpose:'Read a teaching case about Afterpay, the Australian buy now, pay later business, and analyse it with the ideas from Part 1.', output:'Part 1 complete', takeaway:'You are ready to build your own shop.' }
+      { first:'p1-case', title:'Teaching case: AMARO', purpose:'Read a teaching case about AMARO, a Brazilian digitally native fashion brand deciding whether to become a platform, and analyse it with the ideas from Part 1.', output:'Part 1 complete', takeaway:'You are ready to build your own shop.' }
     ],
     part2: [
       { first:'p2-ready', title:'Get ready', purpose:'Set up five accounts, see how one sale works from start to finish, learn four safety rules, then choose step by step or all in one (connectors).', output:'Accounts and the big picture', takeaway:'You know what each tool does and how a sale flows through them.' },
@@ -2777,6 +2814,10 @@ Requirements:
     ["Vibe coding", "Building software by describing what you want to an AI assistant, testing the result, and asking for changes.", "directing a builder instead of laying the bricks yourself."],
     ["Teaching case", "A true business story written for students to analyse. It sets out the facts and a decision, and leaves the answers to you.", "a flight simulator for business decisions."],
     ["Two-sided platform", "A business that serves two groups who need each other, such as shoppers and retailers, and often charges one side to attract the other.", "a nightclub that lets one group in free to attract the other."],
+    ["DNVB (digitally native vertical brand)", "A brand born online that designs its own products and sells them directly to customers, controlling the chain from design to delivery.", "a designer with their own shopfront and no middlemen."],
+    ["Vertical integration", "One business running several stages of its supply chain itself, such as design, production planning, stock and selling.", "a bakery that grows its own wheat."],
+    ["Vertical marketplace", "A marketplace focused on one category or audience, such as women's fashion, rather than selling everything.", "a specialist market hall, not a supermarket."],
+    ["Guide shop", "A small physical store where customers see and try products, then buy through the brand's online system.", "a showroom with a checkout screen."],
     ["Credit licence", "A licence a business needs in Australia to provide credit. Since June 2025 it includes buy now, pay later providers.", "a driver's licence for lending money."],
     ["Learning outcome", "A statement of what you will be able to do by the end of a module, such as “evaluate” or “build”.", "the destination on a map."],
     ["Connector", "A link that plugs an outside service, such as Stripe or Supabase, into an AI assistant so it can look things up and take actions there, using your login.", "giving an assistant a key card to certain rooms."],
@@ -3199,7 +3240,7 @@ Requirements:
     });
     words();
     document.getElementById('mcase-copy').addEventListener('click', function () {
-      var text = 'Teaching case: Afterpay\n\n' + fields.map(function (f) {
+      var text = 'Teaching case: AMARO (adapted from Silva et al., 2024, CC BY 4.0)\nQuestion: How did AMARO\'s use of e-commerce change as it moved from being a digitally native retailer to operating more like a platform, and what new opportunities and challenges did this create?\n\n' + fields.map(function (f) {
         return f.closest('label').querySelector('.case-q').firstChild.textContent.trim() + '\n' + (f.value.trim() || '(not answered)');
       }).join('\n\n');
       var fb = document.getElementById('mcase-fallback'), btn = this;
@@ -3211,35 +3252,6 @@ Requirements:
   })();
 
 
-  // ---------- buy now, pay later calculator (Afterpay case) ----------
-  (function () {
-    var outEl = document.getElementById('bnpl-out');
-    if (!outEl) return;
-    var ids = ['orders','price','margin','card','bnpl','share','extra'], el = {};
-    ids.forEach(function (k) { el[k] = document.getElementById('b-' + k); });
-    var res = document.getElementById('bnpl-result');
-    function money(v) { return (v < 0 ? '−$' : '$') + Math.abs(v).toFixed(2); }
-    function row(label, value, total) { return '<div class="cac-row' + (total ? ' total' : '') + '"><span>' + label + '</span><span>' + value + '</span></div>'; }
-    function calc() {
-      var n = +el.orders.value, price = +el.price.value, margin = +el.margin.value, card = +el.card.value / 100, bnpl = +el.bnpl.value / 100, share = +el.share.value / 100, extra = +el.extra.value;
-      document.getElementById('bo-orders').textContent = n;
-      document.getElementById('bo-price').textContent = '$' + price;
-      document.getElementById('bo-margin').textContent = '$' + margin;
-      document.getElementById('bo-card').textContent = (card * 100).toFixed(2) + '%';
-      document.getElementById('bo-bnpl').textContent = (bnpl * 100).toFixed(1) + '%';
-      document.getElementById('bo-share').textContent = Math.round(share * 100) + '%';
-      document.getElementById('bo-extra').textContent = extra + ' a month';
-      var without = n * (margin - price * card);
-      var switched = n * share, stayed = n - switched;
-      var withIt = stayed * (margin - price * card) + (switched + extra) * (margin - price * bnpl);
-      var diff = withIt - without;
-      outEl.innerHTML = row('Monthly profit, cards only', money(without)) + row('Monthly profit with buy now, pay later', money(withIt)) + row('Extra fees paid on switched orders', money(switched * price * (bnpl - card))) + row('Difference', money(diff), true);
-      res.classList.toggle('bad', diff < 0);
-      res.textContent = diff < 0 ? 'Offering it costs the shop ' + money(-diff) + ' a month at these numbers.' : 'Offering it earns the shop ' + money(diff) + ' more a month at these numbers.';
-    }
-    ids.forEach(function (k) { el[k].addEventListener('input', calc); });
-    calc();
-  })();
 })();
 </script>
 

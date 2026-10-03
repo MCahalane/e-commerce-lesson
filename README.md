@@ -2,7 +2,7 @@
 
 An interactive, self-paced e-commerce lesson for business and information systems students. It takes about 5–6 hours: Part 1 about 1½–2 hours, Part 2 about 2–2½ hours, Part 3 about 1½ hours.
 
-- **Part 1:** from dot-com to AI. Covers e-commerce types, business models, Web 2.0 and channels, how online payments work, AI, and a real teaching case (Afterpay).
+- **Part 1:** from dot-com to AI. Covers e-commerce types, business models, Web 2.0 and channels, how online payments work, AI, and a real teaching case (AMARO).
 - **Part 2:** build your own shop that takes test payments, using an AI assistant, Stripe, Supabase and Vercel.
 - **Part 3:** what it takes to make it real. Covers finding customers, fulfilment, the law, security and ethics, and ends with a short business case.
 - **Reference:** a recap of AI tools for vibe coding, a glossary, and sources.
@@ -36,7 +36,7 @@ Progress, quiz answers and the business case are saved only in each student's br
 
 ## Sources and acknowledgements
 
-**Teaching case:** the Part 1 Afterpay case was written for this module from widely reported public information. It is not endorsed by Afterpay or Block, Inc.
+**Acknowledgement:** the Part 1 teaching case activity is adapted (shortened, paraphrased and reorganised), for educational purposes, from Silva, W. J. da, Araújo, G. da C., Rehder, A., & Pedroso, M. C. (2024). Amaro's business model innovation: DNVB or platform? *Revista de Gestão*, 31(4), 371–382. https://doi.org/10.1108/REGE-08-2022-0115. The original is licensed under CC BY 4.0. Figures 1 and 2 are reproduced from the article. The module is not endorsed by the authors, the journal, Emerald Publishing or AMARO.
 
 Chapter 7 material is adapted from Rainer, R. K., & Prince, B. (2021). *Introduction to information systems*. John Wiley & Sons.
 
