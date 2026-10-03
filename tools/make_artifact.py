@@ -1,7 +1,8 @@
 """Turn index.html (the master copy) into a page for a Claude artifact.
 
 Claude artifacts can't embed YouTube, so each embedded video becomes a
-link button, and the document wrapper is removed (the artifact adds its own).
+link button; .m4a audio sources are dropped (the .mp3 copies remain); and the
+document wrapper is removed (the artifact adds its own).
 
 Usage: python3 tools/make_artifact.py index.html artifact.html
 """
@@ -17,6 +18,9 @@ s, n = re.subn(
     r'<a class="video-link" href="https://www.youtube.com/watch?v=\1" target="_blank" rel="noopener"><span>Open this video on YouTube ↗</span></a>',
     s, flags=re.S)
 s = re.sub(r'  \.video-embed \{.*?\n  \.video-fallback \{[^\n]*\n', '', s, flags=re.S)
+
+# Claude artifacts don't serve .m4a, so keep only the .mp3 audio sources
+s = re.sub(r'<source src="audio/[^"]+\.m4a" type="audio/mp4">', '', s)
 
 # strip the document wrapper
 s = s[s.index('<title>'):]
