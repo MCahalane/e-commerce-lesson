@@ -485,6 +485,11 @@
   .calc-result { margin-top:14px; padding:12px 14px; font-weight:800; border-left:6px solid var(--green); background:var(--green-soft); }
   .calc-result.bad { border-left-color:var(--red); background:var(--red-soft); }
 
+  /* build routes */
+  .route-note { margin:20px 0; padding:14px 18px; background:var(--blue-pale); border-left:6px solid var(--black); }
+  .route-note .route-label { display:inline-block; margin-bottom:6px; padding:.2rem .5rem; background:var(--black); color:var(--yellow); font-size:.7rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase; }
+  .route-note p { margin:.25rem 0 0; max-width:75ch; }
+  .routes-table td:first-child { white-space:nowrap; }
   /* majors */
   .major-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin:18px 0 26px; }
   .major { display:flex; flex-direction:column; gap:8px; min-width:0; padding:16px; background:#fff; border:2px solid var(--black); }
@@ -1232,7 +1237,7 @@
         </div>
 
         <section id="p2-ready" class="required-section" data-stage="1">
-          <h2>Get ready <span class="section-time">About 15 min</span></h2>
+          <h2>Get ready <span class="section-time">About 20 min</span></h2>
           <div class="scenario-thread story"><div class="scenario-label">Story · two weeks to O-Week</div><p>Alex wants Uni Textbook Swap online before the start of semester, when new students hunt for cheap books. There is no budget for a developer and only two weeks to go. Ten years ago that would have been impossible. Today, with free tools and an AI assistant, it is a weekend project. The trick is knowing what each tool does.</p></div>
           <h3>Five free accounts</h3>
           <div class="comparison-wrap"><table class="comparison">
@@ -1245,11 +1250,38 @@
               <tr><td>AI assistant</td><td>Writes the code with you</td><td>Claude Code at <a href="https://claude.ai/code" target="_blank" rel="noopener">claude.ai/code</a>, or similar</td></tr>
             </tbody>
           </table></div>
-          <h3>Three safety rules</h3>
-          <div class="grid three">
+          <h3>Four safety rules</h3>
+          <div class="grid two">
             <div class="card"><h3>Test mode only</h3><p>Work in a Stripe <strong>sandbox</strong>. Your secret Stripe code must start with <code>sk_test_</code>. If you see <code>sk_live_</code>, stop: that is real money.</p></div>
-            <div class="card"><h3>Secrets stay secret</h3><p>Paste secret codes only into Vercel's settings. Never into GitHub, an AI chat or a screenshot you share.</p></div>
+            <div class="card"><h3>Secrets stay secret</h3><p>Paste secret codes only into Vercel's settings. Never into GitHub, an AI chat or a screenshot you share. (Connectors, below, are different: the AI uses your login, so you don't paste codes at all.)</p></div>
             <div class="card"><h3>Save often</h3><p>Ask your AI assistant to save a version (a <strong>commit</strong>) after each step, so you can always go back.</p></div>
+            <div class="card"><h3>Approve, don't autopilot</h3><p>If you connect services to your AI assistant, read each action before you approve it, check that Stripe is in your sandbox, and disconnect the services when you finish.</p></div>
+          </div>
+          <h3>Two ways to build: step by step, or all in one</h3>
+          <p>Every student builds the same shop. You can choose how much of the clicking your AI assistant does for you.</p>
+          <div class="comparison-wrap"><table class="comparison routes-table">
+            <thead><tr><th></th><th>Route A · Step by step</th><th>Route B · All in one (connectors)</th></tr></thead>
+            <tbody>
+              <tr><td>How it works</td><td>Your AI assistant writes the code. You work in each service's own website: add products in Stripe, set up the database in Supabase, copy codes into Vercel.</td><td>You connect Stripe, Supabase, Vercel and GitHub to your AI assistant. It then does most of those steps for you, inside each service, while you watch and approve.</td></tr>
+              <tr><td>What you set up</td><td>Five accounts</td><td>Five accounts, plus switching on a connector for each service and approving what it may do</td></tr>
+              <tr><td>Best for</td><td>Learning what each part does and where everything lives</td><td>Speed, and seeing an AI agent do real work</td></tr>
+              <tr><td>Watch out for</td><td>Copy-and-paste mistakes, such as a code with a missing character</td><td>Approving actions without reading them; some steps may still need you</td></tr>
+            </tbody>
+          </table></div>
+          <p><strong>This lesson's steps are written for Route A.</strong> If you take Route B, look for the blue <em>Using connectors?</em> notes in each stage: they tell you what to ask your AI to do, and what to check yourself afterwards. Either way, you should understand every step, because you are responsible for the shop.</p>
+          <h3>What are connectors and MCP?</h3>
+          <p>On its own, an AI assistant can only talk and write code. A <strong>connector</strong> plugs an outside service, such as Stripe or Supabase, into the assistant so it can look things up and take actions there, using your login. Most connectors use <strong>MCP</strong> (Model Context Protocol), an open standard that Anthropic introduced in 2024 and other AI companies have since adopted. MCP is a common plug that any AI assistant and any service can use, much like USB for devices.</p>
+          <p>This is the <strong>AI agent</strong> idea from Part 1: AI that takes actions, not just answers. Stripe, Supabase, Vercel and GitHub all offer official connectors.</p>
+          <div class="grid two">
+            <div class="card"><div class="icon-badge" aria-hidden="true">1</div><h3>Switch the connectors on</h3><p>In <strong>Claude</strong>, connectors are in the app's settings, and Claude Code can use them too. <strong>ChatGPT</strong> and OpenAI's coding tool <strong>Codex</strong> also support MCP connectors. Menus change often, so search your assistant's help pages for “connectors” or “MCP”.</p></div>
+            <div class="card"><div class="icon-badge" aria-hidden="true">2</div><h3>Sign in and approve</h3><p>Each connector asks you to sign in to that service and approve what the AI may do. Choose the narrowest access offered. For Stripe, connect your <strong>sandbox</strong>, never a live account.</p></div>
+            <div class="card"><div class="icon-badge" aria-hidden="true">3</div><h3>Check the AI is working in the right place</h3><p>Before it creates anything, ask it to tell you which Stripe account, Supabase project and Vercel team it is about to use. It is easy to build in the wrong project.</p></div>
+            <div class="card"><div class="icon-badge" aria-hidden="true">4</div><h3>Read, then approve</h3><p>The assistant shows each action before running it. Read it. Anything that deletes, uses live keys or costs money deserves a hard look, or a no.</p></div>
+          </div>
+          <div class="scenario-thread story"><div class="scenario-label">Story · the agent hits a wall</div><p>The example shop for this lesson was built with Route B. Connected to Stripe, Supabase, GitHub and Vercel, the AI assistant created the products, the database tables, the webhook and the deployment in minutes. But it could not do everything. Vercel refused to let it create the project, and Stripe had moved its webhook settings to a new menu, so a person had to click through those steps by hand. Agents are fast, but you still need to know what each step is for, so you can take over when they get stuck.</p></div>
+          <div class="why-matters">
+            <div class="why-label">Why this matters to you</div>
+            <p>Businesses are starting to connect AI agents to their real systems: payments, customer records, stock and websites. Someone has to decide which systems an agent may touch, what it may do there, and who checks its work. That is a business decision about risk and responsibility, not only a technical one, and it is increasingly made by managers and analysts rather than programmers.</p>
           </div>
           <h3>The parts of your shop</h3>
           <p>Your shop is made of a few services that each do one job. Some work while you build the shop; others work every time a customer buys.</p>
@@ -1311,6 +1343,8 @@
             <p>For many small businesses, a ready-made platform such as Shopify is the right choice. It is quick to set up, comes with support, and charges a monthly fee plus payment fees. Building your own gives full control and can cost less to run, but you have to maintain it yourself.</p>
             <p><strong>Build versus buy</strong> is one of the most common decisions in business technology. This module has you build, so you can see inside the machine and make that decision with your eyes open.</p>
           </div></details>
+          <div class="route-note"><span class="route-label">Using connectors? (Route B)</span><p>Choose your route now. If you take Route B, connect Stripe (sandbox), Supabase, Vercel and GitHub to your AI assistant before Stage 2.</p></div>
+          <div class="quick-check section-check" data-answer="2" data-explanation="Connectors act inside your real accounts with your login. Check the AI is using your Stripe sandbox and the right project, and read each action before you approve it."><div class="question-number">Pause and check</div><h3>You connect Stripe to your AI assistant. What should you do before it creates anything?</h3><div class="choices"><button class="choice">Nothing. Connectors are always safe.</button><button class="choice">Paste your secret Stripe key into the chat so it can work faster.</button><button class="choice">Check it is using your Stripe sandbox, then read each action before approving it.</button></div><div class="feedback" aria-live="polite"></div></div>
           <div class="quick-check section-check" data-answer="2" data-explanation="The order is saved only when Stripe's signed “paid” message arrives (step 5). The thank-you page can be skipped or faked, so it records nothing."><div class="question-number">Pause and check</div><h3>At which step is the order saved in your database?</h3><div class="choices"><button class="choice">When the customer clicks Buy now</button><button class="choice">When the thank-you page loads</button><button class="choice">When Stripe's signed “paid” message arrives</button></div><div class="feedback" aria-live="polite"></div></div>
         </section>
 
@@ -1351,6 +1385,7 @@
           <details class="more"><summary>Pricing second-hand items</summary><div class="details-body">
             <p>Look up what similar items sell for, then adjust for condition: “like new” earns more than “well used”. Then think about the whole order. With A$9.95 flat-rate shipping, a $15 item costs the customer $24.95, so shipping is almost 40% of what they pay. A $60 item barely notices it. Low-priced items may need a different approach, such as bundles or free shipping over a set amount.</p>
           </div></details>
+          <div class="route-note"><span class="route-label">Using connectors? (Route B)</span><p>Ask your AI assistant to create each product with its AUD price in your Stripe <strong>sandbox</strong>, then list the price IDs it made. Open the Stripe dashboard and check every name, price and currency yourself.</p></div>
           <div class="quick-check section-check" data-answer="0" data-explanation="A sandbox is Stripe's practice account. It uses test cards, and no real money moves."><div class="question-number">Pause and check</div><h3>Why do you create your products in a Stripe sandbox?</h3><div class="choices"><button class="choice">It is a practice account where no real money moves.</button><button class="choice">Sandboxes are faster than normal accounts.</button><button class="choice">Products in a sandbox are free to sell for real.</button></div><div class="feedback" aria-live="polite"></div></div>
         </section>
 
@@ -1425,6 +1460,7 @@ Requirements:
             </table></div>
           </div></details>
           <details class="more"><summary>Stuck? See a working example</summary><div class="details-body"><p>A finished example shop (a comic shop built the same way) is at <a href="https://github.com/MCahalane/stripe-checkout-test" target="_blank" rel="noopener">github.com/MCahalane/stripe-checkout-test</a>. Ask your AI assistant to use it as a reference, or compare your files with it.</p></div></details>
+          <div class="route-note"><span class="route-label">Using connectors? (Route B)</span><p>Use the same brief, and add one line telling your AI which connectors it may use. It may be able to create the GitHub repository too. If GitHub blocks it, create the repository yourself and carry on.</p></div>
           <div class="quick-check section-check" data-answer="1" data-explanation="The prompt names every setting exactly, so the names your AI uses in the code match the names you enter in Vercel later."><div class="question-number">Pause and check</div><h3>Why does the prompt list the exact names of all six settings?</h3><div class="choices"><button class="choice">The AI can't write code without a list of names.</button><button class="choice">So the code uses the same names you will enter in Vercel later.</button><button class="choice">So the AI can show the secret values in the code.</button></div><div class="feedback" aria-live="polite"></div></div>
         </section>
 
@@ -1467,6 +1503,7 @@ Requirements:
             </ul>
             <p>You can answer all of these with the two simple tables you just created.</p>
           </div></details>
+          <div class="route-note"><span class="route-label">Using connectors? (Route B)</span><p>Ask your AI assistant to create the tables and add your products through the Supabase connector. It can also look up your project URL and public key. Then open Supabase and check the tables and rows are really there. The <strong>service role key</strong> is a secret: put it into Vercel's settings yourself.</p></div>
           <div class="quick-check section-check" data-answer="2" data-explanation="The service role key can read and change everything in your database, ignoring its security rules. Only your server may use it, so it must stay secret."><div class="question-number">Pause and check</div><h3>Which Supabase key must never appear in the browser or on GitHub?</h3><div class="choices"><button class="choice">The project URL</button><button class="choice">The anon (publishable) key</button><button class="choice">The service role (secret) key</button></div><div class="feedback" aria-live="polite"></div></div>
         </section>
 
@@ -1514,6 +1551,7 @@ Requirements:
             </ul>
             <p>Each one saves staff time and errors, but each is also a link that can break. Someone needs to notice when messages stop arriving.</p>
           </div></details>
+          <div class="route-note"><span class="route-label">Using connectors? (Route B)</span><p>Your AI assistant may be able to create the Vercel project, add the settings, deploy, and create the Stripe payment-message destination. Expect at least one step to need you, as in the story in Stage 1. The rule still applies: after any settings change, the shop must be redeployed.</p></div>
           <div class="quick-check section-check" data-answer="1" data-explanation="Vercel reads settings when it builds the shop. After adding or changing a setting, you must redeploy for the shop to use it."><div class="question-number">Pause and check</div><h3>You add a new setting in Vercel, but your shop behaves the same. What is the most likely reason?</h3><div class="choices"><button class="choice">Settings take 24 hours to start working.</button><button class="choice">You haven't redeployed since adding it.</button><button class="choice">Vercel ignores settings for free accounts.</button></div><div class="feedback" aria-live="polite"></div></div>
         </section>
 
@@ -1595,6 +1633,7 @@ Requirements:
               <li><strong>Monitoring after launch:</strong> alerts when payments fail or messages stop arriving.</li>
             </ul>
           </div></details>
+          <div class="route-note"><span class="route-label">Using connectors? (Route B)</span><p>Make the test purchases yourself, in the browser, like a real customer. Then ask your AI assistant to check Supabase for the new order and Stripe for the payment message, and compare its answer with what you see in each dashboard.</p></div>
           <div class="quick-check section-check" data-answer="0" data-explanation="The first buyer's click reserves the item in one database update. The second buyer's update finds it already reserved, so they are told it is no longer available."><div class="question-number">Pause and check</div><h3>Two people click Buy now on the same textbook at the same moment. What happens?</h3><div class="choices"><button class="choice">One gets Stripe's page; the other is told it's no longer available.</button><button class="choice">Both pay, and one is refunded later.</button><button class="choice">Neither can buy it until the shop owner decides.</button></div><div class="feedback" aria-live="polite"></div></div>
         </section>
         <section id="p2-help" class="optional-section" data-stage="6">
@@ -2023,7 +2062,7 @@ Requirements:
       { first:'p1-review', title:'Review understanding', purpose:'Apply ideas from across Part 1 to six new questions.', output:'Part 1 complete', takeaway:'You are ready to build your own shop.' }
     ],
     part2: [
-      { first:'p2-ready', title:'Get ready', purpose:'Set up five free accounts, learn three safety rules, and see how one sale works from start to finish.', output:'Accounts and the big picture', takeaway:'You know what each tool does and how a sale flows through them.' },
+      { first:'p2-ready', title:'Get ready', purpose:'Set up five free accounts, learn four safety rules, choose step-by-step or all-in-one (connectors), and see how one sale works from start to finish.', output:'Accounts and the big picture', takeaway:'You know what each tool does and how a sale flows through them.' },
       { first:'p2-stripe', title:'Plan your products', purpose:'Choose what your shop sells and add each item, with an AUD price, to a Stripe sandbox.', output:'Products and price IDs', takeaway:'Your products and prices are ready in Stripe.' },
       { first:'p2-build', title:'Build it with AI', purpose:'Create a GitHub repository and brief your AI assistant with a ready-made prompt.', output:'Your shop’s code on GitHub', takeaway:'Your AI assistant has written the shop’s code.' },
       { first:'p2-data', title:'Database and codes', purpose:'Create your Supabase tables and collect the codes your shop needs.', output:'A database and four codes', takeaway:'Your database is ready and your codes are collected.' },
@@ -2355,6 +2394,8 @@ Requirements:
     ["Fraud detection", "Checking payments for signs of stolen cards. Stripe's Radar uses machine learning for this.", "a bouncer checking IDs."],
     ["AI agent and agentic commerce", "An AI agent is AI that can take actions, not just answer. Agentic commerce is AI agents finding and buying products for people.", "a personal shopper who can use your card."],
     ["Vibe coding", "Building software by describing what you want to an AI assistant, testing the result, and asking for changes.", "directing a builder instead of laying the bricks yourself."],
+    ["Connector", "A link that plugs an outside service, such as Stripe or Supabase, into an AI assistant so it can look things up and take actions there, using your login.", "giving an assistant a key card to certain rooms."],
+    ["MCP (Model Context Protocol)", "An open standard, introduced by Anthropic in 2024, that most AI connectors use. Any AI assistant and any service that support it can work together.", "USB for AI: one common plug."],
     ["Prompt", "The instructions you give an AI assistant. A clear, specific prompt gets better results.", "a written brief for a contractor."],
     ["Repository (repo)", "A project folder on GitHub that holds your code and every saved version of it.", "a filing box for one project."],
     ["Commit", "A saved version of your project, with a short note saying what changed.", "a dated save point in a game."],
