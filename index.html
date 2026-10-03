@@ -549,6 +549,11 @@
   .last-checked { display:inline-block; margin:0 0 12px; padding:.25rem .55rem; background:var(--grey); border:1px solid var(--line); font-size:.8rem; color:#444; }
 
   /* teaching case */
+  .case-intro { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:18px 36px; margin:0 0 6px; }
+  .case-intro p { grid-column:1; grid-row:1; margin:0; }
+  .case-intro-icon { grid-column:2; grid-row:1; display:grid; justify-items:center; gap:4px; padding:14px 18px; background:#fff; border:2px solid var(--black); }
+  .case-intro-icon svg { display:block; width:150px; height:auto; }
+  .case-intro-icon span { font-size:.68rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase; color:#574a00; }
   .case-source { margin:18px 0 22px; padding:18px 22px; background:#fff; border:2px solid var(--black); border-top:8px solid var(--yellow); }
   .case-source-label { display:inline-block; margin-bottom:8px; padding:.25rem .55rem; background:var(--black); color:var(--yellow); font-size:.72rem; font-weight:900; letter-spacing:.09em; text-transform:uppercase; }
   .case-source p { margin:.4rem 0; max-width:80ch; }
@@ -646,7 +651,10 @@
     .module-recap ul { grid-template-columns:1fr; }
     .media-lesson { grid-template-columns:1fr; }
     .tips-groups, .outcomes li, .case-who { grid-template-columns:1fr; }
-    .is-note { grid-template-columns:1fr; }
+    .is-note, .case-intro { grid-template-columns:1fr; }
+    .case-intro-icon { grid-column:1; grid-row:1; justify-self:start; }
+    .case-intro-icon svg { width:120px; }
+    .case-intro p { grid-row:2; }
     .is-note-icon { grid-column:1; grid-row:1; justify-items:start; }
     .is-note-icon svg { width:120px; }
     .is-note p { grid-row:2; }
@@ -1320,7 +1328,15 @@
              This module is not endorsed by the authors, the journal, The Case Centre or the University of Lethbridge. -->
         <section id="p1-case" class="required-section" data-stage="8">
           <h2>Teaching case: Malayali360 <span class="section-time">About 30 min, including reading the case</span></h2>
-          <p>So far Part 1 has used an invented shop, Uni Textbook Swap. To finish, you will apply the same ideas to a <strong>real business</strong>, described in a published teaching case. A teaching case is a true business story written for students to analyse: it sets out the facts and a decision, and leaves the answers to you.</p>
+          <div class="case-intro"><div class="case-intro-icon" aria-hidden="true"><svg viewBox="0 0 160 120">
+              <rect x="14" y="10" width="62" height="84" fill="#fff" stroke="#231f20" stroke-width="4"/><rect x="14" y="10" width="62" height="16" fill="#231f20"/><text x="45" y="22" text-anchor="middle" fill="#ffe600" font-family="Arial" font-weight="900" font-size="10">CASE</text>
+              <g stroke="#231f20" stroke-width="3"><line x1="24" y1="38" x2="66" y2="38"/><line x1="24" y1="50" x2="66" y2="50"/><line x1="24" y1="62" x2="58" y2="62"/><line x1="24" y1="74" x2="62" y2="74"/></g>
+              <g stroke="#806d00" stroke-width="3"><line x1="112" y1="40" x2="96" y2="80"/><line x1="112" y1="40" x2="140" y2="80"/><line x1="96" y1="80" x2="140" y2="80"/></g>
+              <circle cx="112" cy="36" r="12" fill="#ffe600" stroke="#231f20" stroke-width="4"/><circle cx="94" cy="82" r="12" fill="#ffe600" stroke="#231f20" stroke-width="4"/><circle cx="140" cy="82" r="12" fill="#ffe600" stroke="#231f20" stroke-width="4"/>
+              <circle cx="112" cy="36" r="4" fill="#231f20"/><circle cx="94" cy="82" r="4" fill="#231f20"/><circle cx="140" cy="82" r="4" fill="#231f20"/>
+            </svg><span>Real business · real community</span></div>
+            <p>So far Part 1 has used an invented shop, Uni Textbook Swap. To finish, you will apply the same ideas to a <strong>real business</strong>, described in a published teaching case. A teaching case is a true business story written for students to analyse: it sets out the facts and a decision, and leaves the answers to you.</p>
+          </div>
           <div class="case-source" role="note">
             <div class="case-source-label">Case source</div>
             <p>This activity is adapted from “Community Based Marketing Strategy: Expanding Malayali360” by Sidney Shapiro and B. Panvelwala, published in the <em>Open Access Teaching Case Journal</em>, 4(1), 2026.</p>
@@ -2321,7 +2337,7 @@ Requirements:
       </section>
     </div>
 
-    <footer><strong>Build Your Own Online Shop</strong> · Version 3 October 2026 (Malayali360 teaching case) · A hands-on e-commerce module · Test mode only, no real payments. The diagrams are illustrations, and the screenshots come from an example shop built the same way. Logos are trademarks of their owners, used for identification and teaching (see Sources).</footer>
+    <footer><strong>Build Your Own Online Shop</strong> · Version 3 October 2026 (Malayali360 teaching case, icon) · A hands-on e-commerce module · Test mode only, no real payments. The diagrams are illustrations, and the screenshots come from an example shop built the same way. Logos are trademarks of their owners, used for identification and teaching (see Sources).</footer>
   </main>
 </div>
 <button type="button" class="top-button" id="top-button" aria-label="Back to top"><span aria-hidden="true">↑</span><span class="top-label">Top</span></button>
