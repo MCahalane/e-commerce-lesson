@@ -548,8 +548,17 @@
   .cart-figure svg { display:block; width:100%; max-width:220px; height:auto; margin:auto; }
   .last-checked { display:inline-block; margin:0 0 12px; padding:.25rem .55rem; background:var(--grey); border:1px solid var(--line); font-size:.8rem; color:#444; }
 
+  /* teaching case */
+  .case-source { margin:18px 0 22px; padding:18px 22px; background:#fff; border:2px solid var(--black); border-top:8px solid var(--yellow); }
+  .case-source-label { display:inline-block; margin-bottom:8px; padding:.25rem .55rem; background:var(--black); color:var(--yellow); font-size:.72rem; font-weight:900; letter-spacing:.09em; text-transform:uppercase; }
+  .case-source p { margin:.4rem 0; max-width:80ch; }
+  .case-source-small { font-size:.85rem; color:var(--muted); }
+  .case-authors { font-size:.9rem; color:var(--muted); }
+  .case-reference { margin-top:22px; padding-top:12px; border-top:1px solid var(--line); font-size:.9rem; overflow-wrap:anywhere; }
+
   /* majors */
-  .major-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin:18px 0 26px; }
+  .major-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; margin:18px 0 26px; }
+  .major-name { overflow-wrap:anywhere; }
   .major { display:flex; flex-direction:column; gap:8px; min-width:0; padding:16px; background:#fff; border:2px solid var(--black); }
   .major .major-name { display:inline-block; width:max-content; max-width:100%; padding:.25rem .55rem; background:var(--yellow); font-weight:900; font-size:.78rem; letter-spacing:.06em; text-transform:uppercase; }
   .major p { margin:0; font-size:.93rem; }
@@ -617,6 +626,7 @@
     .module-switcher { max-width:420px; }
     .rail-note { display:none; }
     .grid.three, .shots.three, .journey.cols-3, .journey.cols-4, .major-grid { grid-template-columns:1fr 1fr; }
+    .major-grid .major:last-child { grid-column:1 / -1; }
     .run-flow { grid-template-columns:repeat(6,minmax(160px,1fr)); }
     .lane.five { grid-template-columns:1fr 1fr; }
     .lane.five .lane-box::after { display:none; }
@@ -695,6 +705,7 @@
           <a href="#p1-payments" data-stage-link="5">5 · Payments get easy</a>
           <a href="#p1-ai" data-stage-link="6">6 · AI changes the game</a>
           <a href="#p1-review" data-stage-link="7">7 · Review understanding</a>
+          <a href="#p1-case" data-stage-link="8">8 · Teaching case: Malayali360</a>
         </div>
       </div>
       <div class="nav-group" data-group="part2">
@@ -752,10 +763,10 @@
         <div class="section-label">Orientation</div>
         <h2 class="section-title">How this module works</h2>
         <div class="how-it-works" role="note">
-          <div class="label">Three parts · about 4½–5½ hours</div>
+          <div class="label">Three parts · about 5–6 hours</div>
           <h3>Learn the story, build the shop, then see what it takes to go live</h3>
           <ol class="steps">
-            <li><strong>Part 1</strong> explains how e-commerce developed, from the dot-com era to AI, and how online businesses make money. About 1–1½ hours.</li>
+            <li><strong>Part 1</strong> explains how e-commerce developed, from the dot-com era to AI, and how online businesses make money, then applies it to a real teaching case. About 1½–2 hours.</li>
             <li><strong>Part 2</strong> walks you through building your own shop with an AI assistant, Stripe, Supabase and Vercel. About 2–2½ hours, depending on your experience.</li>
             <li><strong>Part 3</strong> explains what it takes to turn your class project into a real business, and ends with your own short business case. About 1½ hours.</li>
           </ol>
@@ -792,7 +803,7 @@
         <p>By the end of this module, you will be able to:</p>
         <ol class="outcomes">
           <li><span class="lo-num">LO1</span><div><p><strong>Explain</strong> how e-commerce has evolved from the dot-com era to AI-enabled commerce, and what each stage made possible for businesses.</p><span class="lo-meta"><span class="lo-level">Understand</span> Part 1</span></div></li>
-          <li><span class="lo-num">LO2</span><div><p><strong>Classify</strong> e-commerce businesses by who trades with whom, where they sell and how they make money, and <strong>compare</strong> the value and risks of different business models.</p><span class="lo-meta"><span class="lo-level">Analyse</span> Part 1 · Part 3 business case</span></div></li>
+          <li><span class="lo-num">LO2</span><div><p><strong>Classify</strong> e-commerce businesses by who trades with whom, where they sell and how they make money, and <strong>compare</strong> the value and risks of different business models, including in a real business case.</p><span class="lo-meta"><span class="lo-level">Analyse</span> Part 1 · Malayali360 teaching case · Part 3 business case</span></div></li>
           <li><span class="lo-num">LO3</span><div><p><strong>Describe</strong> the information systems behind an online sale (storefront, payment platform, database, hosting and webhooks) and <strong>trace</strong> how data flows between them.</p><span class="lo-meta"><span class="lo-level">Understand</span> Part 1 payments · Part 2</span></div></li>
           <li><span class="lo-num">LO4</span><div><p><strong>Build and test</strong> a working online shop in a test environment, using an AI assistant and cloud services.</p><span class="lo-meta"><span class="lo-level">Apply · Create</span> Part 2</span></div></li>
           <li><span class="lo-num">LO5</span><div><p><strong>Analyse</strong> how the design of an online shop's systems controls business risks such as price tampering, overselling, fraud and lost orders.</p><span class="lo-meta"><span class="lo-level">Analyse</span> Part 2</span></div></li>
@@ -800,15 +811,16 @@
           <li><span class="lo-num">LO7</span><div><p><strong>Justify</strong> when and how a business should use AI assistants and agents, including the controls needed to use them safely.</p><span class="lo-meta"><span class="lo-level">Evaluate</span> Part 1 AI · Part 2 · AI tools recap</span></div></li>
         </ol>
         <div class="callout"><strong>Running example:</strong> throughout the module we follow <strong>Uni Textbook Swap</strong>, a small shop selling second-hand textbooks. Every book is one of a kind, which makes the shop simple to start but interesting to build. You choose your own idea in Part 2.</div>
-        <h3 style="margin-top:28px;">What's in it for me? E-commerce in your major</h3>
-        <p>Whatever you study, online selling will land on your desk. Here is where each business discipline meets it, using the Uni Textbook Swap example. The idea is adapted from the “What’s in IT for me?” sections of Rainer and Prince (2021).</p>
+        <h3 style="margin-top:28px;">What's in it for me? E-commerce in your business studies at University</h3>
+        <p>Whatever you study in business, online selling will land on your desk. Here is where each discipline meets it, using the Uni Textbook Swap example. The idea is adapted from the “What’s in IT for me?” sections of Rainer and Prince (2021).</p>
         <div class="major-grid">
-          <div class="major"><span class="major-name">Accounting</span><p>Stripe pays the shop in batches, minus fees, days after each sale. Someone has to match every payout to the orders behind it, track refunds, and work out when GST applies.</p><div class="where">See: the profit calculator in Part 3</div></div>
-          <div class="major"><span class="major-name">Finance</span><p>Money arrives days after a book is sold, but stock and postage are paid up front. Finance decides whether payment fees, buy now pay later and free shipping are worth what they cost, and whether a shop is worth investing in.</p><div class="where">See: the dot-com crash in Part 1</div></div>
+          <div class="major"><span class="major-name">Accounting, Auditing &amp; Taxation</span><p>Stripe pays the shop in batches, minus fees, days after each sale. Someone has to match every payout to its orders, record refunds, and work out when an ABN and GST apply. Every order row and payment message is also an audit trail that shows what really happened.</p><div class="where">See: the order record in Part 2 and the profit calculator in Part 3</div></div>
+          <div class="major"><span class="major-name">Banking &amp; Finance</span><p>Every card payment passes through banks and card networks, and the money arrives days later. Finance weighs payment fees, buy now pay later (a form of credit), cash flow and whether an online business is worth investing in.</p><div class="where">See: the nine-step payment walkthrough and the dot-com crash in Part 1</div></div>
+          <div class="major"><span class="major-name">Economics</span><p>Online markets change how prices and competition work. Network effects let a few platforms dominate, shoppers compare prices instantly, and middlemen are cut out or replaced. A used-textbook market is supply and demand you can watch each semester.</p><div class="where">See: Web 2.0 and channels in Part 1</div></div>
+          <div class="major"><span class="major-name">Information Systems</span><p>Choosing, connecting and securing the systems behind every sale: the storefront, payments, database, hosting and AI. You will build exactly this in Part 2, trace how data flows between the parts, and judge what could go wrong.</p><div class="where">See: all of Part 2 and the AI tools recap</div></div>
+          <div class="major"><span class="major-name">Management &amp; Governance</span><p>Leaders choose the business model, decide what staff and AI agents may do, and answer for the outcome. Governance means clear policies (privacy, refunds, security) and a plan for when something goes wrong.</p><div class="where">See: business models in Part 1 and rules, ethics and risk in Part 3</div></div>
           <div class="major"><span class="major-name">Marketing</span><p>Which ad, search result or student group brought in each buyer? What does each new customer cost to win? Marketing also manages reviews, pricing and the tension between selling online and through shops.</p><div class="where">See: Web 2.0 in Part 1 and finding customers in Part 3</div></div>
-          <div class="major"><span class="major-name">Operations</span><p>Every book is one of a kind, so the shop must hold it while someone pays, then pick, pack and post it, and handle returns. Getting orders to customers is often the hardest part of e-commerce.</p><div class="where">See: the sale animation in Part 2 and delivery in Part 3</div></div>
-          <div class="major"><span class="major-name">Human resources</span><p>Online businesses need new roles, such as digital marketers, data analysts and customer support, and many recruit online. HR teams also run online services for staff, such as payroll and training portals.</p><div class="where">See: who sells to whom in Part 1</div></div>
-          <div class="major"><span class="major-name">Information systems</span><p>Choosing, connecting and securing the tools: payments, database, hosting and AI. You will do exactly this in Part 2, and then judge what could go wrong.</p><div class="where">See: all of Part 2</div></div>
+          <div class="major"><span class="major-name">Risk &amp; Actuarial Studies</span><p>Every online sale carries risks you can measure: stolen cards and chargebacks, the same book sold twice, lost orders and returns. Risk work estimates how often each happens and what it costs, then checks that the controls (holds, signature checks, limits on automation) are worth it.</p><div class="where">See: “Why it works this way” in Part 2 and trust, ethics and risk in Part 3</div></div>
         </div>
       </section>
 
@@ -851,11 +863,11 @@
         <div class="module-overview" id="p1-intro">
           <h3>What will you learn?</h3>
           <p><strong>Purpose:</strong> understand how selling online developed, so you can see why today's tools work the way they do.</p>
-          <p><strong>Key ideas:</strong> e-commerce and e-business, who sells to whom, business models, the dot-com era, Web 2.0, showrooming and middlemen, how a card payment works, and AI in e-commerce.</p>
+          <p><strong>Key ideas:</strong> e-commerce and e-business, who sells to whom, business models, the dot-com era, Web 2.0, showrooming and middlemen, how a card payment works, AI in e-commerce, and a real teaching case (Malayali360).</p>
           <p><strong>By the end:</strong> you can explain how an online business makes money, what each era made easier for a small business, and what new questions AI raises.</p>
-          <p class="lo-covers"><strong>Learning outcomes:</strong> LO1, LO2, and an introduction to LO3 and LO7.</p>
+          <p class="lo-covers"><strong>Learning outcomes:</strong> LO1 and LO2 (applied in the Malayali360 teaching case), and an introduction to LO3 and LO7.</p>
         </div>
-        <p class="time-note"><strong>About 1–1½ hours</strong>, plus three optional videos. A good single session.</p>
+        <p class="time-note"><strong>About 1½–2 hours</strong>, including the teaching case, plus three optional videos.</p>
         <div class="scenario-thread"><div class="scenario-label">Running example</div><p><strong>Imagine selling second-hand textbooks online.</strong> In 1997 you would need a bank's permission to take cards and weeks of setup. By 2011 a few lines of code would do it. Today an AI assistant can build the whole shop with you. Part 1 explains how that changed.</p></div>
         <div class="journey cols-4" aria-label="Part 1 stages">
           <a href="#p1-define"><strong>What is e-commerce?</strong><span>Who sells to whom, and where: online, in shops or both.</span></a>
@@ -864,7 +876,8 @@
           <a href="#p1-web2"><strong>Web 2.0 and channels</strong><span>Reviews, platforms, showrooming and middlemen.</span></a>
           <a href="#p1-payments"><strong>Payments get easy</strong><span>From bank paperwork to Stripe, and the nine steps of a card payment.</span></a>
           <a href="#p1-ai"><strong>AI changes the game</strong><span>Recommendations, fraud checks, vibe coding and AI agents.</span></a>
-          <a href="#p1-review"><strong>Review understanding</strong><span>Six questions to finish Part 1.</span></a>
+          <a href="#p1-review"><strong>Review understanding</strong><span>Six questions across Part 1.</span></a>
+          <a href="#p1-case"><strong>Teaching case: Malayali360</strong><span>Apply Part 1 to a real community platform.</span></a>
         </div>
 
         <section id="p1-define" class="required-section" data-stage="1">
@@ -1260,7 +1273,7 @@
 
         <section id="p1-review" class="required-section" data-stage="7">
           <h2>How well do you understand the story? <span class="section-time">About 6 min</span></h2>
-          <p>Six questions that apply ideas from across Part 1. Answer all six correctly to complete Part 1.</p>
+          <p>Six questions that apply ideas from across Part 1. Answer all six correctly, then finish Part 1 with a real teaching case.</p>
           <div class="knowledge-checks">
             <div class="quick-check" data-answer="1" data-explanation="A Web 1.0 shop published a catalogue. Reviews, ratings and sharing are Web 2.0 features, built on content customers create.">
               <div class="question-number">Question 1</div>
@@ -1300,9 +1313,87 @@
             </div>
           </div>
         </section>
+        <!-- Teaching case activity.
+             Acknowledgement: adapted, for educational purposes, from Shapiro, S., & Panvelwala, B. (2026).
+             Community based marketing strategy: Expanding Malayali360. Open Access Teaching Case Journal, 4(1).
+             https://oatcj.org/ — summarised in original wording; no case text, tables, images or teaching notes are reproduced.
+             This module is not endorsed by the authors, the journal, The Case Centre or the University of Lethbridge. -->
+        <section id="p1-case" class="required-section" data-stage="8">
+          <h2>Teaching case: Malayali360 <span class="section-time">About 30 min, including reading the case</span></h2>
+          <p>So far Part 1 has used an invented shop, Uni Textbook Swap. To finish, you will apply the same ideas to a <strong>real business</strong>, described in a published teaching case. A teaching case is a true business story written for students to analyse: it sets out the facts and a decision, and leaves the answers to you.</p>
+          <div class="case-source" role="note">
+            <div class="case-source-label">Case source</div>
+            <p>This activity is adapted from “Community Based Marketing Strategy: Expanding Malayali360” by Sidney Shapiro and B. Panvelwala, published in the <em>Open Access Teaching Case Journal</em>, 4(1), 2026.</p>
+            <p><strong>Read the original case here:</strong> <a href="https://www.thecasecentre.org/products/view?id=214365" target="_blank" rel="noopener">thecasecentre.org/products/view?id=214365</a></p>
+            <p>The original case is openly available for educational use under the licence specified by the publisher. This learning activity has been shortened and adapted for this module. It is not a replacement for the original case.</p>
+            <p class="case-source-small">This module is independent. It is not endorsed by the case authors, the <em>Open Access Teaching Case Journal</em>, The Case Centre or the University of Lethbridge.</p>
+          </div>
+          <h3>The case at a glance</h3>
+          <div class="definition-strip case-facts">
+            <div><strong>The business</strong>Malayali360, a social media platform built for the Malayali community that runs across several social media channels at once.</div>
+            <div><strong>The moment</strong>October 2024. The platform has grown to more than 150,000 members, and its team is thinking about how to expand.</div>
+            <div><strong>The question</strong>How should a community-based platform grow its reach through marketing, without losing what makes the community valuable?</div>
+          </div>
+          <p class="case-authors">The case was written by Sidney Shapiro of the Dhillon School of Business, University of Lethbridge, and B. Panvelwala. Read the full case for the details of the platform, its channels and the options its team faces.</p>
+          <h3>Some background before you read</h3>
+          <p><strong>Who are Malayalis?</strong> Malayalis are people whose mother tongue is Malayalam, the main language of the state of Kerala in southern India. Many Malayalis live and work outside Kerala, across India and around the world. A community spread across countries like this is called a <strong>diaspora</strong>.</p>
+          <p><strong>Why would a diaspora need its own platform?</strong> People living far from home often look for others who share their language, food, festivals and news. General social media puts them alongside everyone else. A community platform gathers them in one place, and that shared identity is exactly what makes it valuable, to members and to businesses that want to reach them.</p>
+          <div class="scenario-thread story"><div class="scenario-label">Illustration · not from the case</div><p><strong>Meera</strong> has just moved overseas for her master's degree. She knows nobody in her new city. A cousin forwards her a post about a local Onam festival lunch, shared by a Malayali community page. She joins, finds a flatmate through a members' post, and three weeks later she is recommending a Kerala grocery store to the next new arrival. Meera never saw an advert. She joined because people she trusted were already there, and every new member like her makes the community more useful for the next one.</p></div>
+          <h3>Bring your Part 1 toolkit</h3>
+          <p>Each idea from Part 1 gives you a question to ask as you read the case.</p>
+          <div class="comparison-wrap"><table class="comparison">
+            <thead><tr><th>Part 1 idea</th><th>Question to ask about Malayali360</th></tr></thead>
+            <tbody>
+              <tr><td>Who sells to whom</td><td>Who are its users, and who might pay? Members, local businesses, advertisers, event organisers? Which relationships are C2C, B2C or B2B?</td></tr>
+              <tr><td>Business models</td><td>Which of the money models from Stage 2 could fit a community platform: advertising, sponsorship, membership, affiliate, events? What would each do to members' trust?</td></tr>
+              <tr><td>Web 2.0 and network effects</td><td>How much of the platform's value is content created by members? How does each new member make it more useful to others?</td></tr>
+              <tr><td>Channels</td><td>What are the benefits and risks of operating across several social media channels it does not own?</td></tr>
+              <tr><td>Marketing</td><td>How is growth through community and word of mouth different from paying for ads?</td></tr>
+              <tr><td>AI and data</td><td>What could data and AI help it do, and what would members expect it <em>not</em> to do with their information?</td></tr>
+            </tbody>
+          </table></div>
+          <figure class="picture">
+            <div class="diagram-wrap">
+              <svg viewBox="0 0 640 290" role="img" aria-label="A community growth loop, as a general idea: members share and post, which creates content and trust, which draws new members through word of mouth, which gives local businesses and sponsors a valuable audience, whose support funds the community, which gives members more reasons to share.">
+                <defs><marker id="case-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#806d00"/></marker></defs>
+                <g fill="none" stroke="#806d00" stroke-width="3">
+                  <path d="M415 45 Q530 45 530 116" marker-end="url(#case-arrow)"/>
+                  <path d="M530 172 Q530 245 420 245" marker-end="url(#case-arrow)"/>
+                  <path d="M225 245 Q110 245 110 178" marker-end="url(#case-arrow)"/>
+                  <path d="M110 120 Q110 45 220 45" marker-end="url(#case-arrow)"/>
+                </g>
+                <rect x="225" y="20" width="190" height="50" fill="#fff7bf" stroke="#231f20" stroke-width="2"/><text x="320" y="51" text-anchor="middle" class="lb">Members share and post</text>
+                <rect x="440" y="120" width="180" height="50" fill="#fff7bf" stroke="#231f20" stroke-width="2"/><text x="530" y="143" text-anchor="middle" class="lb">Content and trust</text><text x="530" y="160" text-anchor="middle" class="lb2">build up</text>
+                <rect x="225" y="220" width="190" height="50" fill="#fff7bf" stroke="#231f20" stroke-width="2"/><text x="320" y="243" text-anchor="middle" class="lb">New members join</text><text x="320" y="260" text-anchor="middle" class="lb2">by word of mouth</text>
+                <rect x="20" y="120" width="180" height="50" fill="#fff7bf" stroke="#231f20" stroke-width="2"/><text x="110" y="143" text-anchor="middle" class="lb">Businesses and sponsors</text><text x="110" y="160" text-anchor="middle" class="lb2">want to reach them</text>
+                <circle cx="320" cy="145" r="56" fill="#231f20"/><text x="320" y="141" text-anchor="middle" fill="#ffe600" font-family="Arial" font-weight="900" font-size="14">Community</text><text x="320" y="158" text-anchor="middle" fill="#ffe600" font-family="Arial" font-weight="900" font-size="14">flywheel</text>
+              </svg>
+            </div>
+            <figcaption><strong>A general idea to test against the case, not a diagram from it.</strong> Community platforms often grow in a loop like this. As you read, ask which parts of the loop Malayali360 relies on, and where the loop could break, for example if sponsors crowd out members' own posts.</figcaption>
+          </figure>
+          <h3>Your analysis</h3>
+          <p>Read the original case, then answer these questions in a few sentences each. Your answers save in this browser. Your teacher may use them for a class discussion.</p>
+          <div class="case-form" id="case-analysis">
+            <label><span class="case-q">1 · Classify it <small>LO2</small></span><span class="case-hint">What kind of e-business is Malayali360? Who are its users, and who could be its paying customers?</span><textarea data-mcase="classify" rows="3"></textarea></label>
+            <label><span class="case-q">2 · Money and trust <small>LO2</small></span><span class="case-hint">Which business models could fund it? Pick the one you think fits best, and explain how it might affect members' trust.</span><textarea data-mcase="model" rows="3"></textarea></label>
+            <label><span class="case-q">3 · Network effects and channels <small>LO1 · LO2</small></span><span class="case-hint">How do network effects help it grow? What risks come from building a community on social media channels it doesn't own?</span><textarea data-mcase="channels" rows="3"></textarea></label>
+            <label><span class="case-q">4 · Your recommendation <small>LO2 · LO7</small></span><span class="case-hint">It is October 2024 and you are advising the team. Recommend one way to expand, and name one information system (such as a member database, an events and payments tool, or AI-based analytics) it would need to support that step.</span><textarea data-mcase="recommend" rows="4"></textarea></label>
+            <div class="case-actions"><button type="button" class="viz-btn" id="mcase-copy">Copy my answers</button><span class="case-count" id="mcase-count" aria-live="polite"></span></div>
+            <textarea class="case-fallback" id="mcase-fallback" rows="8" readonly hidden aria-label="Your case answers, ready to copy"></textarea>
+          </div>
+          <div class="why-matters">
+            <div class="why-label">Why this matters to you</div>
+            <p>Real businesses rarely fit one textbook label. A community platform is part social network, part marketplace and part media business, and its most valuable asset, members' trust, is easy to damage. Practising on a real case is how you learn to apply frameworks to messy situations, which is what employers will ask you to do.</p>
+          </div>
+          <div class="quick-check section-check" data-answer="2" data-explanation="Each new member makes the platform more useful to the others, which attracts more members. That self-reinforcing loop is a network effect."><div class="question-number">Pause and check</div><h3>Malayali360 becomes more useful to each member as more members join. What is this called?</h3><div class="choices"><button class="choice">Disintermediation</button><button class="choice">Showrooming</button><button class="choice">A network effect</button></div><div class="feedback" aria-live="polite"></div></div>
+          <div class="quick-check section-check" data-answer="1" data-explanation="A business paying a platform to promote itself to an audience is business to business (B2B): the platform's customer here is the restaurant, not the members."><div class="question-number">Pause and check</div><h3>A local Kerala restaurant pays a community platform to promote its festival menu to members. Which relationship is that payment?</h3><div class="choices"><button class="choice">C2C: consumer to consumer</button><button class="choice">B2B: business to business</button><button class="choice">G2B: government to business</button></div><div class="feedback" aria-live="polite"></div></div>
+          <div class="quick-check section-check" data-answer="0" data-explanation="A platform that lives on channels it doesn't own depends on their rules. If a channel changes its algorithm or policies, the platform can lose reach to members overnight."><div class="question-number">Pause and check</div><h3>What is the main risk of building a community across social media channels a business doesn't own?</h3><div class="choices"><button class="choice">The channels can change their rules or reach, cutting the business off from its members.</button><button class="choice">Members can't share content across channels.</button><button class="choice">Social media channels charge every member a fee to join.</button></div><div class="feedback" aria-live="polite"></div></div>
+          <p class="case-reference"><strong>Reference:</strong> Shapiro, S., &amp; Panvelwala, B. (2026). Community based marketing strategy: Expanding Malayali360. <em>Open Access Teaching Case Journal</em>, 4(1). <a href="https://oatcj.org/" target="_blank" rel="noopener">https://oatcj.org/</a></p>
+        </section>
+
         <div class="module-recap" data-closure="part1" hidden>
           <h3>What should you take from Part 1?</h3>
-          <ul><li>Who sells to whom, and how a business makes money, matter more than how its website looks.</li><li>E-commerce grew from read-only catalogues (Web 1.0) to sites where customers create content (Web 2.0), and shoppers now compare across every channel.</li><li>Payment platforms like Stripe turned weeks of bank paperwork into a few lines of code; approval takes seconds, but the money arrives days later.</li><li>AI now recommends, detects fraud, writes content, builds shops, and is starting to shop for people.</li></ul>
+          <ul><li>Who sells to whom, and how a business makes money, matter more than how its website looks, as the Malayali360 case shows for a real community platform.</li><li>Each era, from Web 1.0 to Web 2.0 to easy payments, lowered the barriers to selling online; approval takes seconds, but the money arrives days later.</li><li>AI now recommends, detects fraud, writes content, builds shops and starts to shop for people, and it needs limits and human oversight.</li></ul>
         </div>
         <div class="celebration" data-closure="part1" role="note" hidden><strong>Part 1 complete.</strong><p>You know where today's tools came from. Now build your own shop.</p></div>
         <div class="part-transition" data-closure="part1" hidden><strong>Continue to Part 2</strong><p>Build and launch your own shop.</p><a href="#part2">Go to Part 2 →</a></div>
@@ -2207,6 +2298,11 @@ Requirements:
           <li>All logos are trademarks of their owners. They are used only to identify the companies and products discussed, for teaching, and their use implies no endorsement.</li>
           <li>Screenshots of the shop and checkout come from the worked example built for this module, in Stripe's test mode. Diagrams and illustrations were made for this module.</li>
         </ul>
+        <h3>Teaching case</h3>
+        <ul>
+          <li>Shapiro, S., &amp; Panvelwala, B. (2026). Community based marketing strategy: Expanding Malayali360. <em>Open Access Teaching Case Journal</em>, 4(1). <a href="https://oatcj.org/" target="_blank" rel="noopener">https://oatcj.org/</a>. Case available at <a href="https://www.thecasecentre.org/products/view?id=214365" target="_blank" rel="noopener">The Case Centre</a>.</li>
+          <li><strong>Acknowledgement:</strong> the Part 1 teaching case activity was adapted from this case for educational purposes. It summarises the case in original wording and does not reproduce its text, tables, images or teaching notes. This module is not endorsed by the authors, the journal, The Case Centre or the University of Lethbridge.</li>
+        </ul>
         <h3>E-commerce concepts</h3>
         <ul>
           <li>Rainer, R. K., &amp; Prince, B. (2021). <em>Introduction to information systems</em>. John Wiley &amp; Sons. Chapter 7, “E-Business and E-Commerce”, is the source for the six-majors cards, physical and online businesses, B2E and e-government, business models, B2B, the card payment steps, payment types, showrooming and channels, online marketing, order fulfilment, the Flash Crash case, and the ethical and legal issues.</li>
@@ -2225,7 +2321,7 @@ Requirements:
       </section>
     </div>
 
-    <footer><strong>Build Your Own Online Shop</strong> · Version 3 October 2026 (updated times, IS icon) · A hands-on e-commerce module · Test mode only, no real payments. The diagrams are illustrations, and the screenshots come from an example shop built the same way. Logos are trademarks of their owners, used for identification and teaching (see Sources).</footer>
+    <footer><strong>Build Your Own Online Shop</strong> · Version 3 October 2026 (Malayali360 teaching case) · A hands-on e-commerce module · Test mode only, no real payments. The diagrams are illustrations, and the screenshots come from an example shop built the same way. Logos are trademarks of their owners, used for identification and teaching (see Sources).</footer>
   </main>
 </div>
 <button type="button" class="top-button" id="top-button" aria-label="Back to top"><span aria-hidden="true">↑</span><span class="top-label">Top</span></button>
@@ -2271,7 +2367,8 @@ Requirements:
       { first:'p1-web2', title:'Web 2.0 and channels', purpose:'See how customers began creating content, how shops became platforms, and how shoppers now compare across every channel.', output:'The shift to Web 2.0', takeaway:'You can explain user-generated content, network effects, showrooming and disintermediation.' },
       { first:'p1-payments', title:'Payments get easy', purpose:'Compare taking card payments in 2000 with doing it through Stripe today, and follow one payment through nine steps.', output:'Why payment platforms matter', takeaway:'You can explain what Stripe made easier for small businesses.' },
       { first:'p1-ai', title:'AI changes the game', purpose:'See six ways AI is used in e-commerce today, from recommendations to AI agents that shop.', output:'AI in e-commerce', takeaway:'You can describe how AI is changing online shopping, and the questions it raises.' },
-      { first:'p1-review', title:'Review understanding', purpose:'Apply ideas from across Part 1 to six new questions.', output:'Part 1 complete', takeaway:'You are ready to build your own shop.' }
+      { first:'p1-review', title:'Review understanding', purpose:'Apply ideas from across Part 1 to six new questions.', output:'Part 1 reviewed', takeaway:'Next, apply these ideas to a real business case.' },
+      { first:'p1-case', title:'Teaching case: Malayali360', purpose:'Read a published teaching case about a community social media platform, and analyse it with the ideas from Part 1.', output:'Part 1 complete', takeaway:'You are ready to build your own shop.' }
     ],
     part2: [
       { first:'p2-ready', title:'Get ready', purpose:'Set up five accounts, see how one sale works from start to finish, learn four safety rules, then choose step by step or all in one (connectors).', output:'Accounts and the big picture', takeaway:'You know what each tool does and how a sale flows through them.' },
@@ -2619,6 +2716,9 @@ Requirements:
     ["Fraud detection", "Checking payments for signs of stolen cards. Stripe's Radar uses machine learning for this.", "a bouncer checking IDs."],
     ["AI agent and agentic commerce", "An AI agent is AI that can take actions, not just answer. Agentic commerce is AI agents finding and buying products for people.", "a personal shopper who can use your card."],
     ["Vibe coding", "Building software by describing what you want to an AI assistant, testing the result, and asking for changes.", "directing a builder instead of laying the bricks yourself."],
+    ["Teaching case", "A true business story written for students to analyse. It sets out the facts and a decision, and leaves the answers to you.", "a flight simulator for business decisions."],
+    ["Diaspora", "A community of people living outside their original homeland, often spread across several countries, such as Malayalis living outside Kerala.", "one extended family spread across many cities."],
+    ["Community-based marketing", "Growing a business through an engaged community and word of mouth, rather than mainly through paid advertising.", "a club that grows because members bring friends."],
     ["Learning outcome", "A statement of what you will be able to do by the end of a module, such as “evaluate” or “build”.", "the destination on a map."],
     ["Connector", "A link that plugs an outside service, such as Stripe or Supabase, into an AI assistant so it can look things up and take actions there, using your login.", "giving an assistant a key card to certain rooms."],
     ["MCP (Model Context Protocol)", "An open standard, introduced by Anthropic in 2024, that most AI connectors use. Any AI assistant and any service that support it can work together.", "USB for AI: one common plug."],
@@ -3024,6 +3124,32 @@ Requirements:
   }
   renderCompletion();
   document.addEventListener('check-attempted', function () { setTimeout(renderCompletion, 0); });
+
+  // ---------- Malayali360 case answers ----------
+  (function () {
+    var form = document.getElementById('case-analysis');
+    if (!form) return;
+    var fields = Array.prototype.slice.call(form.querySelectorAll('textarea[data-mcase]'));
+    var saved = load('mcase', {}), count = document.getElementById('mcase-count');
+    function words() {
+      count.textContent = fields.reduce(function (t, f) { var w = f.value.trim(); return t + (w ? w.split(/\s+/).length : 0); }, 0) + ' words';
+    }
+    fields.forEach(function (f) {
+      f.value = saved[f.dataset.mcase] || '';
+      f.addEventListener('input', function () { saved[f.dataset.mcase] = f.value; save('mcase', saved); words(); });
+    });
+    words();
+    document.getElementById('mcase-copy').addEventListener('click', function () {
+      var text = 'Teaching case: Malayali360 (adapted from Shapiro & Panvelwala, 2026)\n\n' + fields.map(function (f) {
+        return f.closest('label').querySelector('.case-q').firstChild.textContent.trim() + '\n' + (f.value.trim() || '(not answered)');
+      }).join('\n\n');
+      var fb = document.getElementById('mcase-fallback'), btn = this;
+      function fallback() { fb.hidden = false; fb.value = text; fb.focus(); fb.select(); btn.textContent = 'Select all and copy below'; }
+      try {
+        navigator.clipboard.writeText(text).then(function () { btn.textContent = 'Copied ✓'; setTimeout(function () { btn.textContent = 'Copy my answers'; }, 2500); }, fallback);
+      } catch (e) { fallback(); }
+    });
+  })();
 })();
 </script>
 

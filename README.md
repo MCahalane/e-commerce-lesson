@@ -1,8 +1,8 @@
 # Build Your Own Online Shop
 
-An interactive, self-paced e-commerce lesson for business and information systems students. It takes about 4½–5½ hours: Part 1 about 1–1½ hours, Part 2 about 2–2½ hours, Part 3 about 1½ hours.
+An interactive, self-paced e-commerce lesson for business and information systems students. It takes about 5–6 hours: Part 1 about 1½–2 hours, Part 2 about 2–2½ hours, Part 3 about 1½ hours.
 
-- **Part 1:** from dot-com to AI. Covers e-commerce types, business models, Web 2.0 and channels, how online payments work, and AI.
+- **Part 1:** from dot-com to AI. Covers e-commerce types, business models, Web 2.0 and channels, how online payments work, AI, and a real teaching case (Malayali360).
 - **Part 2:** build your own shop that takes test payments, using an AI assistant, Stripe, Supabase and Vercel.
 - **Part 3:** what it takes to make it real. Covers finding customers, fulfilment, the law, security and ethics, and ends with a short business case.
 - **Reference:** a recap of AI tools for vibe coding, a glossary, and sources.
@@ -35,6 +35,8 @@ The site is published with GitHub Pages. To view it locally, serve the folder (f
 Progress, quiz answers and the business case are saved only in each student's browser. The site collects no data.
 
 ## Sources and acknowledgements
+
+**Acknowledgement:** the Part 1 teaching case activity is adapted, for educational purposes, from Shapiro, S., & Panvelwala, B. (2026). Community based marketing strategy: Expanding Malayali360. *Open Access Teaching Case Journal*, 4(1). https://oatcj.org/. It summarises the case in original wording and links to the original. The module is not endorsed by the case authors, the journal, The Case Centre or the University of Lethbridge.
 
 Chapter 7 material is adapted from Rainer, R. K., & Prince, B. (2021). *Introduction to information systems*. John Wiley & Sons.
 
