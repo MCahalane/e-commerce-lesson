@@ -24,6 +24,7 @@ By the end of the module, students can:
 - `index.html` is the whole site and the **master copy**. Edit this file.
 - `shots/` holds the screenshots and logos.
 - `favicon.svg` is the browser-tab icon.
+- To change who receives business cases, edit the `CONVENOR_EMAIL` line in `index.html`.
 - `tools/make_artifact.py` converts `index.html` into a page for a Claude artifact, swapping the embedded videos for links.
 
 ## Viewing it

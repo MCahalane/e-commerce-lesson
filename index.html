@@ -519,6 +519,18 @@
   .case-form textarea:focus { outline:3px solid var(--focus); outline-offset:1px; }
   .case-actions { display:flex; flex-wrap:wrap; align-items:center; gap:12px; }
   .case-count { font-size:.85rem; color:var(--muted); }
+  .case-who { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; padding-bottom:14px; border-bottom:1px solid var(--line); }
+  .case-who input { width:100%; padding:10px 12px; border:1px solid #9a9a9a; font:inherit; font-size:.95rem; color:var(--ink); background:#fff; }
+  .case-who input:focus { outline:3px solid var(--focus); outline-offset:1px; }
+  .case-who input[aria-invalid="true"] { border-color:var(--red); background:var(--red-soft); }
+  .case-send-row { display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
+  .case-send-row .case-q { flex-basis:100%; }
+  .case-send { display:inline-block; text-decoration:none; background:var(--yellow); }
+  .case-status { margin:0; font-size:.9rem; font-weight:700; color:var(--red); }
+  .case-status:empty { display:none; }
+  .case-send-note { padding:12px 14px; background:var(--grey); font-size:.88rem; }
+  .case-send-note p { margin:.3rem 0; }
+  .convenor-addr { font-family:var(--mono); font-weight:700; user-select:all; }
 
   /* tips and cart */
   .tips-groups { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin:16px 0; }
@@ -616,7 +628,7 @@
     .guided-start-next { width:100%; }
     .module-recap ul { grid-template-columns:1fr; }
     .media-lesson { grid-template-columns:1fr; }
-    .tips-groups, .outcomes li { grid-template-columns:1fr; }
+    .tips-groups, .outcomes li, .case-who { grid-template-columns:1fr; }
     .model-grid, .why-cards, .lane.three, .lane.five, .media-row, .sale-sim, .calc, .callouts, .major-grid, .picker, .picker-out dl, .sort-item, .stat { grid-template-columns:1fr; }
     .wf-row { grid-template-columns:110px minmax(0,1fr) 70px; font-size:.8rem; }
     .chat-phone { border-width:6px; }
@@ -2031,8 +2043,12 @@ Requirements:
             </div>
           </div>
           <h3>Apply it: your business case</h3>
-          <p>Bring the module together by writing a short business case for <strong>your own shop</strong>, about 300–500 words in total. Answer each prompt in a few sentences. Your answers save in this browser as you type. When you're done, copy the whole case and paste it into a document. <strong>Your business case is what you submit to show you have completed the module.</strong></p>
+          <p>Bring the module together by writing a short business case for <strong>your own shop</strong>, about 300–500 words in total. Answer each prompt in a few sentences. Your answers save in this browser as you type. When you're done, add your name and email and use <strong>Email it to the convenor</strong>, or copy it and send it yourself. <strong>Your business case is what you submit to show you have completed the module.</strong></p>
           <div class="case-form" id="business-case">
+            <div class="case-who">
+              <label><span class="case-q">Your name</span><input type="text" id="case-name" autocomplete="name" placeholder="First and last name"></label>
+              <label><span class="case-q">Your email</span><input type="email" id="case-email-addr" autocomplete="email" placeholder="you@example.edu"></label>
+            </div>
             <label><span class="case-q">1 · Your shop and customers <small>LO2</small></span><span class="case-hint">What do you sell, and to whom? Which type is it (B2C, C2C…), and is it pure-play or clicks-and-mortar?</span><textarea data-case="shop" rows="3"></textarea></label>
             <label><span class="case-q">2 · Business model <small>LO2</small></span><span class="case-hint">Which money model would you use, and why? What is its main risk?</span><textarea data-case="model" rows="3"></textarea></label>
             <label><span class="case-q">3 · Finding customers <small>LO6</small></span><span class="case-hint">Name two ways you would win customers. Using the calculator in Stage 2, roughly what would one customer cost, and what would they earn you?</span><textarea data-case="customers" rows="3"></textarea></label>
@@ -2040,6 +2056,19 @@ Requirements:
             <label><span class="case-q">5 · Top three risks and controls <small>LO5 · LO6</small></span><span class="case-hint">Name three risks (technical, legal or ethical) and what controls each one. Include at least one control your Part 2 shop already has.</span><textarea data-case="risks" rows="4"></textarea></label>
             <label><span class="case-q">6 · Using AI <small>LO7</small></span><span class="case-hint">Did you take Route A or B, and why? Name one thing the AI did well and one thing you had to check or fix. Would you let an AI agent run any part of the real business?</span><textarea data-case="ai" rows="4"></textarea></label>
             <div class="case-actions"><button type="button" class="viz-btn" id="case-copy">Copy my business case</button><span class="case-count" id="case-count" aria-live="polite"></span></div>
+            <div class="case-send-row" role="group" aria-label="Email it to the convenor">
+              <span class="case-q">Email it to the convenor using:</span>
+              <a class="viz-btn case-send" data-via="gmail" href="#" target="_blank" rel="noopener">Gmail</a>
+              <a class="viz-btn case-send" data-via="outlook" href="#" target="_blank" rel="noopener">Outlook (university or work)</a>
+              <a class="viz-btn case-send" data-via="outlookcom" href="#" target="_blank" rel="noopener">Outlook.com (personal)</a>
+              <a class="viz-btn case-send" data-via="app" href="#">Email app on this device</a>
+            </div>
+            <p class="case-status" id="case-status" aria-live="polite"></p>
+            <div class="case-send-note">
+              <p><strong>How sending works:</strong> each button opens a new email in <em>your own</em> account (Gmail or Outlook in the browser, or the email app on your device) with a message to the convenor at <span class="convenor-addr" id="convenor-addr"></span>, containing your name, email, a few timestamps from this module and your business case. Check it, then press Send. Nothing is sent automatically.</p>
+              <p>Sign in to that email account first if you aren't already. <strong>If nothing opens</strong>, or the message is cut short: click <em>Copy my business case</em>, start a new email to the address above, and paste it in.</p>
+              <p><strong>Privacy:</strong> your name and email are saved only in this browser, and are shared only when you send the email yourself.</p>
+            </div>
             <textarea class="case-fallback" id="case-fallback" rows="8" readonly hidden aria-label="Your business case, ready to copy"></textarea>
           </div>
         </section>
@@ -2246,6 +2275,8 @@ Requirements:
   };
   var nextPart = { part1:'part2', part2:'part3', part3:null };
   var unlocked = load('unlocked', {}), complete = load('complete', {}), started = load('started', {});
+  var times = load('times', {});
+  function stamp(name, always) { if (always || !times[name]) { times[name] = new Date().toISOString(); save('times', times); } }
   Object.keys(plans).forEach(function (k) { unlocked[k] = Math.max(1, Math.min(plans[k].length, Number(unlocked[k]) || 1)); });
 
   var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-section-links a'));
@@ -2288,7 +2319,7 @@ Requirements:
   function revealClosure(k) { document.querySelectorAll('[data-closure="' + k + '"]').forEach(function (el) { el.hidden = false; }); }
   function checkPartComplete(k) {
     if (!complete[k] && stageReady(k, plans[k].length)) {
-      complete[k] = true; save('complete', complete); revealClosure(k); confetti();
+      complete[k] = true; save('complete', complete); stamp(k + '-done'); revealClosure(k); confetti();
     }
     updateCompletion();
   }
@@ -2315,7 +2346,7 @@ Requirements:
     n = Math.min(n, unlocked[k]);
     var view = document.getElementById(k), plan = plans[k][n - 1];
     view.classList.add('stage-active');
-    started[k] = true; save('started', started); updateCompletion();
+    started[k] = true; save('started', started); stamp('module-start'); stamp(k + '-start'); updateCompletion();
     clearStageUi();
     view.querySelectorAll('section[data-stage]').forEach(function (s) { s.classList.toggle('active-stage', Number(s.dataset.stage) === n); });
     var sections = Array.prototype.slice.call(view.querySelectorAll('section[data-stage="' + n + '"]'));
@@ -2860,24 +2891,84 @@ Requirements:
   })();
 
   // ---------- business case ----------
+  // Change this one line to send business cases to a different convenor.
+  var CONVENOR_EMAIL = 'm.cahalane@unsw.edu.au';
   (function () {
     var form = document.getElementById('business-case');
     if (!form) return;
     var fields = Array.prototype.slice.call(form.querySelectorAll('textarea[data-case]'));
+    var nameEl = document.getElementById('case-name'), mailEl = document.getElementById('case-email-addr');
     var saved = load('case', {}), count = document.getElementById('case-count');
+    var sendBtns = Array.prototype.slice.call(form.querySelectorAll('.case-send')), status = document.getElementById('case-status');
+    document.getElementById('convenor-addr').textContent = CONVENOR_EMAIL;
     function words() {
-      var n = fields.reduce(function (t, f) { var w = f.value.trim(); return t + (w ? w.split(/\s+/).length : 0); }, 0);
-      count.textContent = n + ' words';
+      return fields.reduce(function (t, f) { var w = f.value.trim(); return t + (w ? w.split(/\s+/).length : 0); }, 0);
     }
-    fields.forEach(function (f) {
-      f.value = saved[f.dataset.case] || '';
-      f.addEventListener('input', function () { saved[f.dataset.case] = f.value; save('case', saved); words(); });
-    });
-    words();
-    document.getElementById('case-copy').addEventListener('click', function () {
-      var text = 'My business case: Build Your Own Online Shop\n\n' + fields.map(function (f) {
+    function when(iso) {
+      if (!iso) return 'not recorded';
+      var d = new Date(iso);
+      return d.toLocaleString('en-AU', { day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: '2-digit' });
+    }
+    function caseText() {
+      return fields.map(function (f) {
         return f.closest('label').querySelector('.case-q').firstChild.textContent.trim() + '\n' + (f.value.trim() || '(not answered)');
       }).join('\n\n');
+    }
+    function emailBody() {
+      var lines = [
+        'Business case: Build Your Own Online Shop', '',
+        'Name: ' + (nameEl.value.trim() || '(not given)'),
+        'Email: ' + (mailEl.value.trim() || '(not given)'), '',
+        'Timestamps (from the student\'s browser):',
+        '- Module started: ' + when(times['module-start']),
+        '- Part 1 completed: ' + when(times['part1-done']),
+        '- Part 2 completed: ' + when(times['part2-done']),
+        '- Part 3 completed: ' + when(times['part3-done']),
+        '- Business case started: ' + when(times['case-start']),
+        '- Business case last edited: ' + when(times['case-edit']),
+        '- Email prepared: ' + when(new Date().toISOString()),
+        '- Word count: ' + words(), '',
+        caseText()
+      ];
+      return lines.join('\n');
+    }
+    function refresh() {
+      count.textContent = words() + ' words';
+      var subject = 'Business case: Build Your Own Online Shop – ' + (nameEl.value.trim() || 'student');
+      var to = encodeURIComponent(CONVENOR_EMAIL), su = encodeURIComponent(subject), bo = encodeURIComponent(emailBody());
+      var urls = {
+        gmail: 'https://mail.google.com/mail/?view=cm&fs=1&to=' + to + '&su=' + su + '&body=' + bo,
+        outlook: 'https://outlook.office.com/mail/deeplink/compose?to=' + to + '&subject=' + su + '&body=' + bo,
+        outlookcom: 'https://outlook.live.com/mail/0/deeplink/compose?to=' + to + '&subject=' + su + '&body=' + bo,
+        app: 'mailto:' + CONVENOR_EMAIL + '?subject=' + su + '&body=' + bo
+      };
+      sendBtns.forEach(function (a) { a.href = urls[a.dataset.via]; });
+    }
+    nameEl.value = saved.__name || ''; mailEl.value = saved.__email || '';
+    [nameEl, mailEl].forEach(function (el) {
+      el.addEventListener('input', function () {
+        saved[el === nameEl ? '__name' : '__email'] = el.value; save('case', saved);
+        el.removeAttribute('aria-invalid'); status.textContent = ''; refresh();
+      });
+    });
+    fields.forEach(function (f) {
+      f.value = saved[f.dataset.case] || '';
+      f.addEventListener('input', function () {
+        saved[f.dataset.case] = f.value; save('case', saved);
+        stamp('case-start'); stamp('case-edit', true); refresh();
+      });
+    });
+    refresh();
+    sendBtns.forEach(function (a) { a.addEventListener('click', function (e) {
+      var problems = [];
+      if (!nameEl.value.trim()) { problems.push('your name'); nameEl.setAttribute('aria-invalid', 'true'); }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mailEl.value.trim())) { problems.push('a valid email address'); mailEl.setAttribute('aria-invalid', 'true'); }
+      if (words() < 50) problems.push('your business case (at least 50 words)');
+      if (problems.length) { e.preventDefault(); status.textContent = 'Before sending, please add ' + problems.join(', ') + '.'; return; }
+      status.textContent = '';
+    }); });
+    document.getElementById('case-copy').addEventListener('click', function () {
+      var text = emailBody();
       var fb = document.getElementById('case-fallback'), btn = this;
       function fallback() { fb.hidden = false; fb.value = text; fb.focus(); fb.select(); btn.textContent = 'Select all and copy below'; }
       try {
@@ -2898,7 +2989,7 @@ Requirements:
       save('finished', fin);
     }
     cards.forEach(function (c) {
-      c.innerHTML = '<h3>Module complete</h3><p>You finished all three parts on <strong></strong>.</p><p>To show your teacher you have completed the module, submit your <a href="#p3-review">business case</a> from Part 3, Stage 5. Use the <em>Copy my business case</em> button and paste it into a document.</p>';
+      c.innerHTML = '<h3>Module complete</h3><p>You finished all three parts on <strong></strong>.</p><p>To show your teacher you have completed the module, submit your <a href="#p3-review">business case</a> from Part 3, Stage 5, using the <em>Email it to the convenor</em> button.</p>';
       c.querySelector('p strong').textContent = fin.date;
       c.hidden = false;
     });
