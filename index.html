@@ -494,8 +494,11 @@
   .route-note p { margin:.25rem 0 0; max-width:75ch; }
   .routes-table td:first-child { white-space:nowrap; }
   /* IS module note */
-  .is-note { margin:0 0 34px; padding:18px 22px; background:var(--yellow-soft); border:2px solid var(--black); border-left:10px solid var(--black); }
-  .is-note p { margin:0; max-width:80ch; font-size:1.05rem; }
+  .is-note { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:18px 32px; margin:0 0 34px; padding:20px 26px; background:var(--yellow-soft); border:2px solid var(--black); border-left:10px solid var(--black); }
+  .is-note p { grid-column:1; grid-row:1; margin:0; font-size:1.05rem; }
+  .is-note-icon { grid-column:2; grid-row:1; display:grid; justify-items:center; gap:4px; }
+  .is-note-icon svg { display:block; width:150px; height:auto; }
+  .is-note-icon span { font-size:.68rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase; color:#574a00; }
 
   /* learning outcomes */
   .outcomes { list-style:none; margin:14px 0 26px; padding:0; display:grid; gap:8px; }
@@ -633,6 +636,10 @@
     .module-recap ul { grid-template-columns:1fr; }
     .media-lesson { grid-template-columns:1fr; }
     .tips-groups, .outcomes li, .case-who { grid-template-columns:1fr; }
+    .is-note { grid-template-columns:1fr; }
+    .is-note-icon { grid-column:1; grid-row:1; justify-items:start; }
+    .is-note-icon svg { width:120px; }
+    .is-note p { grid-row:2; }
     .model-grid, .why-cards, .lane.three, .lane.five, .media-row, .sale-sim, .calc, .callouts, .major-grid, .picker, .picker-out dl, .sort-item, .stat { grid-template-columns:1fr; }
     .wf-row { grid-template-columns:110px minmax(0,1fr) 70px; font-size:.8rem; }
     .chat-phone { border-width:6px; }
@@ -736,7 +743,12 @@
 
       <!-- OVERVIEW -->
       <section class="orientation page-view active-view" id="overview" data-view="overview">
-        <div class="is-note" role="note"><p><strong>This is an Information Systems (IS) learning module for business students.</strong> It is hands-on and learn-by-building: you follow one small business example, build a working online shop with real tools in test mode, and use it to see how information systems help a business sell, and where they create risk.</p></div>
+        <div class="is-note" role="note"><div class="is-note-icon" aria-hidden="true"><svg viewBox="0 0 160 110">
+            <g stroke="#231f20" stroke-width="3" fill="none"><line x1="52" y1="38" x2="80" y2="72"/><line x1="108" y1="38" x2="80" y2="72"/><line x1="58" y1="22" x2="102" y2="22"/></g>
+            <rect x="8" y="6" width="50" height="34" rx="3" fill="#fff" stroke="#231f20" stroke-width="4"/><path d="M18 15h5l4 13h16l3-9H25" fill="none" stroke="#231f20" stroke-width="3" stroke-linejoin="round"/><line x1="26" y1="46" x2="40" y2="46" stroke="#231f20" stroke-width="4"/>
+            <rect x="102" y="8" width="50" height="32" rx="4" fill="#ffe600" stroke="#231f20" stroke-width="4"/><rect x="102" y="16" width="50" height="7" fill="#231f20"/><rect x="110" y="29" width="16" height="5" fill="#231f20"/>
+            <ellipse cx="80" cy="74" rx="22" ry="7" fill="#fff" stroke="#231f20" stroke-width="4"/><path d="M58 74v22c0 4 10 7 22 7s22-3 22-7V74" fill="#fff" stroke="#231f20" stroke-width="4"/><path d="M58 85c0 4 10 7 22 7s22-3 22-7" fill="none" stroke="#231f20" stroke-width="3"/>
+          </svg><span>Shop · Payments · Data</span></div><p><strong>This is an Information Systems (IS) learning module for business students.</strong> It is hands-on and learn-by-building: you follow one small business example, build a working online shop with real tools in test mode, and use it to see how information systems help a business sell, and where they create risk.</p></div>
         <div class="section-label">Orientation</div>
         <h2 class="section-title">How this module works</h2>
         <div class="how-it-works" role="note">
@@ -2213,7 +2225,7 @@ Requirements:
       </section>
     </div>
 
-    <footer><strong>Build Your Own Online Shop</strong> · Version 3 October 2026 (updated times) · A hands-on e-commerce module · Test mode only, no real payments. The diagrams are illustrations, and the screenshots come from an example shop built the same way. Logos are trademarks of their owners, used for identification and teaching (see Sources).</footer>
+    <footer><strong>Build Your Own Online Shop</strong> · Version 3 October 2026 (updated times, IS icon) · A hands-on e-commerce module · Test mode only, no real payments. The diagrams are illustrations, and the screenshots come from an example shop built the same way. Logos are trademarks of their owners, used for identification and teaching (see Sources).</footer>
   </main>
 </div>
 <button type="button" class="top-button" id="top-button" aria-label="Back to top"><span aria-hidden="true">↑</span><span class="top-label">Top</span></button>
