@@ -25,6 +25,7 @@ By the end of the module, students can:
 - `shots/` holds the screenshots and logos.
 - `favicon.svg` is the browser-tab icon.
 - Teacher preview: open the site with `#teacher-preview` at the end of the address to unlock every stage (in that browser only) and jump to the business case.
+- Student answer boxes: add `data-no-paste="true"` to a textarea to block pasting and show a live word count (optionally add `data-suggested="80–120"` for a suggested length). This is a learning-design nudge, not a security control.
 - To change who receives business cases, edit the `CONVENOR_EMAIL` line in `index.html`.
 - `tools/make_artifact.py` converts `index.html` into a page for a Claude artifact, swapping the embedded videos for links.
 

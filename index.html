@@ -526,6 +526,13 @@
   .case-form textarea:focus { outline:3px solid var(--focus); outline-offset:1px; }
   .case-actions { display:flex; flex-wrap:wrap; align-items:center; gap:12px; }
   .case-count { font-size:.85rem; color:var(--muted); }
+  .field-wrap { position:relative; }
+  .field-wrap textarea { display:block; }
+  .field-meta { margin-top:3px; font-size:.8rem; }
+  .field-wc { color:var(--muted); font-variant-numeric:tabular-nums; }
+  .field-paste-msg { position:absolute; left:6px; right:6px; bottom:6px; padding:.35rem .6rem; background:var(--yellow-soft); border:1px solid var(--olive); border-left:5px solid var(--olive); color:#3f3600; font-size:.82rem; font-weight:700; line-height:1.4; box-shadow:0 2px 8px rgba(0,0,0,.12); opacity:0; transform:translateY(4px); transition:opacity .2s ease, transform .2s ease; pointer-events:none; }
+  .field-paste-msg.show { opacity:1; transform:none; }
+  @media (prefers-reduced-motion:reduce) { .field-paste-msg { transition:none; } }
   .case-who { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; padding-bottom:14px; border-bottom:1px solid var(--line); }
   .case-who input { width:100%; padding:10px 12px; border:1px solid #9a9a9a; font:inherit; font-size:.95rem; color:var(--ink); background:#fff; }
   .case-who input:focus { outline:3px solid var(--focus); outline-offset:1px; }
@@ -712,7 +719,7 @@
 </head>
 <body>
 <!-- Icons: Lucide (lucide.dev), ISC licence. Copyright (c) Lucide Icons and Contributors. -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="lu-calculator" viewBox="0 0 24 24"><rect width="16" height="20" x="4" y="2" rx="2" /> <line x1="8" x2="16" y1="6" y2="6" /> <line x1="16" x2="16" y1="14" y2="18" /> <path d="M16 10h.01" /> <path d="M12 10h.01" /> <path d="M8 10h.01" /> <path d="M12 14h.01" /> <path d="M8 14h.01" /> <path d="M12 18h.01" /> <path d="M8 18h.01" /></symbol><symbol id="lu-credit-card" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2" /> <line x1="2" x2="22" y1="10" y2="10" /> <path d="M6 14h2" /></symbol><symbol id="lu-scale" viewBox="0 0 24 24"><path d="M12 3v18" /> <path d="m19 8 3 8a5 5 0 0 1-6 0zV7" /> <path d="M3 7h1a17 17 0 0 0 8-2 17 17 0 0 0 8 2h1" /> <path d="m5 8 3 8a5 5 0 0 1-6 0zV7" /> <path d="M7 21h10" /></symbol><symbol id="lu-network" viewBox="0 0 24 24"><rect x="16" y="16" width="6" height="6" rx="1" /> <rect x="2" y="16" width="6" height="6" rx="1" /> <rect x="9" y="2" width="6" height="6" rx="1" /> <path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" /> <path d="M12 12V8" /></symbol><symbol id="lu-megaphone" viewBox="0 0 24 24"><path d="M11 6a13 13 0 0 0 8.4-2.8A1 1 0 0 1 21 4v12a1 1 0 0 1-1.6.8A13 13 0 0 0 11 14H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" /> <path d="M6 14a12 12 0 0 0 2.4 7.2 2 2 0 0 0 3.2-2.4A8 8 0 0 1 10 14" /> <path d="M8 6v8" /></symbol><symbol id="lu-chart-column" viewBox="0 0 24 24"><path d="M3 3v16a2 2 0 0 0 2 2h16" /> <path d="M18 17V9" /> <path d="M13 17V5" /> <path d="M8 17v-3" /></symbol><symbol id="lu-lightbulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /> <path d="M9 18h6" /> <path d="M10 22h4" /></symbol><symbol id="lu-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /> <path d="M2 12h20" /></symbol><symbol id="lu-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /></symbol><symbol id="lu-bot" viewBox="0 0 24 24"><path d="M12 8V4H8" /> <rect width="16" height="12" x="4" y="8" rx="2" /> <path d="M2 14h2" /> <path d="M20 14h2" /> <path d="M15 13v2" /> <path d="M9 13v2" /></symbol><symbol id="lu-leaf" viewBox="0 0 24 24"><path d="M11 20a10 10 0 0010-10 25.9 25.9 0 00-1.04-7.281 1 1 0 00-1.755-.325C15.833 5.5 13 5.5 9.8 6.1A7 7 0 0011 20" /> <path d="M2 21a5 5 0 012.911-4.544C7.613 15.212 8.351 15.24 11 13" /></symbol><symbol id="lu-triangle-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" /> <path d="M12 9v4" /> <path d="M12 17h.01" /></symbol></defs></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="lu-calculator" viewBox="0 0 24 24"><rect width="16" height="20" x="4" y="2" rx="2" /> <line x1="8" x2="16" y1="6" y2="6" /> <line x1="16" x2="16" y1="14" y2="18" /> <path d="M16 10h.01" /> <path d="M12 10h.01" /> <path d="M8 10h.01" /> <path d="M12 14h.01" /> <path d="M8 14h.01" /> <path d="M12 18h.01" /> <path d="M8 18h.01" /></symbol><symbol id="lu-credit-card" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2" /> <line x1="2" x2="22" y1="10" y2="10" /> <path d="M6 14h2" /></symbol><symbol id="lu-scale" viewBox="0 0 24 24"><path d="M12 3v18" /> <path d="m19 8 3 8a5 5 0 0 1-6 0zV7" /> <path d="M3 7h1a17 17 0 0 0 8-2 17 17 0 0 0 8 2h1" /> <path d="m5 8 3 8a5 5 0 0 1-6 0zV7" /> <path d="M7 21h10" /></symbol><symbol id="lu-network" viewBox="0 0 24 24"><rect x="16" y="16" width="6" height="6" rx="1" /> <rect x="2" y="16" width="6" height="6" rx="1" /> <rect x="9" y="2" width="6" height="6" rx="1" /> <path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" /> <path d="M12 12V8" /></symbol><symbol id="lu-megaphone" viewBox="0 0 24 24"><path d="M11 6a13 13 0 0 0 8.4-2.8A1 1 0 0 1 21 4v12a1 1 0 0 1-1.6.8A13 13 0 0 0 11 14H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" /> <path d="M6 14a12 12 0 0 0 2.4 7.2 2 2 0 0 0 3.2-2.4A8 8 0 0 1 10 14" /> <path d="M8 6v8" /></symbol><symbol id="lu-chart-column" viewBox="0 0 24 24"><path d="M3 3v16a2 2 0 0 0 2 2h16" /> <path d="M18 17V9" /> <path d="M13 17V5" /> <path d="M8 17v-3" /></symbol><symbol id="lu-lightbulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /> <path d="M9 18h6" /> <path d="M10 22h4" /></symbol><symbol id="lu-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /> <path d="M2 12h20" /></symbol><symbol id="lu-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /></symbol><symbol id="lu-bot" viewBox="0 0 24 24"><path d="M12 8V4H8" /> <rect width="16" height="12" x="4" y="8" rx="2" /> <path d="M2 14h2" /> <path d="M20 14h2" /> <path d="M15 13v2" /> <path d="M9 13v2" /></symbol><symbol id="lu-leaf" viewBox="0 0 24 24"><path d="M11 20a10 10 0 0010-10 25.9 25.9 0 00-1.04-7.281 1 1 0 00-1.755-.325C15.833 5.5 13 5.5 9.8 6.1A7 7 0 0011 20" /> <path d="M2 21a5 5 0 012.911-4.544C7.613 15.212 8.351 15.24 11 13" /></symbol><symbol id="lu-triangle-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" /> <path d="M12 9v4" /> <path d="M12 17h.01" /></symbol><symbol id="lu-landmark" viewBox="0 0 24 24"><path d="M10 18v-7" /> <path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z" /> <path d="M14 18v-7" /> <path d="M18 18v-7" /> <path d="M3 22h18" /> <path d="M6 18v-7" /></symbol><symbol id="lu-briefcase-business" viewBox="0 0 24 24"><path d="M12 12h.01" /> <path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" /> <path d="M22 13a18.15 18.15 0 0 1-20 0" /> <rect width="20" height="14" x="2" y="6" rx="2" /></symbol></defs></svg>
 <div class="page-reading-progress" id="page-reading-progress" role="progressbar" aria-label="Progress through the current page" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="page-reading-progress-fill"></span></div>
 <div class="app-shell">
   <aside class="rail" aria-label="Module navigation">
@@ -870,6 +877,13 @@
             <div class="where">In this module: <a href="#p2-test">the order record, Part 2</a> · <a href="#p3-changes">profit on one sale, Part 3</a></div>
           </article>
           <article class="major">
+            <div class="major-top"><span class="major-icon" aria-hidden="true"><svg><use href="#lu-landmark"/></svg></span><span class="major-name">Banking &amp; Finance</span></div>
+            <h4>Banks, credit and value</h4>
+            <p>Behind every online payment sit banks: the customer’s bank approves it, the seller’s bank receives it, and lenders fund services such as buy now, pay later. Finance also asks what an online business is worth, and whether fast growth will ever turn into profit.</p>
+            <div class="major-q"><span class="major-q-label">Your question</span><p>“Should a bank lend money to a fast-growing online retailer that has never made a profit?”</p></div>
+            <div class="where">In this module: <a href="#p1-dotcom">the dot-com crash, Part 1</a> · <a href="#p1-payments">payments, Part 1</a></div>
+          </article>
+          <article class="major">
             <div class="major-top"><span class="major-icon" aria-hidden="true"><svg><use href="#lu-credit-card"/></svg></span><span class="major-name">Finance &amp; FinTech</span></div>
             <h4>Money in motion</h4>
             <p>Online businesses depend on payment gateways, card networks, digital wallets and fraud controls. Every payment method carries a fee and a delay, which shape cash flow and margins. Choosing how customers pay is a financial decision, not just a technical one.</p>
@@ -889,6 +903,13 @@
             <p>A single purchase relies on a website, a database, APIs, a payment gateway, inventory records and cloud hosting all working together. If one link fails, the sale fails. You build exactly this chain in Part 2.</p>
             <div class="major-q"><span class="major-q-label">Your question</span><p>“What systems have to communicate successfully for a single online purchase to work?”</p></div>
             <div class="where">In this module: <a href="#p2-ready">how a sale works, Part 2</a></div>
+          </article>
+          <article class="major">
+            <div class="major-top"><span class="major-icon" aria-hidden="true"><svg><use href="#lu-briefcase-business"/></svg></span><span class="major-name">Management &amp; Governance</span></div>
+            <h4>Who decides, and who is accountable?</h4>
+            <p>Running an online business means setting policies for privacy, refunds and security, deciding who may access which systems, and answering for the outcome when something goes wrong. Governance now includes new questions, such as which decisions staff or AI agents may make without approval.</p>
+            <div class="major-q"><span class="major-q-label">Your question</span><p>“Who in the business should be accountable when a data breach exposes customers’ details?”</p></div>
+            <div class="where">In this module: <a href="#p3-run">rules, running and security, Part 3</a> · <a href="#p3-trust">trust, ethics and risk, Part 3</a></div>
           </article>
           <article class="major">
             <div class="major-top"><span class="major-icon" aria-hidden="true"><svg><use href="#lu-megaphone"/></svg></span><span class="major-name">Marketing</span></div>
@@ -949,8 +970,8 @@
         </div>
         <div class="one-sale">
           <h4>One sale. Many business decisions.</h4>
-          <p>A single e-commerce transaction involves marketing, finance, accounting, analytics, information systems, cybersecurity, strategy and operations, all at the same time. E-commerce isn’t just an IT topic: every business discipline has a part in making one sale work.</p>
-          <ol class="sale-flow" aria-label="The stages of one online sale, and the disciplines involved at each stage"><li><strong>Order placed</strong><span class="flow-tags"><span>Marketing</span><span>Analytics</span><span>Economics</span></span></li><li><strong>Payment</strong><span class="flow-tags"><span>Finance &amp; FinTech</span><span>Accounting</span><span>Cybersecurity</span></span></li><li><strong>Data</strong><span class="flow-tags"><span>Information Systems</span><span>Analytics</span><span>AI</span></span></li><li><strong>Inventory</strong><span class="flow-tags"><span>Strategy</span><span>Risk</span></span></li><li><strong>Delivery</strong><span class="flow-tags"><span>International</span><span>Sustainability</span><span>Risk</span></span></li><li><strong>Customer service</strong><span class="flow-tags"><span>AI</span><span>Marketing</span><span>Accounting</span></span></li></ol>
+          <p>A single e-commerce transaction involves marketing, banking and finance, accounting, analytics, information systems, cybersecurity, strategy, management and operations, all at the same time. E-commerce isn’t just an IT topic: every business discipline has a part in making one sale work.</p>
+          <ol class="sale-flow" aria-label="The stages of one online sale, and the disciplines involved at each stage"><li><strong>Order placed</strong><span class="flow-tags"><span>Marketing</span><span>Analytics</span><span>Economics</span></span></li><li><strong>Payment</strong><span class="flow-tags"><span>Banking &amp; Finance</span><span>Finance &amp; FinTech</span><span>Accounting</span><span>Cybersecurity</span></span></li><li><strong>Data</strong><span class="flow-tags"><span>Information Systems</span><span>Analytics</span><span>AI</span></span></li><li><strong>Inventory</strong><span class="flow-tags"><span>Management</span><span>Strategy</span><span>Risk</span></span></li><li><strong>Delivery</strong><span class="flow-tags"><span>International</span><span>Sustainability</span><span>Risk</span></span></li><li><strong>Customer service</strong><span class="flow-tags"><span>AI</span><span>Marketing</span><span>Accounting</span></span></li></ol>
         </div>
         <p class="majors-note">The idea for this section is adapted from the “What’s in IT for me?” sections of Rainer and Prince (2021).</p>
       </section>
@@ -1575,12 +1596,12 @@
           </table></div>
 
           <h3>Activity: from online retailer to digital platform</h3>
-          <p><strong>Instructions:</strong> read the AMARO case above and consider how its e-commerce business model evolved. Answer the question using specific examples from the case. Aim to explain not only <em>what</em> changed, but <em>why</em> the change mattered for the business.</p>
+          <p><strong>Instructions:</strong> read the AMARO case above and consider how its e-commerce business model evolved. Answer the question using specific examples from the case. Aim to explain not only <em>what</em> changed, but <em>why</em> the change mattered for the business. Type your answer in your own words: pasting is turned off for this activity.</p>
           <div class="callout"><strong>Question:</strong> How did AMARO's use of e-commerce change as it moved from being a digitally native retailer to operating more like a platform, and what new opportunities and challenges did this create?</div>
           <div class="case-form" id="case-analysis">
-            <label><span class="case-q">1 · Before <small>LO1 · LO2</small></span><span class="case-hint">How did AMARO originally use e-commerce to sell its own products directly to customers?</span><textarea data-mcase="before" rows="4"></textarea></label>
-            <label><span class="case-q">2 · Change <small>LO2 · LO3</small></span><span class="case-hint">What changed when AMARO began allowing other brands to sell through its platform?</span><textarea data-mcase="change" rows="4"></textarea></label>
-            <label><span class="case-q">3 · Impact <small>LO2 · LO6</small></span><span class="case-hint">Identify at least one opportunity and one challenge created by this shift, using examples from the case.</span><textarea data-mcase="impact" rows="4"></textarea></label>
+            <label><span class="case-q">1 · Before <small>LO1 · LO2</small></span><span class="case-hint">How did AMARO originally use e-commerce to sell its own products directly to customers?</span><textarea data-no-paste="true" data-suggested="60–100" data-mcase="before" rows="4"></textarea></label>
+            <label><span class="case-q">2 · Change <small>LO2 · LO3</small></span><span class="case-hint">What changed when AMARO began allowing other brands to sell through its platform?</span><textarea data-no-paste="true" data-suggested="60–100" data-mcase="change" rows="4"></textarea></label>
+            <label><span class="case-q">3 · Impact <small>LO2 · LO6</small></span><span class="case-hint">Identify at least one opportunity and one challenge created by this shift, using examples from the case.</span><textarea data-no-paste="true" data-suggested="80–120" data-mcase="impact" rows="4"></textarea></label>
             <div class="case-actions"><button type="button" class="viz-btn" id="mcase-copy">Copy my answers</button><span class="case-count" id="mcase-count" aria-live="polite"></span></div>
             <textarea class="case-fallback" id="mcase-fallback" rows="8" readonly hidden aria-label="Your case answers, ready to copy"></textarea>
           </div>
@@ -2354,18 +2375,18 @@ Requirements:
             </div>
           </div>
           <h3>Apply it: your business case</h3>
-          <p>Bring the module together by writing a short business case for <strong>your own shop</strong>, about 300–500 words in total. Answer each prompt in a few sentences. Your answers save in this browser as you type. When you're done, add your name and email and use <strong>Email it to the convenor</strong>, or copy it and send it yourself. <strong>Your business case is what you submit to show you have completed the module.</strong></p>
+          <p>Bring the module together by writing a short business case for <strong>your own shop</strong>, about 300–500 words in total. Answer each prompt in a few sentences, typed in your own words (pasting is turned off). Your answers save in this browser as you type. When you're done, add your name and email and use <strong>Email it to the convenor</strong>, or copy it and send it yourself. <strong>Your business case is what you submit to show you have completed the module.</strong></p>
           <div class="case-form" id="business-case">
             <div class="case-who">
               <label><span class="case-q">Your name</span><input type="text" id="case-name" autocomplete="name" placeholder="First and last name"></label>
               <label><span class="case-q">Your email</span><input type="email" id="case-email-addr" autocomplete="email" placeholder="you@example.edu"></label>
             </div>
-            <label><span class="case-q">1 · Your shop and customers <small>LO2</small></span><span class="case-hint">What do you sell, and to whom? Which type is it (B2C, C2C…), and is it pure-play or clicks-and-mortar?</span><textarea data-case="shop" rows="3"></textarea></label>
-            <label><span class="case-q">2 · Business model <small>LO2</small></span><span class="case-hint">Which money model would you use, and why? What is its main risk?</span><textarea data-case="model" rows="3"></textarea></label>
-            <label><span class="case-q">3 · Finding customers <small>LO6</small></span><span class="case-hint">Name two ways you would win customers. Using the calculator in Stage 2, roughly what would one customer cost, and what would they earn you?</span><textarea data-case="customers" rows="3"></textarea></label>
-            <label><span class="case-q">4 · Delivering orders <small>LO6</small></span><span class="case-hint">Who packs and posts orders? What delivery time will you promise, and what is your returns policy?</span><textarea data-case="delivery" rows="3"></textarea></label>
-            <label><span class="case-q">5 · Top three risks and controls <small>LO5 · LO6</small></span><span class="case-hint">Name three risks (technical, legal or ethical) and what controls each one. Include at least one control your Part 2 shop already has.</span><textarea data-case="risks" rows="4"></textarea></label>
-            <label><span class="case-q">6 · Using AI <small>LO7</small></span><span class="case-hint">Did you take Route A or B, and why? Name one thing the AI did well and one thing you had to check or fix. Would you let an AI agent run any part of the real business?</span><textarea data-case="ai" rows="4"></textarea></label>
+            <label><span class="case-q">1 · Your shop and customers <small>LO2</small></span><span class="case-hint">What do you sell, and to whom? Which type is it (B2C, C2C…), and is it pure-play or clicks-and-mortar?</span><textarea data-no-paste="true" data-suggested="40–80" data-case="shop" rows="3"></textarea></label>
+            <label><span class="case-q">2 · Business model <small>LO2</small></span><span class="case-hint">Which money model would you use, and why? What is its main risk?</span><textarea data-no-paste="true" data-suggested="40–80" data-case="model" rows="3"></textarea></label>
+            <label><span class="case-q">3 · Finding customers <small>LO6</small></span><span class="case-hint">Name two ways you would win customers. Using the calculator in Stage 2, roughly what would one customer cost, and what would they earn you?</span><textarea data-no-paste="true" data-suggested="50–90" data-case="customers" rows="3"></textarea></label>
+            <label><span class="case-q">4 · Delivering orders <small>LO6</small></span><span class="case-hint">Who packs and posts orders? What delivery time will you promise, and what is your returns policy?</span><textarea data-no-paste="true" data-suggested="40–80" data-case="delivery" rows="3"></textarea></label>
+            <label><span class="case-q">5 · Top three risks and controls <small>LO5 · LO6</small></span><span class="case-hint">Name three risks (technical, legal or ethical) and what controls each one. Include at least one control your Part 2 shop already has.</span><textarea data-no-paste="true" data-suggested="60–100" data-case="risks" rows="4"></textarea></label>
+            <label><span class="case-q">6 · Using AI <small>LO7</small></span><span class="case-hint">Did you take Route A or B, and why? Name one thing the AI did well and one thing you had to check or fix. Would you let an AI agent run any part of the real business?</span><textarea data-no-paste="true" data-suggested="50–90" data-case="ai" rows="4"></textarea></label>
             <div class="case-actions"><button type="button" class="viz-btn" id="case-copy">Copy my business case</button><span class="case-count" id="case-count" aria-live="polite"></span></div>
             <div class="case-send-row" role="group" aria-label="Email it to the convenor">
               <span class="case-q">Email it to the convenor using:</span>
@@ -2524,7 +2545,7 @@ Requirements:
       </section>
     </div>
 
-    <footer><strong>Build Your Own Online Shop</strong> · Version 3 October 2026 (business majors) · A hands-on e-commerce module · Test mode only, no real payments. The diagrams are illustrations, and the screenshots come from an example shop built the same way. Logos are trademarks of their owners, used for identification and teaching (see Sources).</footer>
+    <footer><strong>Build Your Own Online Shop</strong> · Version 3 October 2026 (typed responses) · A hands-on e-commerce module · Test mode only, no real payments. The diagrams are illustrations, and the screenshots come from an example shop built the same way. Logos are trademarks of their owners, used for identification and teaching (see Sources).</footer>
   </main>
 </div>
 <button type="button" class="top-button" id="top-button" aria-label="Back to top"><span aria-hidden="true">↑</span><span class="top-label">Top</span></button>
@@ -3359,6 +3380,43 @@ Requirements:
   })();
 
 
+
+  // ---------- typed-response fields: paste prevention + live word count ----------
+  // Learning-design friction, not a security control. Apply with data-no-paste="true";
+  // add data-suggested="80–120" to show a suggested length.
+  (function () {
+    var MSG = 'Please type your response in your own words. Pasting is disabled for this activity.';
+    function countWords(v) { var t = v.trim(); return t ? t.split(/\s+/).length : 0; }
+    document.querySelectorAll('[data-no-paste="true"]').forEach(function (field, i) {
+      var wrap = document.createElement('div'); wrap.className = 'field-wrap';
+      field.parentNode.insertBefore(wrap, field); wrap.appendChild(field);
+      var msg = document.createElement('span'); msg.className = 'field-paste-msg'; msg.setAttribute('role', 'status'); msg.setAttribute('aria-live', 'polite');
+      wrap.appendChild(msg);
+      var meta = document.createElement('div'); meta.className = 'field-meta';
+      var wc = document.createElement('span'); wc.className = 'field-wc'; wc.id = 'field-wc-' + i;
+      meta.appendChild(wc);
+      wrap.insertAdjacentElement('afterend', meta);
+      var described = (field.getAttribute('aria-describedby') || '').trim();
+      field.setAttribute('aria-describedby', (described ? described + ' ' : '') + wc.id);
+      var suggested = field.dataset.suggested, timer;
+      function update() {
+        var n = countWords(field.value);
+        wc.textContent = n + (n === 1 ? ' word' : ' words') + ' typed' + (suggested ? ' · Suggested: ' + suggested + ' words' : '');
+      }
+      function blocked(e) {
+        e.preventDefault();
+        msg.textContent = MSG; msg.classList.add('show');
+        clearTimeout(timer);
+        timer = setTimeout(function () { msg.textContent = ''; msg.classList.remove('show'); }, 4000);
+      }
+      field.addEventListener('paste', blocked);
+      field.addEventListener('beforeinput', function (e) { if (e.inputType === 'insertFromPaste' || e.inputType === 'insertFromDrop' || e.inputType === 'insertFromPasteAsQuotation') blocked(e); });
+      field.addEventListener('drop', blocked);
+      field.addEventListener('dragover', function (e) { e.preventDefault(); if (e.dataTransfer) e.dataTransfer.dropEffect = 'none'; });
+      field.addEventListener('input', update);
+      update();
+    });
+  })();
 })();
 </script>
 
