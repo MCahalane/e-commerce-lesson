@@ -1,6 +1,6 @@
 # Build Your Own Online Shop
 
-An interactive, self-paced e-commerce lesson for business and information systems students. It takes about 6½ hours, spread over roughly four sessions.
+An interactive, self-paced e-commerce lesson for business and information systems students. It takes about 4½–5½ hours: Part 1 about 1–1½ hours, Part 2 about 2–2½ hours, Part 3 about 1½ hours.
 
 - **Part 1:** from dot-com to AI. Covers e-commerce types, business models, Web 2.0 and channels, how online payments work, and AI.
 - **Part 2:** build your own shop that takes test payments, using an AI assistant, Stripe, Supabase and Vercel.
