@@ -40,6 +40,6 @@ Progress, quiz answers and the business case are saved only in each student's br
 
 Chapter 7 material is adapted from Rainer, R. K., & Prince, B. (2021). *Introduction to information systems*. John Wiley & Sons.
 
-All logos are trademarks of their owners, used to identify the companies discussed for teaching purposes. The page's Sources section lists all sources and acknowledgements.
+All logos are trademarks of their owners, used to identify the companies discussed for teaching purposes. Icons in the business majors section are from Lucide (https://lucide.dev), ISC licence, embedded inline (no external library is loaded). The page's Sources section lists all sources and acknowledgements.
 
 Prices, taxes and laws in the module are Australian.

@@ -577,12 +577,31 @@
   .case-reference { margin-top:22px; padding-top:12px; border-top:1px solid var(--line); font-size:.9rem; overflow-wrap:anywhere; }
 
   /* majors */
-  .major-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; margin:18px 0 26px; }
-  .major-name { overflow-wrap:anywhere; }
-  .major { display:flex; flex-direction:column; gap:8px; min-width:0; padding:16px; background:#fff; border:2px solid var(--black); }
-  .major .major-name { display:inline-block; width:max-content; max-width:100%; padding:.25rem .55rem; background:var(--yellow); font-weight:900; font-size:.78rem; letter-spacing:.06em; text-transform:uppercase; }
+  .majors-lead { margin:.4rem 0 .2rem; font-size:1.25rem; font-weight:900; }
+  .major-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin:18px 0 26px; }
+  .major { display:flex; flex-direction:column; gap:10px; min-width:0; padding:18px; background:#fff; border:2px solid var(--black); border-top:8px solid var(--yellow); transition:transform .18s ease, box-shadow .18s ease; }
+  .major:hover, .major:focus-within { transform:translateY(-3px); box-shadow:0 10px 22px rgba(0,0,0,.12); }
+  .major-top { display:flex; align-items:center; gap:12px; }
+  .major-icon { flex:0 0 auto; display:grid; place-items:center; width:48px; height:48px; background:var(--yellow); border:2px solid var(--black); }
+  .major-icon svg { width:26px; height:26px; fill:none; stroke:var(--black); stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+  .major-name { min-width:0; font-size:.78rem; font-weight:900; letter-spacing:.06em; text-transform:uppercase; line-height:1.3; overflow-wrap:anywhere; }
+  .major h4 { margin:0; font-size:1.05rem; line-height:1.25; }
   .major p { margin:0; font-size:.93rem; }
-  .major .where { margin-top:auto; padding-top:8px; border-top:1px solid var(--line); font-size:.82rem; color:var(--muted); }
+  .major-q { margin-top:auto; padding:12px 14px; background:var(--black); color:#fff; }
+  .major-q-label { display:block; margin-bottom:4px; font-size:.7rem; font-weight:900; letter-spacing:.09em; text-transform:uppercase; color:var(--yellow); }
+  .major-q p { color:#fff; font-size:.92rem; font-weight:700; }
+  .major .where { padding-top:8px; border-top:1px solid var(--line); font-size:.82rem; color:var(--muted); }
+  .one-sale { margin:8px 0 22px; padding:20px 22px; background:var(--yellow-soft); border:2px solid var(--black); border-left:10px solid var(--black); }
+  .one-sale h4 { margin:0 0 6px; font-size:1.15rem; }
+  .one-sale > p { margin:0 0 14px; }
+  .sale-flow { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:22px; }
+  .sale-flow li { position:relative; padding:10px; background:#fff; border:1px solid var(--black); min-width:0; }
+  .sale-flow li:not(:last-child)::after { content:"→"; position:absolute; right:-18px; top:10px; font-weight:900; color:var(--olive); }
+  .sale-flow strong { display:block; margin-bottom:6px; font-size:.9rem; }
+  .flow-tags { display:flex; flex-wrap:wrap; gap:4px; }
+  .flow-tags span { padding:.12rem .38rem; background:var(--grey); border:1px solid var(--line); font-size:.72rem; font-weight:700; }
+  .majors-note { font-size:.82rem; color:var(--muted); }
+  @media (prefers-reduced-motion:reduce) { .major { transition:none; } .major:hover, .major:focus-within { transform:none; } }
 
   /* sorting activity */
   .sorter { display:grid; gap:10px; }
@@ -646,7 +665,8 @@
     .module-switcher { max-width:420px; }
     .rail-note { display:none; }
     .grid.three, .shots.three, .journey.cols-3, .journey.cols-4, .major-grid { grid-template-columns:1fr 1fr; }
-    .major-grid .major:last-child { grid-column:1 / -1; }
+    .sale-flow { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .sale-flow li:nth-child(3n)::after { display:none; }
     .run-flow { grid-template-columns:repeat(6,minmax(160px,1fr)); }
     .lane.five { grid-template-columns:1fr 1fr; }
     .lane.five .lane-box::after { display:none; }
@@ -665,7 +685,8 @@
     .guided-start-next { width:100%; }
     .module-recap ul { grid-template-columns:1fr; }
     .media-lesson { grid-template-columns:1fr; }
-    .tips-groups, .outcomes li, .case-who { grid-template-columns:1fr; }
+    .tips-groups, .outcomes li, .case-who, .sale-flow { grid-template-columns:1fr; }
+    .sale-flow li:not(:last-child)::after { content:"↓"; right:auto; left:14px; top:auto; bottom:-20px; display:block; }
     .is-note, .case-intro, .case-bg, .case-figs { grid-template-columns:1fr; }
     .case-timeline { grid-template-columns:repeat(3,minmax(0,1fr)); }
     .case-intro-icon { grid-column:1; grid-row:1; justify-self:start; }
@@ -690,6 +711,8 @@
 
 </head>
 <body>
+<!-- Icons: Lucide (lucide.dev), ISC licence. Copyright (c) Lucide Icons and Contributors. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="lu-calculator" viewBox="0 0 24 24"><rect width="16" height="20" x="4" y="2" rx="2" /> <line x1="8" x2="16" y1="6" y2="6" /> <line x1="16" x2="16" y1="14" y2="18" /> <path d="M16 10h.01" /> <path d="M12 10h.01" /> <path d="M8 10h.01" /> <path d="M12 14h.01" /> <path d="M8 14h.01" /> <path d="M12 18h.01" /> <path d="M8 18h.01" /></symbol><symbol id="lu-credit-card" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2" /> <line x1="2" x2="22" y1="10" y2="10" /> <path d="M6 14h2" /></symbol><symbol id="lu-scale" viewBox="0 0 24 24"><path d="M12 3v18" /> <path d="m19 8 3 8a5 5 0 0 1-6 0zV7" /> <path d="M3 7h1a17 17 0 0 0 8-2 17 17 0 0 0 8 2h1" /> <path d="m5 8 3 8a5 5 0 0 1-6 0zV7" /> <path d="M7 21h10" /></symbol><symbol id="lu-network" viewBox="0 0 24 24"><rect x="16" y="16" width="6" height="6" rx="1" /> <rect x="2" y="16" width="6" height="6" rx="1" /> <rect x="9" y="2" width="6" height="6" rx="1" /> <path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" /> <path d="M12 12V8" /></symbol><symbol id="lu-megaphone" viewBox="0 0 24 24"><path d="M11 6a13 13 0 0 0 8.4-2.8A1 1 0 0 1 21 4v12a1 1 0 0 1-1.6.8A13 13 0 0 0 11 14H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" /> <path d="M6 14a12 12 0 0 0 2.4 7.2 2 2 0 0 0 3.2-2.4A8 8 0 0 1 10 14" /> <path d="M8 6v8" /></symbol><symbol id="lu-chart-column" viewBox="0 0 24 24"><path d="M3 3v16a2 2 0 0 0 2 2h16" /> <path d="M18 17V9" /> <path d="M13 17V5" /> <path d="M8 17v-3" /></symbol><symbol id="lu-lightbulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /> <path d="M9 18h6" /> <path d="M10 22h4" /></symbol><symbol id="lu-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /> <path d="M2 12h20" /></symbol><symbol id="lu-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /></symbol><symbol id="lu-bot" viewBox="0 0 24 24"><path d="M12 8V4H8" /> <rect width="16" height="12" x="4" y="8" rx="2" /> <path d="M2 14h2" /> <path d="M20 14h2" /> <path d="M15 13v2" /> <path d="M9 13v2" /></symbol><symbol id="lu-leaf" viewBox="0 0 24 24"><path d="M11 20a10 10 0 0010-10 25.9 25.9 0 00-1.04-7.281 1 1 0 00-1.755-.325C15.833 5.5 13 5.5 9.8 6.1A7 7 0 0011 20" /> <path d="M2 21a5 5 0 012.911-4.544C7.613 15.212 8.351 15.24 11 13" /></symbol><symbol id="lu-triangle-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" /> <path d="M12 9v4" /> <path d="M12 17h.01" /></symbol></defs></svg>
 <div class="page-reading-progress" id="page-reading-progress" role="progressbar" aria-label="Progress through the current page" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="page-reading-progress-fill"></span></div>
 <div class="app-shell">
   <aside class="rail" aria-label="Module navigation">
@@ -836,16 +859,100 @@
         </ol>
         <div class="callout"><strong>Running example:</strong> throughout the module we follow <strong>Uni Textbook Swap</strong>, a small shop selling second-hand textbooks. Every book is one of a kind, which makes the shop simple to start but interesting to build. You choose your own idea in Part 2.</div>
         <h3 style="margin-top:28px;">What's in it for me? E-commerce in your business studies at University</h3>
-        <p>Whatever you study in business, online selling will land on your desk. Here is where each discipline meets it, using the Uni Textbook Swap example. The idea is adapted from the “What’s in IT for me?” sections of Rainer and Prince (2021).</p>
+        <p class="majors-lead">Find your major. What would you be responsible for?</p>
+        <p>The same online sale raises very different questions depending on what you study. Find your area below: each card shows where e-commerce meets your field, and a question someone in that role might need to answer.</p>
         <div class="major-grid">
-          <div class="major"><span class="major-name">Accounting, Auditing &amp; Taxation</span><p>Stripe pays the shop in batches, minus fees, days after each sale. Someone has to match every payout to its orders, record refunds, and work out when an ABN and GST apply. Every order row and payment message is also an audit trail that shows what really happened.</p><div class="where">See: the order record in Part 2 and the profit calculator in Part 3</div></div>
-          <div class="major"><span class="major-name">Banking &amp; Finance</span><p>Every card payment passes through banks and card networks, and the money arrives days later. Finance weighs payment fees, buy now pay later (a form of credit), cash flow and whether an online business is worth investing in.</p><div class="where">See: the nine-step payment walkthrough and the dot-com crash in Part 1</div></div>
-          <div class="major"><span class="major-name">Economics</span><p>Online markets change how prices and competition work. Network effects let a few platforms dominate, shoppers compare prices instantly, and middlemen are cut out or replaced. A used-textbook market is supply and demand you can watch each semester.</p><div class="where">See: Web 2.0 and channels in Part 1</div></div>
-          <div class="major"><span class="major-name">Information Systems</span><p>Choosing, connecting and securing the systems behind every sale: the storefront, payments, database, hosting and AI. You will build exactly this in Part 2, trace how data flows between the parts, and judge what could go wrong.</p><div class="where">See: all of Part 2 and the AI tools recap</div></div>
-          <div class="major"><span class="major-name">Management &amp; Governance</span><p>Leaders choose the business model, decide what staff and AI agents may do, and answer for the outcome. Governance means clear policies (privacy, refunds, security) and a plan for when something goes wrong.</p><div class="where">See: business models in Part 1 and rules, ethics and risk in Part 3</div></div>
-          <div class="major"><span class="major-name">Marketing</span><p>Which ad, search result or student group brought in each buyer? What does each new customer cost to win? Marketing also manages reviews, pricing and the tension between selling online and through shops.</p><div class="where">See: Web 2.0 in Part 1 and finding customers in Part 3</div></div>
-          <div class="major"><span class="major-name">Risk &amp; Actuarial Studies</span><p>Every online sale carries risks you can measure: stolen cards and chargebacks, the same book sold twice, lost orders and returns. Risk work estimates how often each happens and what it costs, then checks that the controls (holds, signature checks, limits on automation) are worth it.</p><div class="where">See: “Why it works this way” in Part 2 and trust, ethics and risk in Part 3</div></div>
+          <article class="major">
+            <div class="major-top"><span class="major-icon" aria-hidden="true"><svg><use href="#lu-calculator"/></svg></span><span class="major-name">Accounting, Auditing &amp; Taxation</span></div>
+            <h4>Every sale leaves a record</h4>
+            <p>Each online order creates records: revenue, GST, payment fees, refunds and changes to inventory. Payouts arrive days later, minus fees, so they must be matched to the orders behind them. Together, these records form the audit trail that shows what really happened.</p>
+            <div class="major-q"><span class="major-q-label">Your question</span><p>“If a customer buys a $100 product, then receives a partial refund two weeks later, how should that transaction be recorded?”</p></div>
+            <div class="where">In this module: <a href="#p2-test">the order record, Part 2</a> · <a href="#p3-changes">profit on one sale, Part 3</a></div>
+          </article>
+          <article class="major">
+            <div class="major-top"><span class="major-icon" aria-hidden="true"><svg><use href="#lu-credit-card"/></svg></span><span class="major-name">Finance &amp; FinTech</span></div>
+            <h4>Money in motion</h4>
+            <p>Online businesses depend on payment gateways, card networks, digital wallets and fraud controls. Every payment method carries a fee and a delay, which shape cash flow and margins. Choosing how customers pay is a financial decision, not just a technical one.</p>
+            <div class="major-q"><span class="major-q-label">Your question</span><p>“What happens between clicking ‘Pay’ and the money actually reaching the seller?”</p></div>
+            <div class="where">In this module: <a href="#p1-payments">the nine-step payment walkthrough, Part 1</a></div>
+          </article>
+          <article class="major">
+            <div class="major-top"><span class="major-icon" aria-hidden="true"><svg><use href="#lu-scale"/></svg></span><span class="major-name">Economics &amp; Behavioural Economics</span></div>
+            <h4>Prices, choices and behaviour</h4>
+            <p>E-commerce cuts search costs: customers can compare prices in seconds, so competition intensifies. Yet people don’t always choose the cheapest option. Trust, convenience, reviews, defaults and how choices are presented all shape what they buy.</p>
+            <div class="major-q"><span class="major-q-label">Your question</span><p>“Why might a customer buy a product for $80 on one website when an identical product is available elsewhere for $70?”</p></div>
+            <div class="where">In this module: <a href="#p1-web2">Web 2.0 and channels, Part 1</a></div>
+          </article>
+          <article class="major">
+            <div class="major-top"><span class="major-icon" aria-hidden="true"><svg><use href="#lu-network"/></svg></span><span class="major-name">Information Systems</span></div>
+            <h4>Systems that must talk to each other</h4>
+            <p>A single purchase relies on a website, a database, APIs, a payment gateway, inventory records and cloud hosting all working together. If one link fails, the sale fails. You build exactly this chain in Part 2.</p>
+            <div class="major-q"><span class="major-q-label">Your question</span><p>“What systems have to communicate successfully for a single online purchase to work?”</p></div>
+            <div class="where">In this module: <a href="#p2-ready">how a sale works, Part 2</a></div>
+          </article>
+          <article class="major">
+            <div class="major-top"><span class="major-icon" aria-hidden="true"><svg><use href="#lu-megaphone"/></svg></span><span class="major-name">Marketing</span></div>
+            <h4>Winning and keeping customers</h4>
+            <p>Firms attract customers through search, social media and digital advertising, then personalise what each person sees. Because every campaign can be measured from click to purchase, marketers must show what each customer costs and what they return.</p>
+            <div class="major-q"><span class="major-q-label">Your question</span><p>“Which customer is actually worth paying to acquire?”</p></div>
+            <div class="where">In this module: <a href="#p3-customers">finding customers, Part 3</a></div>
+          </article>
+          <article class="major">
+            <div class="major-top"><span class="major-icon" aria-hidden="true"><svg><use href="#lu-chart-column"/></svg></span><span class="major-name">Business Analytics / Marketing Analytics</span></div>
+            <h4>Every click is data</h4>
+            <p>Every visit, search, abandoned cart, purchase, refund and repeat visit generates data. Analysts turn it into funnels and dashboards that show where customers drop out, and what to fix first.</p>
+            <div class="major-q"><span class="major-q-label">Your question</span><p>“If 1,000 people visit the store but only 20 buy something, where are the other 980 being lost?”</p></div>
+            <div class="where">In this module: <a href="#p3-customers">the customer-cost calculator, Part 3</a></div>
+          </article>
+          <article class="major">
+            <div class="major-top"><span class="major-icon" aria-hidden="true"><svg><use href="#lu-lightbulb"/></svg></span><span class="major-name">Innovation, Strategy &amp; Entrepreneurship</span></div>
+            <h4>More than a website</h4>
+            <p>Building the store is only part of the challenge. A business must decide its value proposition, target customer and revenue model, and whether to operate as a retailer, marketplace, platform or subscription business.</p>
+            <div class="major-q"><span class="major-q-label">Your question</span><p>“Should Uni Textbook Swap buy and resell books itself, or simply connect buyers and sellers as a marketplace?”</p></div>
+            <div class="where">In this module: <a href="#p1-models">business models, Part 1</a> · <a href="#p1-case">the AMARO case</a></div>
+          </article>
+          <article class="major">
+            <div class="major-top"><span class="major-icon" aria-hidden="true"><svg><use href="#lu-globe"/></svg></span><span class="major-name">International Business</span></div>
+            <h4>Selling across borders</h4>
+            <p>E-commerce puts international customers one click away. But each country brings different currencies, payment methods, taxes, shipping costs, consumer laws and cultural expectations.</p>
+            <div class="major-q"><span class="major-q-label">Your question</span><p>“If an Australian online business suddenly receives orders from the US and Singapore, should it accept them?”</p></div>
+            <div class="where">In this module: <a href="#p3-run">rules and running a shop, Part 3</a></div>
+          </article>
+          <article class="major">
+            <div class="major-top"><span class="major-icon" aria-hidden="true"><svg><use href="#lu-shield"/></svg></span><span class="major-name">Cybersecurity Management</span></div>
+            <h4>Protecting what’s valuable</h4>
+            <p>E-commerce systems hold customer identities, passwords, payment events and transaction data, which makes them attractive targets. Controls such as checking prices on the server and verifying payment messages are central to the business, not an add-on.</p>
+            <div class="major-q"><span class="major-q-label">Your question</span><p>“What would happen if someone manipulated a transaction so that a $100 product was sent to the payment system as $10?”</p></div>
+            <div class="where">In this module: <a href="#p2-review">why it works this way, Part 2</a></div>
+          </article>
+          <article class="major">
+            <div class="major-top"><span class="major-icon" aria-hidden="true"><svg><use href="#lu-bot"/></svg></span><span class="major-name">AI in Business and Society</span></div>
+            <h4>What should AI decide?</h4>
+            <p>AI already powers recommendations, search, customer service, fraud detection, content creation and even shopping agents. The key managerial question is shifting from whether AI <em>can</em> do a task to what it should be allowed to do on its own.</p>
+            <div class="major-q"><span class="major-q-label">Your question</span><p>“Should an AI customer-service agent be allowed to approve a $200 refund without a human?”</p></div>
+            <div class="where">In this module: <a href="#p1-ai">AI in e-commerce, Part 1</a> · <a href="#ai-tools">AI tools recap</a></div>
+          </article>
+          <article class="major">
+            <div class="major-top"><span class="major-icon" aria-hidden="true"><svg><use href="#lu-leaf"/></svg></span><span class="major-name">Sustainability &amp; Social Impact</span></div>
+            <h4>The footprint of a parcel</h4>
+            <p>E-commerce can support reuse and circular consumption, as a second-hand textbook shop does. But packaging, delivery, returns and data centres all carry environmental costs.</p>
+            <div class="major-q"><span class="major-q-label">Your question</span><p>“Is buying a second-hand textbook online necessarily more sustainable once packaging and delivery are considered?”</p></div>
+            <div class="where">In this module: <a href="#p3-trust">trust, ethics and risk, Part 3</a></div>
+          </article>
+          <article class="major">
+            <div class="major-top"><span class="major-icon" aria-hidden="true"><svg><use href="#lu-triangle-alert"/></svg></span><span class="major-name">Risk / Actuarial Studies</span></div>
+            <h4>What could go wrong?</h4>
+            <p>Fraud, cyber attacks, chargebacks, returns, delivery failures, demand swings and system outages can all stop an order being completed. Risk specialists estimate how likely and how costly each one is, and whether a control is worth its cost.</p>
+            <div class="major-q"><span class="major-q-label">Your question</span><p>“What risks could prevent an online retailer from successfully completing a customer order?”</p></div>
+            <div class="where">In this module: <a href="#p2-test">the tricky test cases, Part 2</a> · <a href="#p3-trust">trust, ethics and risk, Part 3</a></div>
+          </article>
         </div>
+        <div class="one-sale">
+          <h4>One sale. Many business decisions.</h4>
+          <p>A single e-commerce transaction involves marketing, finance, accounting, analytics, information systems, cybersecurity, strategy and operations, all at the same time. E-commerce isn’t just an IT topic: every business discipline has a part in making one sale work.</p>
+          <ol class="sale-flow" aria-label="The stages of one online sale, and the disciplines involved at each stage"><li><strong>Order placed</strong><span class="flow-tags"><span>Marketing</span><span>Analytics</span><span>Economics</span></span></li><li><strong>Payment</strong><span class="flow-tags"><span>Finance &amp; FinTech</span><span>Accounting</span><span>Cybersecurity</span></span></li><li><strong>Data</strong><span class="flow-tags"><span>Information Systems</span><span>Analytics</span><span>AI</span></span></li><li><strong>Inventory</strong><span class="flow-tags"><span>Strategy</span><span>Risk</span></span></li><li><strong>Delivery</strong><span class="flow-tags"><span>International</span><span>Sustainability</span><span>Risk</span></span></li><li><strong>Customer service</strong><span class="flow-tags"><span>AI</span><span>Marketing</span><span>Accounting</span></span></li></ol>
+        </div>
+        <p class="majors-note">The idea for this section is adapted from the “What’s in IT for me?” sections of Rainer and Prince (2021).</p>
       </section>
 
       <!-- PART 1 -->
@@ -2392,7 +2499,7 @@ Requirements:
         <ul>
           <li>Amazon logo history image: <a href="https://logos-world.net/amazon-logo/" target="_blank" rel="noopener">Logos-World, “Amazon logo”</a>; logos are trademarks of Amazon.com, Inc. Stripe logo and dashboard screenshots: Stripe, Inc. GitHub logo: GitHub, Inc. Vercel logo: Vercel Inc. Supabase logo: Supabase, Inc. E-commerce logo collection in Part 1: <a href="https://logos-world.net/the-most-interesting-e-commerce-brands/" target="_blank" rel="noopener">Logos-World, “The most interesting e-commerce brands”</a>; logos are trademarks of the companies named.</li>
           <li>All logos are trademarks of their owners. They are used only to identify the companies and products discussed, for teaching, and their use implies no endorsement.</li>
-          <li>Screenshots of the shop and checkout come from the worked example built for this module, in Stripe's test mode. Diagrams and illustrations were made for this module.</li>
+          <li>Screenshots of the shop and checkout come from the worked example built for this module, in Stripe's test mode. Diagrams and illustrations were made for this module. Icons in the business majors section are from <a href="https://lucide.dev" target="_blank" rel="noopener">Lucide</a> (ISC licence).</li>
         </ul>
         <h3>Teaching case</h3>
         <ul>
@@ -2417,7 +2524,7 @@ Requirements:
       </section>
     </div>
 
-    <footer><strong>Build Your Own Online Shop</strong> · Version 3 October 2026 (AMARO teaching case) · A hands-on e-commerce module · Test mode only, no real payments. The diagrams are illustrations, and the screenshots come from an example shop built the same way. Logos are trademarks of their owners, used for identification and teaching (see Sources).</footer>
+    <footer><strong>Build Your Own Online Shop</strong> · Version 3 October 2026 (business majors) · A hands-on e-commerce module · Test mode only, no real payments. The diagrams are illustrations, and the screenshots come from an example shop built the same way. Logos are trademarks of their owners, used for identification and teaching (see Sources).</footer>
   </main>
 </div>
 <button type="button" class="top-button" id="top-button" aria-label="Back to top"><span aria-hidden="true">↑</span><span class="top-label">Top</span></button>
