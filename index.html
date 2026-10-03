@@ -595,6 +595,15 @@
   .case-authors { font-size:.9rem; color:var(--muted); }
   .case-reference { margin-top:22px; padding-top:12px; border-top:1px solid var(--line); font-size:.9rem; overflow-wrap:anywhere; }
 
+  /* module intro video */
+  .intro-video { margin:0 0 34px; padding:18px; background:var(--black); border-bottom:8px solid var(--yellow); }
+  .intro-video-head { margin:0 0 14px; }
+  .intro-video .part-audio-label { color:var(--yellow); }
+  .intro-video h3 { margin:.25rem 0 .35rem; color:#fff; font-size:clamp(1.3rem,2.4vw,1.75rem); }
+  .intro-video-head p { margin:0; color:#e6e6e6; }
+  .intro-video video { display:block; width:100%; max-width:100%; aspect-ratio:16 / 9; height:auto; background:#000; }
+  .intro-video-credit { margin:8px 0 0; font-size:.8rem; color:#bdbdbd; }
+
   /* part intro audio */
   .part-audio { display:grid; grid-template-columns:auto minmax(0,1fr); gap:16px; align-items:center; margin:-14px 0 28px; padding:16px 20px; background:#fff; border:2px solid var(--black); border-left:10px solid var(--yellow); }
   .part-audio-body { min-width:0; }
@@ -848,6 +857,15 @@
             <rect x="102" y="8" width="50" height="32" rx="4" fill="#ffe600" stroke="#231f20" stroke-width="4"/><rect x="102" y="16" width="50" height="7" fill="#231f20"/><rect x="110" y="29" width="16" height="5" fill="#231f20"/>
             <ellipse cx="80" cy="74" rx="22" ry="7" fill="#fff" stroke="#231f20" stroke-width="4"/><path d="M58 74v22c0 4 10 7 22 7s22-3 22-7V74" fill="#fff" stroke="#231f20" stroke-width="4"/><path d="M58 85c0 4 10 7 22 7s22-3 22-7" fill="none" stroke="#231f20" stroke-width="3"/>
           </svg><span>Shop · Payments · Data</span></div><p><strong>This is an Information Systems (IS) learning module for business students.</strong> It is hands-on and learn-by-building: you follow one small business example, build a working online shop with real tools in test mode, and use it to see how information systems help a business sell, and where they create risk.</p></div>
+        <div class="intro-video">
+          <div class="intro-video-head">
+            <span class="part-audio-label">Watch first · Module introduction · 2:22</span>
+            <h3>The Hidden Labyrinth of E-commerce</h3>
+            <p>What really happens behind a single “Buy now” click? Start with this short video, then explore how the module unpacks it.</p>
+          </div>
+          <video controls preload="none" playsinline poster="shots/intro-video-poster.jpg" aria-label="Video introduction: The Hidden Labyrinth of E-commerce"><source src="video/intro-hidden-labyrinth.mp4" type="video/mp4">Your browser can't play this video. <a href="video/intro-hidden-labyrinth.mp4">Open the video file</a>.</video>
+          <p class="intro-video-credit">Video created by the module author.</p>
+        </div>
         <div class="section-label">Orientation</div>
         <h2 class="section-title">How this module works</h2>
         <div class="how-it-works" role="note">
@@ -2635,7 +2653,7 @@ Requirements:
       </section>
     </div>
 
-    <footer><strong>Build Your Own Online Shop</strong> · Version 3 October 2026 (PayPal video updated) · A hands-on e-commerce module · Test mode only, no real payments. The diagrams are illustrations, and the screenshots come from an example shop built the same way. Logos are trademarks of their owners, used for identification and teaching (see Sources).</footer>
+    <footer><strong>Build Your Own Online Shop</strong> · Version 3 October 2026 (introduction video) · A hands-on e-commerce module · Test mode only, no real payments. The diagrams are illustrations, and the screenshots come from an example shop built the same way. Logos are trademarks of their owners, used for identification and teaching (see Sources).</footer>
   </main>
 </div>
 <div class="copy-toast" id="copy-toast" role="status" aria-live="polite"></div>
