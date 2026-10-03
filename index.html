@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="An interactive e-commerce lesson: the history of online selling, business models, building a test shop with Stripe, Supabase and Vercel, and what it takes to go live.">
 <title>Build Your Own Online Shop</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTIiIGZpbGw9IiNmZmU2MDAiLz48cGF0aCBkPSJNMTIgMTZoN2w2IDI2aDI0bDUtMThIMjIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzIzMWYyMCIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48Y2lyY2xlIGN4PSIyNyIgY3k9IjUwIiByPSI0LjUiIGZpbGw9IiMyMzFmMjAiLz48Y2lyY2xlIGN4PSI0NiIgY3k9IjUwIiByPSI0LjUiIGZpbGw9IiMyMzFmMjAiLz48cmVjdCB4PSIyOSIgeT0iMjciIHdpZHRoPSIxNCIgaGVpZ2h0PSI5IiBmaWxsPSIjMjMxZjIwIi8+PC9zdmc+">
 <style>
   /* Layout: light side rail with part switcher + yellow angled hero + one guided part shown at a time.
      Deliberately single (light) theme, matching the reference study-companion style. */
@@ -341,7 +342,9 @@
   footer { background:#191919; color:#fff; padding:32px clamp(20px,5vw,72px); font-size:.9rem; }
   footer strong { color:var(--yellow); }
   .top-button { position:fixed; right:20px; bottom:20px; background:var(--yellow); color:#111; border:2px solid var(--black); width:48px; height:48px; font-size:1.2rem; font-weight:900; cursor:pointer; box-shadow:0 10px 24px rgba(0,0,0,.10); display:none; }
-  .top-button.show { display:block; }
+  .top-button.show { display:flex; }
+  .top-button { z-index:95; right:calc(16px + env(safe-area-inset-right, 0px)); bottom:calc(16px + env(safe-area-inset-bottom, 0px)); width:auto; min-width:52px; height:52px; padding:0 14px; align-items:center; justify-content:center; gap:6px; }
+  .top-button .top-label { font-size:.85rem; font-weight:900; letter-spacing:.04em; text-transform:uppercase; }
 
   .lightbox { position:fixed; inset:0; z-index:200; background:rgba(20,20,20,.94); display:flex; flex-direction:column; padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px); }
   .lb-bar { display:flex; align-items:center; gap:10px; padding:12px 16px; background:var(--black); color:#fff; border-bottom:4px solid var(--yellow); }
@@ -490,6 +493,43 @@
   .route-note .route-label { display:inline-block; margin-bottom:6px; padding:.2rem .5rem; background:var(--black); color:var(--yellow); font-size:.7rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase; }
   .route-note p { margin:.25rem 0 0; max-width:75ch; }
   .routes-table td:first-child { white-space:nowrap; }
+  /* learning outcomes */
+  .outcomes { list-style:none; margin:14px 0 26px; padding:0; display:grid; gap:8px; }
+  .outcomes li { display:grid; grid-template-columns:56px minmax(0,1fr); gap:12px; align-items:start; padding:12px 14px; background:#fff; border:1px solid var(--line); border-left:6px solid var(--yellow); }
+  .outcomes .lo-num { display:grid; place-items:center; height:32px; background:var(--black); color:var(--yellow); font-weight:900; font-size:.85rem; }
+  .outcomes p { margin:0; }
+  .lo-meta { display:block; margin-top:4px; font-size:.8rem; color:var(--muted); }
+  .lo-level { display:inline-block; margin-right:6px; padding:.1rem .4rem; background:var(--yellow-soft); border:1px solid #c7aa00; color:#574a00; font-weight:900; font-size:.72rem; letter-spacing:.04em; text-transform:uppercase; }
+  .lo-covers { margin:.35rem 0; color:#333; }
+
+  /* reset, completion, business case */
+  .reset-btn { display:block; width:100%; margin:0 0 1rem; padding:.55rem .7rem; border:1px solid #9a9a9a; background:#fff; color:var(--ink); font:800 .78rem/1.2 var(--font); cursor:pointer; }
+  .reset-btn:hover { border-color:var(--black); }
+  .reset-btn.confirming { background:var(--red-soft); border-color:var(--red); color:var(--red); }
+  .completion-card { margin:22px 0; padding:22px 24px; background:var(--black); color:#fff; border-left:10px solid var(--yellow); }
+  .completion-card h3 { margin:0 0 6px; color:var(--yellow); }
+  .completion-card p { margin:.35rem 0; color:#fff; }
+  .completion-card .code { display:inline-block; margin:6px 0; padding:.35rem .6rem; background:var(--yellow); color:var(--black); font:900 1.05rem/1.2 var(--mono); letter-spacing:.06em; }
+  .completion-card small { color:#ddd; }
+  .case-form { display:grid; gap:14px; margin:16px 0; padding:20px; background:#fff; border:2px solid var(--black); border-top:8px solid var(--yellow); }
+  .case-form label { display:grid; gap:4px; }
+  .case-q { font-weight:900; }
+  .case-q small { margin-left:6px; padding:.05rem .35rem; background:var(--yellow-soft); border:1px solid #c7aa00; font-size:.7rem; color:#574a00; }
+  .case-hint { font-size:.88rem; color:var(--muted); }
+  .case-form textarea { width:100%; padding:10px 12px; border:1px solid #9a9a9a; font:inherit; font-size:.95rem; color:var(--ink); background:#fff; resize:vertical; }
+  .case-form textarea:focus { outline:3px solid var(--focus); outline-offset:1px; }
+  .case-actions { display:flex; flex-wrap:wrap; align-items:center; gap:12px; }
+  .case-count { font-size:.85rem; color:var(--muted); }
+
+  /* tips and cart */
+  .tips-groups { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin:16px 0; }
+  .tips-group { min-width:0; padding:16px; background:#fff; border:2px solid var(--black); border-top:8px solid var(--yellow); }
+  .tips-group h4 { margin:0 0 8px; font-size:.82rem; letter-spacing:.06em; text-transform:uppercase; color:var(--olive); }
+  .tips-group ol { margin:0; padding-left:1.3rem; display:grid; gap:7px; font-size:.92rem; }
+  .cart-figure { padding:18px; }
+  .cart-figure svg { display:block; width:100%; max-width:220px; height:auto; margin:auto; }
+  .last-checked { display:inline-block; margin:0 0 12px; padding:.25rem .55rem; background:var(--grey); border:1px solid var(--line); font-size:.8rem; color:#444; }
+
   /* majors */
   .major-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin:18px 0 26px; }
   .major { display:flex; flex-direction:column; gap:8px; min-width:0; padding:16px; background:#fff; border:2px solid var(--black); }
@@ -577,6 +617,7 @@
     .guided-start-next { width:100%; }
     .module-recap ul { grid-template-columns:1fr; }
     .media-lesson { grid-template-columns:1fr; }
+    .tips-groups, .outcomes li { grid-template-columns:1fr; }
     .model-grid, .why-cards, .lane.three, .lane.five, .media-row, .sale-sim, .calc, .callouts, .major-grid, .picker, .picker-out dl, .sort-item, .stat { grid-template-columns:1fr; }
     .wf-row { grid-template-columns:110px minmax(0,1fr) 70px; font-size:.8rem; }
     .chat-phone { border-width:6px; }
@@ -611,6 +652,7 @@
       <div class="completion-row" data-completion="part2"><span class="part-label">P2</span><span class="part-status">Ready to start</span><span class="part-mark" aria-hidden="true">○</span></div>
       <div class="completion-row" data-completion="part3"><span class="part-label">P3</span><span class="part-status">Ready to start</span><span class="part-mark" aria-hidden="true">○</span></div>
     </div>
+    <button type="button" class="reset-btn" id="reset-progress">Reset my progress</button>
     <div class="progress-card" id="section-progress" aria-live="polite" hidden>
       <strong id="progress-label">Stage 1 of 1</strong>
       <div class="progress-track" aria-hidden="true"><span class="progress-fill" id="progress-fill"></span></div>
@@ -654,7 +696,7 @@
           <a href="#p3-customers" data-stage-link="2">2 · Find customers, deliver orders</a>
           <a href="#p3-run" data-stage-link="3">3 · Rules, running and security</a>
           <a href="#p3-trust" data-stage-link="4">4 · Trust, ethics and risk</a>
-          <a href="#p3-review" data-stage-link="5">5 · Review understanding</a>
+          <a href="#p3-review" data-stage-link="5">5 · Review and apply</a>
         </div>
       </div>
       <div class="nav-group" data-group="reference">
@@ -682,15 +724,18 @@
         <div class="section-label">Orientation</div>
         <h2 class="section-title">How this module works</h2>
         <div class="how-it-works" role="note">
-          <div class="label">Three parts · about 4 hours</div>
+          <div class="label">Three parts · about 6½ hours</div>
           <h3>Learn the story, build the shop, then see what it takes to go live</h3>
           <ol class="steps">
-            <li><strong>Part 1</strong> explains how e-commerce developed, from the dot-com era to AI, and how online businesses make money. About 1 hour.</li>
-            <li><strong>Part 2</strong> walks you through building your own shop with an AI assistant, Stripe, Supabase and Vercel. About 2 hours.</li>
-            <li><strong>Part 3</strong> explains what would change to turn your class project into a real business: finding customers, delivering orders, and the law and ethics. About 45 minutes.</li>
+            <li><strong>Part 1</strong> explains how e-commerce developed, from the dot-com era to AI, and how online businesses make money. About 1¾ hours.</li>
+            <li><strong>Part 2</strong> walks you through building your own shop with an AI assistant, Stripe, Supabase and Vercel. About 3½ hours, over two sessions.</li>
+            <li><strong>Part 3</strong> explains what it takes to turn your class project into a real business, and ends with your own short business case. About 1½ hours.</li>
           </ol>
-          <p style="margin:.6rem 0 0;"><strong>Each stage ends with a short check.</strong> Answer it correctly to unlock the next stage. Checks are unmarked and you can retry.</p>
+          <p style="margin:.6rem 0 0;"><strong>Suggested sessions:</strong> (1) Part 1 · (2) Part 2, Stages 1–4 · (3) Part 2, Stages 5–7 · (4) Part 3. Times are generous estimates; optional videos are extra.</p>
+          <p style="margin:.6rem 0 0;"><strong>Each stage ends with a short check.</strong> Answer it correctly to unlock the next stage. Checks are unmarked and you can retry. Your progress is saved in this browser only.</p>
+          <p style="margin:.6rem 0 0;"><strong>Where this applies:</strong> prices, taxes and laws in this module are Australian (AUD, GST, the ABN, the ACCC and the Spam Act). If you are elsewhere, the ideas are the same, but check the equivalent rules where you live.</p>
         </div>
+        <div class="completion-card" data-completion-card hidden></div>
         <div class="grid three">
           <a class="part-card" href="#part1">
             <div class="part-card-visual" aria-hidden="true"><svg viewBox="0 0 220 120"><line x1="20" y1="60" x2="200" y2="60" stroke="#fff" stroke-width="5"/><circle cx="40" cy="60" r="12" fill="#fff"/><circle cx="90" cy="60" r="12" fill="#fff"/><circle cx="140" cy="60" r="16" fill="#ffe600"/><circle cx="185" cy="60" r="12" fill="#fff"/><text x="40" y="34" text-anchor="middle" fill="#ffe600" font-family="Arial" font-weight="900" font-size="15">.com</text><text x="140" y="100" text-anchor="middle" fill="#ffe600" font-family="Arial" font-weight="900" font-size="15">$</text><text x="185" y="34" text-anchor="middle" fill="#ffe600" font-family="Arial" font-weight="900" font-size="15">AI</text></svg></div>
@@ -715,6 +760,17 @@
           <div class="card"><div class="icon-badge" aria-hidden="true">2</div><h3>Build</h3><p>Use an AI assistant to create a working shop, so the technology is no longer a black box.</p></div>
           <div class="card"><div class="icon-badge" aria-hidden="true">3</div><h3>Judge</h3><p>Weigh up costs, risks, rules and customer trust, the decisions businesses make every day.</p></div>
         </div>
+        <h3 style="margin-top:28px;">Learning outcomes</h3>
+        <p>By the end of this module, you will be able to:</p>
+        <ol class="outcomes">
+          <li><span class="lo-num">LO1</span><div><p><strong>Explain</strong> how e-commerce has evolved from the dot-com era to AI-enabled commerce, and what each stage made possible for businesses.</p><span class="lo-meta"><span class="lo-level">Understand</span> Part 1</span></div></li>
+          <li><span class="lo-num">LO2</span><div><p><strong>Classify</strong> e-commerce businesses by who trades with whom, where they sell and how they make money, and <strong>compare</strong> the value and risks of different business models.</p><span class="lo-meta"><span class="lo-level">Analyse</span> Part 1 · Part 3 business case</span></div></li>
+          <li><span class="lo-num">LO3</span><div><p><strong>Describe</strong> the information systems behind an online sale (storefront, payment platform, database, hosting and webhooks) and <strong>trace</strong> how data flows between them.</p><span class="lo-meta"><span class="lo-level">Understand</span> Part 1 payments · Part 2</span></div></li>
+          <li><span class="lo-num">LO4</span><div><p><strong>Build and test</strong> a working online shop in a test environment, using an AI assistant and cloud services.</p><span class="lo-meta"><span class="lo-level">Apply · Create</span> Part 2</span></div></li>
+          <li><span class="lo-num">LO5</span><div><p><strong>Analyse</strong> how the design of an online shop's systems controls business risks such as price tampering, overselling, fraud and lost orders.</p><span class="lo-meta"><span class="lo-level">Analyse</span> Part 2</span></div></li>
+          <li><span class="lo-num">LO6</span><div><p><strong>Evaluate</strong> what it takes to run an online shop as a real business, including costs, customer acquisition, fulfilment, legal obligations and ethics.</p><span class="lo-meta"><span class="lo-level">Evaluate</span> Part 3</span></div></li>
+          <li><span class="lo-num">LO7</span><div><p><strong>Justify</strong> when and how a business should use AI assistants and agents, including the controls needed to use them safely.</p><span class="lo-meta"><span class="lo-level">Evaluate</span> Part 1 AI · Part 2 · AI tools recap</span></div></li>
+        </ol>
         <div class="callout"><strong>Running example:</strong> throughout the module we follow <strong>Uni Textbook Swap</strong>, a small shop selling second-hand textbooks. Every book is one of a kind, which makes the shop simple to start but interesting to build. You choose your own idea in Part 2.</div>
         <h3 style="margin-top:28px;">What's in it for me? E-commerce in your major</h3>
         <p>Whatever you study, online selling will land on your desk. Here is where each business discipline meets it, using the Uni Textbook Swap example. The idea is adapted from the “What’s in IT for me?” sections of Rainer and Prince (2021).</p>
@@ -769,8 +825,9 @@
           <p><strong>Purpose:</strong> understand how selling online developed, so you can see why today's tools work the way they do.</p>
           <p><strong>Key ideas:</strong> e-commerce and e-business, who sells to whom, business models, the dot-com era, Web 2.0, showrooming and middlemen, how a card payment works, and AI in e-commerce.</p>
           <p><strong>By the end:</strong> you can explain how an online business makes money, what each era made easier for a small business, and what new questions AI raises.</p>
+          <p class="lo-covers"><strong>Learning outcomes:</strong> LO1, LO2, and an introduction to LO3 and LO7.</p>
         </div>
-        <p class="time-note"><strong>About 1 hour</strong>, plus three optional videos.</p>
+        <p class="time-note"><strong>About 1¾ hours</strong>, plus three optional videos. A good single session.</p>
         <div class="scenario-thread"><div class="scenario-label">Running example</div><p><strong>Imagine selling second-hand textbooks online.</strong> In 1997 you would need a bank's permission to take cards and weeks of setup. By 2011 a few lines of code would do it. Today an AI assistant can build the whole shop with you. Part 1 explains how that changed.</p></div>
         <div class="journey cols-4" aria-label="Part 1 stages">
           <a href="#p1-define"><strong>What is e-commerce?</strong><span>Who sells to whom, and where: online, in shops or both.</span></a>
@@ -783,7 +840,7 @@
         </div>
 
         <section id="p1-define" class="required-section" data-stage="1">
-          <h2>What is e-commerce? <span class="section-time">About 10 min</span></h2>
+          <h2>What is e-commerce? <span class="section-time">About 12 min</span></h2>
           <p>Before the history, here are the words this module uses most. The definitions of e-commerce and e-business follow Rainer and Prince (2021).</p>
           <div class="definition-strip">
             <div><strong>E-commerce</strong>Buying and selling goods or services over the internet. The shop you build in Part 2 is e-commerce.</div>
@@ -809,7 +866,19 @@
             </div>
             <p class="sort-score" aria-live="polite"></p>
           </div>
-          <figure class="photo"><img src="shots/what-is-ecommerce.png" alt="Infographic: e-commerce is the buying and selling of goods online and the related businesses that make it possible: supply chain management, fulfilment, payment processing and software" loading="lazy"><figcaption><strong>E-commerce is more than the shop.</strong> It includes the businesses that make online selling possible. Image: The Motley Fool, shown for teaching.</figcaption></figure>
+          <figure class="picture">
+            <div class="diagram-wrap">
+              <svg viewBox="0 0 760 300" role="img" aria-label="Diagram: an online sale in the centre, supported by four businesses: supply chain management, fulfilment, payment processing and software.">
+                <g stroke="#806d00" stroke-width="3"><line x1="380" y1="150" x2="150" y2="62"/><line x1="380" y1="150" x2="610" y2="62"/><line x1="380" y1="150" x2="150" y2="238"/><line x1="380" y1="150" x2="610" y2="238"/></g>
+                <rect x="270" y="110" width="220" height="80" fill="#231f20"/><text x="380" y="145" text-anchor="middle" fill="#ffe600" font-family="Arial" font-weight="900" font-size="18">One online sale</text><text x="380" y="168" text-anchor="middle" fill="#fff" font-family="Arial" font-size="12">what the customer sees</text>
+                <rect x="40" y="30" width="220" height="64" fill="#fff7bf" stroke="#231f20" stroke-width="2"/><text x="150" y="58" text-anchor="middle" class="lb">1 · Supply chain</text><text x="150" y="77" text-anchor="middle" class="lb2">getting the right stock</text>
+                <rect x="500" y="30" width="220" height="64" fill="#fff7bf" stroke="#231f20" stroke-width="2"/><text x="610" y="58" text-anchor="middle" class="lb">2 · Fulfilment</text><text x="610" y="77" text-anchor="middle" class="lb2">packing, posting, returns</text>
+                <rect x="40" y="206" width="220" height="64" fill="#fff7bf" stroke="#231f20" stroke-width="2"/><text x="150" y="234" text-anchor="middle" class="lb">3 · Payment processing</text><text x="150" y="253" text-anchor="middle" class="lb2">taking the money safely</text>
+                <rect x="500" y="206" width="220" height="64" fill="#fff7bf" stroke="#231f20" stroke-width="2"/><text x="610" y="234" text-anchor="middle" class="lb">4 · Software</text><text x="610" y="253" text-anchor="middle" class="lb2">shop, database, hosting</text>
+              </svg>
+            </div>
+            <figcaption><strong>E-commerce is more than the shop.</strong> Every online sale relies on four kinds of supporting business, each explained below.</figcaption>
+          </figure>
           <h3>Behind every online sale</h3>
           <p>E-commerce is more than a shop page. Every online sale relies on a set of supporting businesses, and many careers sit in these areas rather than in the shop itself.</p>
           <div class="grid two">
@@ -836,18 +905,6 @@
             </tbody>
           </table></div>
           <p><strong>Mobile commerce (m-commerce)</strong> is not a separate type: it describes any of these done on a phone, and it is now how most people shop online. The B2E and e-government types are described in Rainer and Prince (2021).</p>
-          <div class="stat"><div class="num">~85%</div><p><strong>Most e-commerce is invisible to shoppers.</strong> Rainer and Prince (2021) estimate that business-to-business (B2B) trade makes up about 85% of e-commerce by value. When you picture e-commerce you probably think of Amazon, but most of the money moves between businesses ordering supplies, parts and stock from each other.</p></div>
-          <details class="more"><summary>Inside B2B: how the campus bookshop buys its stock</summary><div class="details-body">
-            <p><strong>Story:</strong> in January, the campus bookshop needs 400 copies of a first-year economics text. Nobody phones anyone. The buyer logs in to the publisher's online ordering site, checks the bookshop's agreed price and places the order.</p>
-            <ul>
-              <li><strong>Sell-side:</strong> the publisher runs its own site where business customers order. This is the publisher selling online.</li>
-              <li><strong>Buy-side (e-procurement):</strong> the university buys everything from lab gloves to laptops through its own online purchasing system, with approved suppliers and spending limits built in.</li>
-              <li><strong>Reverse auction (tender):</strong> to choose a printing supplier, the university describes what it needs and suppliers bid. Prices go <em>down</em> as they compete, the reverse of an eBay auction.</li>
-              <li><strong>Group purchasing:</strong> several university bookshops combine their orders to get a bigger discount.</li>
-              <li><strong>Exchanges:</strong> online marketplaces where many businesses buy and sell. Some serve one industry, such as building materials. Others sell things every business needs, such as office supplies.</li>
-            </ul>
-            <p>These B2B approaches are adapted from Rainer and Prince (2021).</p>
-          </div></details>
           <div class="why-matters">
             <div class="why-label">Why this matters to you</div>
             <p>Knowing who sells to whom tells you how a business makes money and what it must get right. A B2C shop lives or dies on marketing, trust and delivery. A B2B supplier depends on contracts, volume and long relationships. A C2C platform earns fees and must keep buyers and sellers safe from each other.</p>
@@ -863,7 +920,7 @@
         </section>
 
         <section id="p1-models" class="required-section" data-stage="2">
-          <h2>How online businesses make money <span class="section-time">About 10 min</span></h2>
+          <h2>How online businesses make money <span class="section-time">About 15 min</span></h2>
           <div class="scenario-thread story"><div class="scenario-label">Story · four ways to earn</div><p>Alex has built Uni Textbook Swap and students are using it. A friend asks the obvious question: “But how do you actually make money?” Alex could buy books cheaply and resell them. Or let students sell to each other and take a cut. Or charge a small fee each semester. Or earn a commission by pointing students to new copies elsewhere. The website could look almost identical in all four cases, but the business would be completely different.</p></div>
           <p>A <strong>business model</strong> is how a business creates value for customers and earns money from it. The part about earning money is sometimes called the <strong>revenue model</strong>. The internet made several new models possible, or made old ones far cheaper to run. These are the ones you will meet most often, drawn mainly from Rainer and Prince’s (2021) table of e-commerce business models, with advertising added.</p>
           <div class="grid two">
@@ -893,6 +950,19 @@
             <div class="why-label">Why this matters to you</div>
             <p>The business model decides almost everything else: who your customer really is, what you must be good at, where the risk sits and how fast you can grow. Two websites that look the same can have opposite strengths. When you analyse a company in a case study, a pitch or a job interview, “How does it make money, and what could break that?” is usually the first question to ask.</p>
           </div>
+          <h3>Don't forget B2B</h3>
+          <div class="stat"><div class="num">~85%</div><p><strong>Most e-commerce is invisible to shoppers.</strong> Rainer and Prince (2021) estimate that business-to-business (B2B) trade makes up about 85% of e-commerce by value. When you picture e-commerce you probably think of Amazon, but most of the money moves between businesses ordering supplies, parts and stock from each other.</p></div>
+          <details class="more"><summary>Inside B2B: how the campus bookshop buys its stock</summary><div class="details-body">
+            <p><strong>Story:</strong> in January, the campus bookshop needs 400 copies of a first-year economics text. Nobody phones anyone. The buyer logs in to the publisher's online ordering site, checks the bookshop's agreed price and places the order.</p>
+            <ul>
+              <li><strong>Sell-side:</strong> the publisher runs its own site where business customers order. This is the publisher selling online.</li>
+              <li><strong>Buy-side (e-procurement):</strong> the university buys everything from lab gloves to laptops through its own online purchasing system, with approved suppliers and spending limits built in.</li>
+              <li><strong>Reverse auction (tender):</strong> to choose a printing supplier, the university describes what it needs and suppliers bid. Prices go <em>down</em> as they compete, the reverse of an eBay auction.</li>
+              <li><strong>Group purchasing:</strong> several university bookshops combine their orders to get a bigger discount.</li>
+              <li><strong>Exchanges:</strong> online marketplaces where many businesses buy and sell. Some serve one industry, such as building materials. Others sell things every business needs, such as office supplies.</li>
+            </ul>
+            <p>These B2B approaches are adapted from Rainer and Prince (2021).</p>
+          </div></details>
           <details class="more"><summary>More models, and the “shopfronts” they run on</summary><div class="details-body">
             <p><strong>Name your own price:</strong> the customer says what they will pay, such as for a hotel room, and the seller accepts or declines. <strong>Find the best price:</strong> a site searches many sellers and shows the cheapest; comparison sites earn fees from the sellers. <strong>Viral marketing:</strong> customers spread the word for you, often rewarded with a referral credit. <strong>Bartering:</strong> swapping goods without money, such as a textbook swap with no cash at all.</p>
             <p><strong>Where these models run:</strong> an <strong>electronic storefront</strong> is one business's own online shop. An <strong>e-mall</strong> groups many shops under one address. An <strong>e-marketplace</strong> is a central online space where many buyers and sellers trade, such as eBay. An <strong>electronic catalogue</strong> is the searchable list of products, prices and photos inside any of these. The shop you build in Part 2 is a storefront with a very small catalogue. Models and mechanisms adapted from Rainer and Prince (2021).</p>
@@ -901,12 +971,11 @@
         </section>
 
         <section id="p1-dotcom" class="required-section" data-stage="3">
-          <h2>1995–2001: the dot-com era <span class="section-time">About 12 min · plus optional video</span></h2>
+          <h2>1995–2001: the dot-com era <span class="section-time">About 15 min · plus optional video</span></h2>
           <div class="scenario-thread story"><div class="scenario-label">Story · 1996</div><p>You want a book your local shop doesn't stock. The shop can order it in, which takes two weeks. Or you can try a new website that claims to have a million titles. You type your card number into a website for the first time, nervously, and wait. The book arrives. Next time you don't hesitate. Multiply that by millions of people and you have the start of e-commerce: trust, built one delivery at a time.</p></div>
           <p>In the mid-1990s, businesses began opening shops on the World Wide Web. <strong>Amazon</strong> started in 1995 as an online bookstore. It could list millions of books, far more than any physical shop could hold. <strong>eBay</strong> started the same year as an online auction site, where ordinary people sold to each other (C2C).</p>
           <p>Investors rushed to fund almost any company with “.com” in its name, and many had no clear way to make a profit. Share prices fell sharply in 2000–2001 and hundreds of these companies closed. This is called the <strong>dot-com crash</strong>, or the bursting of the dot-com bubble. Amazon and eBay survived because customers kept using them and they kept improving the shopping experience.</p>
           <h3>Why selling online took off</h3>
-          <figure class="photo"><img src="shots/ecommerce-benefits.png" alt="eCommerce benefits: no need for a physical space, flexibility for sellers, convenience for buyers, limitless reach" loading="lazy"><figcaption><strong>Four benefits of selling online.</strong> Each is explained below. Image shown for teaching.</figcaption></figure>
           <p>Four benefits explain why businesses rushed online, and why they still do.</p>
           <div class="grid two">
             <div class="card"><div class="icon-badge" aria-hidden="true">1</div><h3>No need for a physical space</h3><p>There is no shopfront to rent, fit out or staff. Stock can sit in a warehouse, or for a small seller, a spare room. That is how Amazon could offer millions of books when the biggest bookshops held a fraction of that.</p></div>
@@ -937,11 +1006,11 @@
               <ul><li>What did selling online let Amazon do that a physical bookshop couldn't?</li><li>What did customers have to trust before paying a website?</li><li>Why did some dot-com companies survive the crash when so many closed?</li></ul>
             </div>
           </div>
-          <div class="quick-check section-check" data-answer="2" data-explanation="Many dot-com companies were funded with no clear way to make a profit. When investor money stopped, they closed. Companies with loyal customers, like Amazon and eBay, survived."><div class="question-number">Pause and check</div><h3>Why did so many dot-com companies close in 2000–2001?</h3><div class="choices"><button class="choice">Websites became illegal to run without a licence.</button><button class="choice">People stopped using the internet.</button><button class="choice">Many had no clear way to make a profit once investor money dried up.</button></div><div class="feedback" aria-live="polite"></div></div>
+          <div class="quick-check section-check" data-answer="1" data-explanation="Many dot-com companies were funded with no clear way to make a profit. When investor money stopped, they closed. Companies with loyal customers, like Amazon and eBay, survived."><div class="question-number">Pause and check</div><h3>Why did so many dot-com companies close in 2000–2001?</h3><div class="choices"><button class="choice">Shoppers didn't trust paying online, so almost nobody bought anything.</button><button class="choice">Many had no clear way to make a profit once investor money dried up.</button><button class="choice">Large retailers such as Amazon bought most of them out.</button></div><div class="feedback" aria-live="polite"></div></div>
         </section>
 
         <section id="p1-web2" class="required-section" data-stage="4">
-          <h2>2004 onwards: Web 2.0 and new channels <span class="section-time">About 14 min</span></h2>
+          <h2>2004 onwards: Web 2.0 and new channels <span class="section-time">About 15 min</span></h2>
           <div class="scenario-thread story"><div class="scenario-label">Story · the $5 of trust</div><p>Two copies of the same textbook are listed online. One costs $40 from a seller with no reviews. The other costs $45 from a seller with 300 five-star ratings. Most people pay the extra $5. That $5 is the value of trust, and in Web 2.0 it was created by customers, not by the business.</p></div>
           <p>Around 2004, people began using the term <strong>Web 2.0</strong> for a new kind of website where users create much of the content. Customers wrote reviews, gave star ratings, shared products with friends and sold their own goods. This is called <strong>user-generated content</strong>.</p>
           <p>Shopping sites became <strong>platforms</strong>: places that connect many buyers and sellers and grow more useful as more people join. Social media (Facebook from 2004, YouTube from 2005) became a major way for shops to find customers.</p>
@@ -1034,11 +1103,11 @@
             <p><strong>Platform power:</strong> once a platform has most of the buyers, sellers may feel they can't leave, even when fees rise or rules change. This is why governments around the world now watch large platforms closely.</p>
             <p><strong>Fake reviews:</strong> because reviews influence sales, some businesses fake them. In Australia, the ACCC treats fake or misleading reviews as a breach of the Australian Consumer Law.</p>
           </div></details>
-          <div class="quick-check section-check" data-answer="0" data-explanation="Web 1.0 pages were read-only catalogues. Web 2.0 added user-generated content such as reviews, ratings and sharing."><div class="question-number">Pause and check</div><h3>What made Web 2.0 shops different from Web 1.0 shops?</h3><div class="choices"><button class="choice">Customers created content too: reviews, ratings and sharing.</button><button class="choice">They only sold digital products.</button><button class="choice">They no longer needed a web address.</button></div><div class="feedback" aria-live="polite"></div></div>
+          <div class="quick-check section-check" data-answer="2" data-explanation="Web 1.0 pages were read-only catalogues. Web 2.0 added user-generated content such as reviews, ratings and sharing."><div class="question-number">Pause and check</div><h3>What made Web 2.0 shops different from Web 1.0 shops?</h3><div class="choices"><button class="choice">They could be viewed on mobile phones for the first time.</button><button class="choice">They could take card payments online for the first time.</button><button class="choice">Customers created content too: reviews, ratings and sharing.</button></div><div class="feedback" aria-live="polite"></div></div>
         </section>
 
         <section id="p1-payments" class="required-section" data-stage="5">
-          <h2>Taking payments got much easier <span class="section-time">About 15 min · plus two optional videos</span></h2>
+          <h2>Taking payments got much easier <span class="section-time">About 20 min · plus two optional videos</span></h2>
           <div class="scenario-thread story"><div class="scenario-label">Story · two café owners</div><p>In 2005, a café owner who wanted to take orders online faced bank forms, a setup fee, a gateway contract and a developer's quote. Most gave up. In 2015, a café owner could add online ordering through a ready-made service in an afternoon, paying only a small fee on each sale. Lower barriers meant far more small businesses could sell online.</p></div>
           <p>For a long time, the hardest part of selling online was taking card payments. A shop needed a <strong>merchant account</strong> from a bank (permission to accept card payments) and a <strong>payment gateway</strong> (software that passes card details securely between the shop and the banks). It also had to meet strict card-security rules called <strong>PCI DSS</strong>. Setting all this up could take weeks.</p>
           <p><strong>PayPal</strong> (founded 1998, bought by eBay in 2002) let people pay with just an email address and password. <strong>Shopify</strong> (2006) let anyone set up a complete shop without coding.</p>
@@ -1107,11 +1176,11 @@
             <p><strong>Buy now, pay later</strong> usually costs the shop more per sale than a card payment, but some shops find customers spend more. Australia began regulating buy now, pay later as a form of credit in 2025.</p>
             <p>For the shop, the question is simple arithmetic: does the extra spending outweigh the extra fee? For society, the question is harder: does making it easy to spend money you don't have help or harm young customers?</p>
           </div></details>
-          <div class="quick-check section-check" data-answer="1" data-explanation="Before services like Stripe, taking cards meant a merchant account, a payment gateway and weeks of paperwork. Stripe wraps all of that in an API that takes a few lines of code."><div class="question-number">Pause and check</div><h3>What problem did Stripe solve for small businesses?</h3><div class="choices"><button class="choice">It gave every business a free website.</button><button class="choice">It made card payments quick to add with a few lines of code.</button><button class="choice">It delivered parcels to customers.</button></div><div class="feedback" aria-live="polite"></div></div>
+          <div class="quick-check section-check" data-answer="1" data-explanation="Before services like Stripe, taking cards meant a merchant account, a payment gateway and weeks of paperwork. Stripe wraps all of that in an API that takes a few lines of code."><div class="question-number">Pause and check</div><h3>What problem did Stripe solve for small businesses?</h3><div class="choices"><button class="choice">It was the first way to pay online using just an email address.</button><button class="choice">It made card payments quick to add with a few lines of code.</button><button class="choice">It let small shops skip the card-security rules entirely.</button></div><div class="feedback" aria-live="polite"></div></div>
         </section>
 
         <section id="p1-ai" class="required-section" data-stage="6">
-          <h2>Now: AI is changing e-commerce <span class="section-time">About 10 min</span></h2>
+          <h2>Now: AI is changing e-commerce <span class="section-time">About 12 min</span></h2>
           <div class="scenario-thread story"><div class="scenario-label">Story · the shopper who never visits</div><p>A student types into an AI assistant: “Find me a used copy of Principles of Economics, 9th edition, under $60, delivered by Friday.” The assistant searches, compares and offers to buy one. The student never visits a shop's website. If you ran Uni Textbook Swap, would the assistant find you? Would it trust your descriptions? And who is responsible if it buys the wrong edition?</p></div>
           <div class="viz" id="ai-chat">
             <div class="viz-head"><h3>What that conversation might look like</h3><span class="viz-tag">Illustration</span></div>
@@ -1135,7 +1204,7 @@
             <div class="card"><div class="icon-badge" aria-hidden="true">★</div><h3>Recommendations</h3><p>“Customers who bought this also bought…” Machine learning compares what millions of shoppers buy and suggests what you might want next. Amazon has done this since the late 1990s.</p></div>
             <div class="card"><div class="icon-badge" aria-hidden="true">!</div><h3>Fraud detection</h3><p>Machine learning spots payments that look like stolen cards. Stripe's fraud tool, Radar, learns from payments across millions of businesses. It checks your test payments in Part 2 too.</p></div>
             <div class="card"><div class="icon-badge" aria-hidden="true">✎</div><h3>Content and service</h3><p>Generative AI writes product descriptions, creates product images and answers customer questions in chat, at any hour.</p></div>
-            <div class="card"><div class="icon-badge" aria-hidden="true">&lt;/&gt;</div><h3>Building the shop</h3><p>With <strong>vibe coding</strong>, a business owner describes the shop and an AI assistant writes the code. You will do this in Part 2.</p></div>
+            <div class="card"><div class="icon-badge" aria-hidden="true">&lt;/&gt;</div><h3>Building the shop</h3><p>With <strong>vibe coding</strong>, a business owner describes the shop and an AI assistant writes the code. You will do this in Part 2; the <a href="#ai-tools">AI tools recap</a> has guides and videos.</p></div>
             <div class="card"><div class="icon-badge" aria-hidden="true">→</div><h3>AI agents that shop</h3><p>An <strong>AI agent</strong> is AI that can take actions, not just answer. Since 2025, some AI assistants can find a product and complete the purchase for a person. This is called <strong>agentic commerce</strong>.</p></div>
             <div class="card"><div class="icon-badge" aria-hidden="true">?</div><h3>New questions</h3><p>If an AI agent buys the wrong thing, who is responsible? How does a shop get noticed when an AI is choosing? How is customer data protected?</p></div>
           </div>
@@ -1158,35 +1227,35 @@
             <p><strong>The lesson for Uni Textbook Swap:</strong> if you let software, or an AI agent, set prices or make purchases, give it limits. Set a maximum and minimum price, cap how much it can spend, require a human to approve anything unusual, and keep a way to switch it off quickly. Automation makes mistakes faster, not just decisions.</p>
           </div></details>
           <div class="callout"><strong>Discuss:</strong> what problem did each era solve for a small business? What problem is AI solving now, and what new risks does it bring?</div>
-          <div class="quick-check section-check" data-answer="2" data-explanation="An AI agent can take actions, such as completing a purchase. Agentic commerce is AI agents finding and buying products on a person's behalf."><div class="question-number">Pause and check</div><h3>What is agentic commerce?</h3><div class="choices"><button class="choice">Shops that employ sales agents to phone customers.</button><button class="choice">Using AI to write product descriptions.</button><button class="choice">AI agents finding and buying products on a person's behalf.</button></div><div class="feedback" aria-live="polite"></div></div>
+          <div class="quick-check section-check" data-answer="1" data-explanation="An AI agent can take actions, such as completing a purchase. Agentic commerce is AI agents finding and buying products on a person's behalf."><div class="question-number">Pause and check</div><h3>What is agentic commerce?</h3><div class="choices"><button class="choice">AI writing product descriptions and answering customer questions.</button><button class="choice">AI agents finding and buying products on a person's behalf.</button><button class="choice">Recommendation engines suggesting what to buy next.</button></div><div class="feedback" aria-live="polite"></div></div>
         </section>
 
         <section id="p1-review" class="required-section" data-stage="7">
-          <h2>How well do you understand the story? <span class="section-time">About 5 min</span></h2>
+          <h2>How well do you understand the story? <span class="section-time">About 8 min</span></h2>
           <p>Six questions that apply ideas from across Part 1. Answer all six correctly to complete Part 1.</p>
           <div class="knowledge-checks">
             <div class="quick-check" data-answer="1" data-explanation="A Web 1.0 shop published a catalogue. Reviews, ratings and sharing are Web 2.0 features, built on content customers create.">
               <div class="question-number">Question 1</div>
               <h3>A shop lets customers rate books and write reviews that other shoppers can read. Which idea is this?</h3>
-              <div class="choices"><button class="choice">Web 1.0 publishing</button><button class="choice">User-generated content from Web 2.0</button><button class="choice">A payment gateway</button><button class="choice">The dot-com crash</button></div>
+              <div class="choices"><button class="choice">Web 1.0 publishing</button><button class="choice">User-generated content from Web 2.0</button><button class="choice">A payment gateway</button><button class="choice">A network effect</button></div>
               <div class="feedback" aria-live="polite"></div>
             </div>
             <div class="quick-check" data-answer="3" data-explanation="A merchant account is a bank's permission to accept card payments. Before payment platforms, every shop had to arrange its own.">
               <div class="question-number">Question 2</div>
               <h3>In 2000, a new online shop applied to its bank for permission to accept card payments. What was it applying for?</h3>
-              <div class="choices"><button class="choice">An API key</button><button class="choice">A domain name</button><button class="choice">A buy now, pay later plan</button><button class="choice">A merchant account</button></div>
+              <div class="choices"><button class="choice">An API key</button><button class="choice">A domain name</button><button class="choice">A payment gateway</button><button class="choice">A merchant account</button></div>
               <div class="feedback" aria-live="polite"></div>
             </div>
-            <div class="quick-check" data-answer="0" data-explanation="Recommendations are one of the oldest uses of machine learning in e-commerce: software learns from what similar shoppers bought.">
+            <div class="quick-check" data-answer="2" data-explanation="Recommendations are one of the oldest uses of machine learning in e-commerce: software learns from what similar shoppers bought.">
               <div class="question-number">Question 3</div>
               <h3>“Customers who bought this also bought…” is an example of what?</h3>
-              <div class="choices"><button class="choice">Machine learning used for recommendations</button><button class="choice">An AI agent completing a purchase</button><button class="choice">Card fraud</button><button class="choice">Web 1.0 design</button></div>
+              <div class="choices"><button class="choice">User-generated content from Web 2.0</button><button class="choice">An AI agent completing a purchase</button><button class="choice">Machine learning used for recommendations</button><button class="choice">Generative AI writing product text</button></div>
               <div class="feedback" aria-live="polite"></div>
             </div>
-            <div class="quick-check" data-answer="2" data-explanation="Stripe offers a hosted payment page and an API, so a small shop can take cards without its own merchant account, gateway or card-security systems.">
+            <div class="quick-check" data-answer="1" data-explanation="Stripe offers a hosted payment page and an API, so a small shop can take cards without its own merchant account, gateway or card-security systems.">
               <div class="question-number">Question 4</div>
               <h3>Why can a student now build a shop that takes card payments in one afternoon?</h3>
-              <div class="choices"><button class="choice">Banks no longer check online shops.</button><button class="choice">Card payments no longer need any security.</button><button class="choice">Payment platforms like Stripe handle the banks, security and checkout for you.</button><button class="choice">Every website is now built automatically.</button></div>
+              <div class="choices"><button class="choice">Banks now approve merchant accounts instantly online.</button><button class="choice">Payment platforms like Stripe handle the banks, security and checkout for you.</button><button class="choice">Card networks dropped their security rules for small shops.</button><button class="choice">Web hosts now include card payments free with every website.</button></div>
               <div class="feedback" aria-live="polite"></div>
             </div>
             <div class="quick-check" data-answer="1" data-explanation="Checking a product in a physical shop and then buying it more cheaply online is showrooming. It is one reason physical shops now sell online too.">
@@ -1218,71 +1287,42 @@
           <h2 class="section-title">Build your own online shop</h2>
           <p>Build and launch a shop that sells one-of-a-kind items, with an AI assistant writing the code.</p>
         </div>
-        <div class="media-row"><figure class="photo"><img src="shots/cart.png" alt="Shopping cart icon with one item" loading="lazy"></figure><div class="prose-side"><h3>From one click to one order</h3><p>To a customer, buying online is one click on a cart button. Behind that click, your shop must check the price, hold the item, take payment, confirm it and record the order, all without mistakes.</p><p>In Part 2 you build every one of those steps yourself, so you understand what really happens when someone clicks “Buy now”.</p></div></div>
+        <div class="media-row"><figure class="photo cart-figure"><svg viewBox="0 0 220 180" role="img" aria-label="A shopping cart holding one item"><path d="M20 30 H55 L80 120 H175 L195 55 H65" fill="none" stroke="#231f20" stroke-width="10" stroke-linejoin="round" stroke-linecap="round"/><rect x="100" y="62" width="50" height="42" fill="#ffe600" stroke="#231f20" stroke-width="6"/><circle cx="95" cy="150" r="13" fill="#231f20"/><circle cx="165" cy="150" r="13" fill="#231f20"/></svg></figure><div class="prose-side"><h3>From one click to one order</h3><p>To a customer, buying online is one click on a cart button. Behind that click, your shop must check the price, hold the item, take payment, confirm it and record the order, all without mistakes.</p><p>In Part 2 you build every one of those steps yourself, so you understand what really happens when someone clicks “Buy now”.</p></div></div>
         <div class="module-overview" id="p2-intro">
           <h3>What will you build?</h3>
           <p><strong>Your shop:</strong> a website listing 5 or 6 one-of-a-kind items. Customers pay on Stripe's secure page, the item is held while they pay, and every order is saved in a database.</p>
           <p><strong>Your tools:</strong> GitHub stores the code, Stripe takes payments, Supabase is the database, Vercel puts it online, and an AI assistant writes the code with you.</p>
           <p><strong>By the end:</strong> your shop is live at its own web address, you have made a test purchase, and you can explain each design choice.</p>
+          <p class="lo-covers"><strong>Learning outcomes:</strong> LO3, LO4, LO5 and LO7.</p>
         </div>
-        <p class="time-note"><strong>About 2 hours.</strong> Keep this page open beside Stripe, Supabase and Vercel.</p>
+        <p class="time-note"><strong>About 3½ hours, best over two sessions:</strong> Stages 1–4 (about 2 hours), then Stages 5–7 (about 1½ hours). Keep this page open beside Stripe, Supabase and Vercel.</p>
+        <p class="last-checked">Steps last checked: October 2026. Menus in Stripe, Supabase, Vercel and AI tools change often; if a button has moved, look for the nearest match or ask your AI assistant.</p>
         <div class="scenario-thread"><div class="scenario-label">Running example</div><p><strong>Uni Textbook Swap</strong> sells second-hand textbooks. Each book is a single copy, so if two students click Buy at the same moment, only one may get it. The examples in Part 2 use this shop. You can build it, or choose your own idea in stage 2.</p></div>
-        <div class="journey cols-3" aria-label="Part 2 stages">
-          <a href="#p2-ready"><strong>Get ready</strong><span>Accounts, safety rules and how a sale works.</span></a>
+        <div class="journey cols-4" aria-label="Part 2 stages">
+          <a href="#p2-ready"><strong>Get ready</strong><span>Accounts, how a sale works, safety rules, and choosing your route.</span></a>
           <a href="#p2-stripe"><strong>Plan your products</strong><span>Pick what you sell and add it to Stripe.</span></a>
           <a href="#p2-build"><strong>Build it with AI</strong><span>Brief your AI assistant with a ready-made prompt.</span></a>
           <a href="#p2-data"><strong>Database and codes</strong><span>Set up Supabase and collect your keys.</span></a>
           <a href="#p2-online"><strong>Put it online</strong><span>Vercel, Stripe's payment messages and a rebuild.</span></a>
           <a href="#p2-test"><strong>Test it</strong><span>A test purchase, then the tricky cases.</span></a>
+          <a href="#p2-review"><strong>Why it works this way</strong><span>Eight design choices, then four questions.</span></a>
         </div>
 
         <section id="p2-ready" class="required-section" data-stage="1">
-          <h2>Get ready <span class="section-time">About 20 min</span></h2>
+          <h2>Get ready <span class="section-time">About 30 min</span></h2>
           <div class="scenario-thread story"><div class="scenario-label">Story · two weeks to O-Week</div><p>Alex wants Uni Textbook Swap online before the start of semester, when new students hunt for cheap books. There is no budget for a developer and only two weeks to go. Ten years ago that would have been impossible. Today, with free tools and an AI assistant, it is a weekend project. The trick is knowing what each tool does.</p></div>
-          <h3>Five free accounts</h3>
+          <h3>Five accounts</h3>
           <div class="comparison-wrap"><table class="comparison">
-            <thead><tr><th>Account</th><th>Its job in your shop</th><th>Sign up at</th></tr></thead>
+            <thead><tr><th>Account</th><th>Its job in your shop</th><th>Sign up at</th><th>Cost for this module</th></tr></thead>
             <tbody>
-              <tr><td>GitHub</td><td>Stores your shop's code and every saved version</td><td><a href="https://github.com" target="_blank" rel="noopener">github.com</a></td></tr>
-              <tr><td>Stripe</td><td>Takes the payments, in test mode only</td><td><a href="https://stripe.com" target="_blank" rel="noopener">stripe.com</a></td></tr>
-              <tr><td>Supabase</td><td>The database: your products, what's still for sale, and every order</td><td><a href="https://supabase.com" target="_blank" rel="noopener">supabase.com</a></td></tr>
-              <tr><td>Vercel</td><td>Puts your shop online at a web address</td><td><a href="https://vercel.com" target="_blank" rel="noopener">vercel.com</a> (sign up with GitHub)</td></tr>
-              <tr><td>AI assistant</td><td>Writes the code with you</td><td>Claude Code at <a href="https://claude.ai/code" target="_blank" rel="noopener">claude.ai/code</a>, or similar</td></tr>
+              <tr><td>GitHub</td><td>Stores your shop's code and every saved version</td><td><a href="https://github.com" target="_blank" rel="noopener">github.com</a></td><td>Free</td></tr>
+              <tr><td>Stripe</td><td>Takes the payments, in test mode only</td><td><a href="https://stripe.com" target="_blank" rel="noopener">stripe.com</a></td><td>Free (sandbox)</td></tr>
+              <tr><td>Supabase</td><td>The database: your products, what's still for sale, and every order</td><td><a href="https://supabase.com" target="_blank" rel="noopener">supabase.com</a></td><td>Free plan</td></tr>
+              <tr><td>Vercel</td><td>Puts your shop online at a web address</td><td><a href="https://vercel.com" target="_blank" rel="noopener">vercel.com</a> (sign up with GitHub)</td><td>Free (Hobby plan)</td></tr>
+              <tr><td>AI assistant</td><td>Writes the code with you</td><td>Claude Code at <a href="https://claude.ai/code" target="_blank" rel="noopener">claude.ai/code</a>, or ChatGPT's Codex</td><td><strong>Usually a paid plan</strong>, unless your university provides one</td></tr>
             </tbody>
           </table></div>
-          <h3>Four safety rules</h3>
-          <div class="grid two">
-            <div class="card"><h3>Test mode only</h3><p>Work in a Stripe <strong>sandbox</strong>. Your secret Stripe code must start with <code>sk_test_</code>. If you see <code>sk_live_</code>, stop: that is real money.</p></div>
-            <div class="card"><h3>Secrets stay secret</h3><p>Paste secret codes only into Vercel's settings. Never into GitHub, an AI chat or a screenshot you share. (Connectors, below, are different: the AI uses your login, so you don't paste codes at all.)</p></div>
-            <div class="card"><h3>Save often</h3><p>Ask your AI assistant to save a version (a <strong>commit</strong>) after each step, so you can always go back.</p></div>
-            <div class="card"><h3>Approve, don't autopilot</h3><p>If you connect services to your AI assistant, read each action before you approve it, check that Stripe is in your sandbox, and disconnect the services when you finish.</p></div>
-          </div>
-          <h3>Two ways to build: step by step, or all in one</h3>
-          <p>Every student builds the same shop. You can choose how much of the clicking your AI assistant does for you.</p>
-          <div class="comparison-wrap"><table class="comparison routes-table">
-            <thead><tr><th></th><th>Route A · Step by step</th><th>Route B · All in one (connectors)</th></tr></thead>
-            <tbody>
-              <tr><td>How it works</td><td>Your AI assistant writes the code. You work in each service's own website: add products in Stripe, set up the database in Supabase, copy codes into Vercel.</td><td>You connect Stripe, Supabase, Vercel and GitHub to your AI assistant. It then does most of those steps for you, inside each service, while you watch and approve.</td></tr>
-              <tr><td>What you set up</td><td>Five accounts</td><td>Five accounts, plus switching on a connector for each service and approving what it may do</td></tr>
-              <tr><td>Best for</td><td>Learning what each part does and where everything lives</td><td>Speed, and seeing an AI agent do real work</td></tr>
-              <tr><td>Watch out for</td><td>Copy-and-paste mistakes, such as a code with a missing character</td><td>Approving actions without reading them; some steps may still need you</td></tr>
-            </tbody>
-          </table></div>
-          <p><strong>This lesson's steps are written for Route A.</strong> If you take Route B, look for the blue <em>Using connectors?</em> notes in each stage: they tell you what to ask your AI to do, and what to check yourself afterwards. Either way, you should understand every step, because you are responsible for the shop. For setup guides and videos on Claude and ChatGPT, see the <a href="#ai-tools">AI tools for vibe coding</a> recap.</p>
-          <h3>What are connectors and MCP?</h3>
-          <p>On its own, an AI assistant can only talk and write code. A <strong>connector</strong> plugs an outside service, such as Stripe or Supabase, into the assistant so it can look things up and take actions there, using your login. Most connectors use <strong>MCP</strong> (Model Context Protocol), an open standard that Anthropic introduced in 2024 and other AI companies have since adopted. MCP is a common plug that any AI assistant and any service can use, much like USB for devices.</p>
-          <p>This is the <strong>AI agent</strong> idea from Part 1: AI that takes actions, not just answers. Stripe, Supabase, Vercel and GitHub all offer official connectors.</p>
-          <div class="grid two">
-            <div class="card"><div class="icon-badge" aria-hidden="true">1</div><h3>Switch the connectors on</h3><p>In <strong>Claude</strong>, connectors are in the app's settings, and Claude Code can use them too. <strong>ChatGPT</strong> and OpenAI's coding tool <strong>Codex</strong> also support MCP connectors. Menus change often: the <a href="#ai-tools">AI tools recap</a> has the official guides. On a university (EDU) account, some connectors and apps may be disabled by your university.</p></div>
-            <div class="card"><div class="icon-badge" aria-hidden="true">2</div><h3>Sign in and approve</h3><p>Each connector asks you to sign in to that service and approve what the AI may do. Choose the narrowest access offered. For Stripe, connect your <strong>sandbox</strong>, never a live account.</p></div>
-            <div class="card"><div class="icon-badge" aria-hidden="true">3</div><h3>Check the AI is working in the right place</h3><p>Before it creates anything, ask it to tell you which Stripe account, Supabase project and Vercel team it is about to use. It is easy to build in the wrong project.</p></div>
-            <div class="card"><div class="icon-badge" aria-hidden="true">4</div><h3>Read, then approve</h3><p>The assistant shows each action before running it. Read it. Anything that deletes, uses live keys or costs money deserves a hard look, or a no.</p></div>
-          </div>
-          <div class="scenario-thread story"><div class="scenario-label">Story · the agent hits a wall</div><p>The example shop for this lesson was built with Route B. Connected to Stripe, Supabase, GitHub and Vercel, the AI assistant created the products, the database tables, the webhook and the deployment in minutes. But it could not do everything. Vercel refused to let it create the project, and Stripe had moved its webhook settings to a new menu, so a person had to click through those steps by hand. Agents are fast, but you still need to know what each step is for, so you can take over when they get stuck.</p></div>
-          <div class="why-matters">
-            <div class="why-label">Why this matters to you</div>
-            <p>Businesses are starting to connect AI agents to their real systems: payments, customer records, stock and websites. Someone has to decide which systems an agent may touch, what it may do there, and who checks its work. That is a business decision about risk and responsibility, not only a technical one, and it is increasingly made by managers and analysts rather than programmers.</p>
-          </div>
+          <div class="callout"><strong>No paid AI plan?</strong> Coding tools such as Claude Code and Codex generally need a paid plan; check what your university provides first. Without one, you can still follow Route A with a free AI chat: ask it to write each file, then create the files yourself in GitHub (<strong>Add file → Create new file</strong>). It is slower, but you will learn just as much. See the <a href="#ai-tools">AI tools recap</a>.</div>
           <h3>The parts of your shop</h3>
           <p>Your shop is made of a few services that each do one job. Some work while you build the shop; others work every time a customer buys.</p>
           <div class="lanes" role="img" aria-label="Diagram of the parts of the shop. While you build: an AI assistant writes the code, GitHub stores it, and Vercel puts it online. When a customer buys: the customer's browser contacts your shop on Vercel, which starts a Stripe payment; Stripe sends a signed message back to your shop, which saves the order in Supabase.">
@@ -1337,19 +1377,49 @@
           </div>
           <div class="why-matters">
             <div class="why-label">Why this matters to you</div>
-            <p>You may never write code for a living, but you will work with people and tools that do. Knowing what each part of a system does lets you brief developers clearly, compare quotes, spot risks and ask the right questions. The same parts appear in much larger businesses, just at a bigger scale.</p>
+            <p>You may never write code for a living, but you will work with people and tools that do. Knowing what each part of a system does lets you brief developers clearly, compare quotes, spot risks and ask the right questions. The same parts appear in much larger businesses, just at a bigger scale. Increasingly, businesses also connect AI agents to these systems, and someone has to decide what an agent may touch and who checks its work.</p>
           </div>
           <details class="more"><summary>Build or buy: why not just use Shopify?</summary><div class="details-body">
             <p>For many small businesses, a ready-made platform such as Shopify is the right choice. It is quick to set up, comes with support, and charges a monthly fee plus payment fees. Building your own gives full control and can cost less to run, but you have to maintain it yourself.</p>
             <p><strong>Build versus buy</strong> is one of the most common decisions in business technology. This module has you build, so you can see inside the machine and make that decision with your eyes open.</p>
           </div></details>
+          <h3>Four safety rules</h3>
+          <div class="grid two">
+            <div class="card"><h3>Test mode only</h3><p>Work in a Stripe <strong>sandbox</strong>. Your secret Stripe code must start with <code>sk_test_</code>. If you see <code>sk_live_</code>, stop: that is real money.</p></div>
+            <div class="card"><h3>Secrets stay secret</h3><p>Paste secret codes only into Vercel's settings. Never into GitHub, an AI chat or a screenshot you share. (Route B connectors, below, are different: the AI uses your login, so you don't paste codes at all.)</p></div>
+            <div class="card"><h3>Save often</h3><p>Ask your AI assistant to save a version (a <strong>commit</strong>) after each step, so you can always go back.</p></div>
+            <div class="card"><h3>Approve, don't autopilot</h3><p>If you take Route B (below) and connect services to your AI assistant, read each action before you approve it, check that Stripe is in your sandbox, and disconnect the services when you finish.</p></div>
+          </div>
+          <h3>Two ways to build: step by step, or all in one</h3>
+          <p>Every student builds the same shop. You can choose how much of the clicking your AI assistant does for you.</p>
+          <div class="comparison-wrap"><table class="comparison routes-table">
+            <thead><tr><th></th><th>Route A · Step by step</th><th>Route B · All in one (connectors)</th></tr></thead>
+            <tbody>
+              <tr><td>How it works</td><td>Your AI assistant writes the code. You work in each service's own website: add products in Stripe, set up the database in Supabase, copy codes into Vercel.</td><td>You connect Stripe, Supabase, Vercel and GitHub to your AI assistant. It then does most of those steps for you, inside each service, while you watch and approve.</td></tr>
+              <tr><td>What you set up</td><td>Five accounts</td><td>Five accounts, plus switching on a connector for each service and approving what it may do</td></tr>
+              <tr><td>Best for</td><td>Learning what each part does and where everything lives</td><td>Speed, and seeing an AI agent do real work</td></tr>
+              <tr><td>Watch out for</td><td>Copy-and-paste mistakes, such as a code with a missing character</td><td>Approving actions without reading them; some steps may still need you</td></tr>
+            </tbody>
+          </table></div>
+          <p><strong>This lesson's steps are written for Route A.</strong> If you take Route B, open the Route B expander below first, then look for the blue <em>Using connectors?</em> notes in each stage: they tell you what to ask your AI to do, and what to check yourself afterwards. Either way, you should understand every step, because you are responsible for the shop. For setup guides and videos on Claude and ChatGPT, see the <a href="#ai-tools">AI tools for vibe coding</a> recap.</p>
+          <details class="more"><summary>Route B: what connectors and MCP are, and how to set them up</summary><div class="details-body">
+          <p>On its own, an AI assistant can only talk and write code. A <strong>connector</strong> plugs an outside service, such as Stripe or Supabase, into the assistant so it can look things up and take actions there, using your login. Most connectors use <strong>MCP</strong> (Model Context Protocol), an open standard that Anthropic introduced in 2024 and other AI companies have since adopted. MCP is a common plug that any AI assistant and any service can use, much like USB for devices.</p>
+          <p>This is the <strong>AI agent</strong> idea from Part 1: AI that takes actions, not just answers. Stripe, Supabase, Vercel and GitHub all offer official connectors.</p>
+          <div class="grid two">
+            <div class="card"><div class="icon-badge" aria-hidden="true">1</div><h3>Switch the connectors on</h3><p>In <strong>Claude</strong>, connectors are in the app's settings, and Claude Code can use them too. <strong>ChatGPT</strong> and OpenAI's coding tool <strong>Codex</strong> also support MCP connectors. Menus change often: the <a href="#ai-tools">AI tools recap</a> has the official guides. On a university (EDU) account, some connectors and apps may be disabled by your university.</p></div>
+            <div class="card"><div class="icon-badge" aria-hidden="true">2</div><h3>Sign in and approve</h3><p>Each connector asks you to sign in to that service and approve what the AI may do. Choose the narrowest access offered. For Stripe, connect your <strong>sandbox</strong>, never a live account.</p></div>
+            <div class="card"><div class="icon-badge" aria-hidden="true">3</div><h3>Check the AI is working in the right place</h3><p>Before it creates anything, ask it to tell you which Stripe account, Supabase project and Vercel team it is about to use. It is easy to build in the wrong project.</p></div>
+            <div class="card"><div class="icon-badge" aria-hidden="true">4</div><h3>Read, then approve</h3><p>The assistant shows each action before running it. Read it. Anything that deletes, uses live keys or costs money deserves a hard look, or a no.</p></div>
+          </div>
+          <div class="scenario-thread story"><div class="scenario-label">Story · the agent hits a wall</div><p>The example shop for this lesson was built with Route B. Connected to Stripe, Supabase, GitHub and Vercel, the AI assistant created the products, the database tables, the webhook and the deployment in minutes. But it could not do everything. Vercel refused to let it create the project, and Stripe had moved its webhook settings to a new menu, so a person had to click through those steps by hand. Agents are fast, but you still need to know what each step is for, so you can take over when they get stuck.</p></div>
+          </div></details>
           <div class="route-note"><span class="route-label">Using connectors? (Route B)</span><p>Choose your route now. If you take Route B, connect Stripe (sandbox), Supabase, Vercel and GitHub to your AI assistant before Stage 2.</p></div>
-          <div class="quick-check section-check" data-answer="2" data-explanation="Connectors act inside your real accounts with your login. Check the AI is using your Stripe sandbox and the right project, and read each action before you approve it."><div class="question-number">Pause and check</div><h3>You connect Stripe to your AI assistant. What should you do before it creates anything?</h3><div class="choices"><button class="choice">Nothing. Connectors are always safe.</button><button class="choice">Paste your secret Stripe key into the chat so it can work faster.</button><button class="choice">Check it is using your Stripe sandbox, then read each action before approving it.</button></div><div class="feedback" aria-live="polite"></div></div>
+          <div class="quick-check section-check" data-answer="2" data-explanation="Connectors act inside your real accounts with your login. Check the AI is using your Stripe sandbox and the right project, and read each action before you approve it."><div class="question-number">Pause and check</div><h3>You connect Stripe to your AI assistant. What should you do before it creates anything?</h3><div class="choices"><button class="choice">Turn on auto-approve so it isn't interrupted.</button><button class="choice">Paste your secret Stripe key into the chat so it can work faster.</button><button class="choice">Check it is using your Stripe sandbox, then read each action before approving it.</button></div><div class="feedback" aria-live="polite"></div></div>
           <div class="quick-check section-check" data-answer="2" data-explanation="The order is saved only when Stripe's signed “paid” message arrives (step 5). The thank-you page can be skipped or faked, so it records nothing."><div class="question-number">Pause and check</div><h3>At which step is the order saved in your database?</h3><div class="choices"><button class="choice">When the customer clicks Buy now</button><button class="choice">When the thank-you page loads</button><button class="choice">When Stripe's signed “paid” message arrives</button></div><div class="feedback" aria-live="polite"></div></div>
         </section>
 
         <section id="p2-stripe" class="required-section" data-stage="2">
-          <h2>Plan your products <span class="section-time">About 25 min</span></h2>
+          <h2>Plan your products <span class="section-time">About 30 min</span></h2>
           <div class="step-heading" data-step="1">Build step 1</div>
           <h3>Pick what your shop sells</h3>
           <p>Choose items where there is <strong>only one of each</strong>. When someone starts paying, nobody else may buy the same item.</p>
@@ -1386,17 +1456,18 @@
             <p>Look up what similar items sell for, then adjust for condition: “like new” earns more than “well used”. Then think about the whole order. With A$9.95 flat-rate shipping, a $15 item costs the customer $24.95, so shipping is almost 40% of what they pay. A $60 item barely notices it. Low-priced items may need a different approach, such as bundles or free shipping over a set amount.</p>
           </div></details>
           <div class="route-note"><span class="route-label">Using connectors? (Route B)</span><p>Ask your AI assistant to create each product with its AUD price in your Stripe <strong>sandbox</strong>, then list the price IDs it made. Open the Stripe dashboard and check every name, price and currency yourself.</p></div>
-          <div class="quick-check section-check" data-answer="0" data-explanation="A sandbox is Stripe's practice account. It uses test cards, and no real money moves."><div class="question-number">Pause and check</div><h3>Why do you create your products in a Stripe sandbox?</h3><div class="choices"><button class="choice">It is a practice account where no real money moves.</button><button class="choice">Sandboxes are faster than normal accounts.</button><button class="choice">Products in a sandbox are free to sell for real.</button></div><div class="feedback" aria-live="polite"></div></div>
+          <div class="quick-check section-check" data-answer="2" data-explanation="A sandbox is Stripe's practice account. It uses test cards, and no real money moves."><div class="question-number">Pause and check</div><h3>Why do you create your products in a Stripe sandbox?</h3><div class="choices"><button class="choice">It hides your products from search engines until launch.</button><button class="choice">Stripe requires a sandbox before it will pay you.</button><button class="choice">It is a practice account where no real money moves.</button></div><div class="feedback" aria-live="polite"></div></div>
         </section>
 
         <section id="p2-build" class="required-section" data-stage="3">
-          <h2>Build it with AI <span class="section-time">About 30 min</span></h2>
+          <h2>Build it with AI <span class="section-time">About 40 min</span></h2>
           <div class="step-heading" data-step="3">Build step 3</div>
           <h3>Brief your AI assistant</h3>
           <div class="logo-badge"><img src="shots/github-logo.png" alt="GitHub logo" loading="lazy"></div>
           <p>You describe the shop; the AI writes the code. The prompt below is your brief. It names every setting exactly, so the later steps match.</p>
           <ol class="steps">
             <li>In GitHub, click <strong>New repository</strong>. Name it after your shop, tick <strong>Add a README file</strong>, and click <strong>Create repository</strong>.</li>
+            <li>Connect GitHub to your AI assistant, once only. In Claude Code (<a href="https://claude.ai/code" target="_blank" rel="noopener">claude.ai/code</a>), sign in with GitHub when asked. If your repository doesn't appear in the list, install <strong>Claude's GitHub app</strong> and give it access to that repository. In Codex, connect GitHub from its settings.</li>
             <li>Open that repository in your AI assistant. In Claude Code, start a new session and choose the repository.</li>
             <li>Copy the prompt below. Replace everything in <span class="pill">[square brackets]</span> with your shop's details and your list from step 2, then send it.</li>
           </ol>
@@ -1420,7 +1491,8 @@ Requirements:
 - The server looks up the price from the database. The browser only sends the product ID.
 - Two Vercel serverless functions in /api: create-checkout-session and stripe-webhook.
 - The webhook verifies Stripe's signature, records the order on
-  checkout.session.completed (no duplicates if Stripe sends it twice),
+  checkout.session.completed and checkout.session.async_payment_succeeded
+  (no duplicates if Stripe sends it twice),
   and marks the item as sold. Orders are NOT recorded on the success page.
 - Supabase tables: products and orders, with row level security
   (anyone can read products; nobody can read orders from the browser).
@@ -1461,11 +1533,11 @@ Requirements:
           </div></details>
           <details class="more"><summary>Stuck? See a working example</summary><div class="details-body"><p>A finished example shop (a comic shop built the same way) is at <a href="https://github.com/MCahalane/stripe-checkout-test" target="_blank" rel="noopener">github.com/MCahalane/stripe-checkout-test</a>. Ask your AI assistant to use it as a reference, or compare your files with it.</p></div></details>
           <div class="route-note"><span class="route-label">Using connectors? (Route B)</span><p>Use the same brief, and add one line telling your AI which connectors it may use. It may be able to create the GitHub repository too. If GitHub blocks it, create the repository yourself and carry on.</p></div>
-          <div class="quick-check section-check" data-answer="1" data-explanation="The prompt names every setting exactly, so the names your AI uses in the code match the names you enter in Vercel later."><div class="question-number">Pause and check</div><h3>Why does the prompt list the exact names of all six settings?</h3><div class="choices"><button class="choice">The AI can't write code without a list of names.</button><button class="choice">So the code uses the same names you will enter in Vercel later.</button><button class="choice">So the AI can show the secret values in the code.</button></div><div class="feedback" aria-live="polite"></div></div>
+          <div class="quick-check section-check" data-answer="1" data-explanation="The prompt names every setting exactly, so the names your AI uses in the code match the names you enter in Vercel later."><div class="question-number">Pause and check</div><h3>Why does the prompt list the exact names of all six settings?</h3><div class="choices"><button class="choice">The AI can't write any code without a list of names.</button><button class="choice">So the code uses the same names you will enter in Vercel later.</button><button class="choice">So the AI can store the secret values safely in the code.</button></div><div class="feedback" aria-live="polite"></div></div>
         </section>
 
         <section id="p2-data" class="required-section" data-stage="4">
-          <h2>Database and codes <span class="section-time">About 20 min</span></h2>
+          <h2>Database and codes <span class="section-time">About 25 min</span></h2>
           <div class="step-heading" data-step="4">Build step 4</div>
           <h3>Set up your Supabase database</h3>
           <div class="logo-badge"><img src="shots/supabase-logo.png" alt="Supabase logo" loading="lazy"></div>
@@ -1504,11 +1576,12 @@ Requirements:
             <p>You can answer all of these with the two simple tables you just created.</p>
           </div></details>
           <div class="route-note"><span class="route-label">Using connectors? (Route B)</span><p>Ask your AI assistant to create the tables and add your products through the Supabase connector. It can also look up your project URL and public key. Then open Supabase and check the tables and rows are really there. The <strong>service role key</strong> is a secret: put it into Vercel's settings yourself.</p></div>
+          <div class="callout dark"><strong>Good place to stop.</strong> This is the end of session 1 (Stages 1–4). Your progress is saved in this browser. Next session, start at Stage 5 with your four codes ready.</div>
           <div class="quick-check section-check" data-answer="2" data-explanation="The service role key can read and change everything in your database, ignoring its security rules. Only your server may use it, so it must stay secret."><div class="question-number">Pause and check</div><h3>Which Supabase key must never appear in the browser or on GitHub?</h3><div class="choices"><button class="choice">The project URL</button><button class="choice">The anon (publishable) key</button><button class="choice">The service role (secret) key</button></div><div class="feedback" aria-live="polite"></div></div>
         </section>
 
         <section id="p2-online" class="required-section" data-stage="5">
-          <h2>Put it online <span class="section-time">About 25 min</span></h2>
+          <h2>Put it online <span class="section-time">About 35 min</span></h2>
           <div class="step-heading" data-step="6">Build step 6</div>
           <h3>Put the shop online with Vercel</h3>
           <div class="logo-badge"><img src="shots/vercel-logo.png" alt="Vercel logo" loading="lazy"></div>
@@ -1552,11 +1625,11 @@ Requirements:
             <p>Each one saves staff time and errors, but each is also a link that can break. Someone needs to notice when messages stop arriving.</p>
           </div></details>
           <div class="route-note"><span class="route-label">Using connectors? (Route B)</span><p>Your AI assistant may be able to create the Vercel project, add the settings, deploy, and create the Stripe payment-message destination. Expect at least one step to need you, as in the story in Stage 1. The rule still applies: after any settings change, the shop must be redeployed.</p></div>
-          <div class="quick-check section-check" data-answer="1" data-explanation="Vercel reads settings when it builds the shop. After adding or changing a setting, you must redeploy for the shop to use it."><div class="question-number">Pause and check</div><h3>You add a new setting in Vercel, but your shop behaves the same. What is the most likely reason?</h3><div class="choices"><button class="choice">Settings take 24 hours to start working.</button><button class="choice">You haven't redeployed since adding it.</button><button class="choice">Vercel ignores settings for free accounts.</button></div><div class="feedback" aria-live="polite"></div></div>
+          <div class="quick-check section-check" data-answer="1" data-explanation="Vercel reads settings when it builds the shop. After adding or changing a setting, you must redeploy for the shop to use it."><div class="question-number">Pause and check</div><h3>You add a new setting in Vercel, but your shop behaves the same. What is the most likely reason?</h3><div class="choices"><button class="choice">New settings apply only to new customers.</button><button class="choice">You haven't redeployed since adding it.</button><button class="choice">Free accounts are limited to four settings.</button></div><div class="feedback" aria-live="polite"></div></div>
         </section>
 
         <section id="p2-test" class="required-section" data-stage="6">
-          <h2>Test it <span class="section-time">About 25 min</span></h2>
+          <h2>Test it <span class="section-time">About 30 min</span></h2>
           <div class="step-heading" data-step="9">Build step 9</div>
           <h3>Make a test purchase</h3>
           <p>Buy one of your own items with Stripe's test card, then check the sale was recorded.</p>
@@ -1648,6 +1721,7 @@ Requirements:
               <tr><td>You changed a setting but nothing changed</td><td>Vercel needs a Redeploy after every settings change</td></tr>
               <tr><td>Two copies of your shop in Vercel</td><td>You imported twice. Keep the one with all six settings and delete the other from its <strong>Settings</strong> page</td></tr>
               <tr><td>Supabase won't let you create a project</td><td>Pause an old project (step 4)</td></tr>
+              <tr><td>Your repository doesn't appear in your AI assistant</td><td>Your AI's GitHub app can't see it yet. For Claude, open <a href="https://github.com/apps/claude" target="_blank" rel="noopener">github.com/apps/claude</a>, choose Configure, and add the repository. On a university GitHub organisation, an owner may need to approve it</td></tr>
               <tr><td>You see <code>sk_live_</code> anywhere</td><td>Stop. You are outside your sandbox. Switch back using the menu in Stripe's top-left</td></tr>
             </tbody>
           </table></div>
@@ -1673,19 +1747,19 @@ Requirements:
             <div class="quick-check" data-answer="1" data-explanation="Anyone can change what their browser sends. Your server looks up the price itself, so a tampered price is ignored.">
               <div class="question-number">Question 1</div>
               <h3>Why does the browser send only the item's ID, never its price?</h3>
-              <div class="choices"><button class="choice">It makes the page load faster.</button><button class="choice">So a customer can't change the price they pay.</button><button class="choice">Stripe can't read prices.</button><button class="choice">Prices are secret.</button></div>
+              <div class="choices"><button class="choice">It makes the page load faster.</button><button class="choice">So a customer can't change the price they pay.</button><button class="choice">Because prices change too often to store in the page.</button><button class="choice">So Stripe can add GST automatically.</button></div>
               <div class="feedback" aria-live="polite"></div>
             </div>
             <div class="quick-check" data-answer="2" data-explanation="Each checkout ID can appear only once in the orders table, so a repeated message is ignored.">
               <div class="question-number">Question 2</div>
               <h3>Stripe sends the same “paid” message twice. What happens?</h3>
-              <div class="choices"><button class="choice">Two orders are saved.</button><button class="choice">The payment is refunded.</button><button class="choice">One order is saved; the repeat changes nothing.</button><button class="choice">The item goes back on sale.</button></div>
+              <div class="choices"><button class="choice">Two orders are saved.</button><button class="choice">Stripe charges the customer twice.</button><button class="choice">One order is saved; the repeat changes nothing.</button><button class="choice">The item goes back on sale.</button></div>
               <div class="feedback" aria-live="polite"></div>
             </div>
-            <div class="quick-check" data-answer="0" data-explanation="The signature proves the message really came from Stripe. Without it, anyone could fake a payment message and get items for free.">
+            <div class="quick-check" data-answer="2" data-explanation="The signature proves the message really came from Stripe. Without it, anyone could fake a payment message and get items for free.">
               <div class="question-number">Question 3</div>
               <h3>Why does your shop check the signature on Stripe's message?</h3>
-              <div class="choices"><button class="choice">To prove the message came from Stripe and wasn't faked.</button><button class="choice">To make the message arrive faster.</button><button class="choice">To find the customer's card number.</button><button class="choice">To translate the message into English.</button></div>
+              <div class="choices"><button class="choice">To encrypt the customer's card number.</button><button class="choice">To stop Stripe sending the same message twice.</button><button class="choice">To prove the message came from Stripe and wasn't faked.</button><button class="choice">To confirm the delivery address is in Australia.</button></div>
               <div class="feedback" aria-live="polite"></div>
             </div>
             <div class="quick-check" data-answer="3" data-explanation="Secret codes belong only in Vercel's environment variables. Never in GitHub, a chat or a shared screenshot.">
@@ -1715,20 +1789,22 @@ Requirements:
           <h3>What changes?</h3>
           <p><strong>Purpose:</strong> understand what separates a test shop from one that can take real money.</p>
           <p><strong>Key ideas:</strong> ABN and GST, activating Stripe, live keys and paid hosting, finding customers, order fulfilment, consumer law and privacy, security, and the ethics of using customer data.</p>
-          <p><strong>By the end:</strong> you can list what a business must sort out before it switches on real payments.</p>
+          <p><strong>By the end:</strong> you can list what a business must sort out before it switches on real payments, and make a short business case for your own shop.</p>
+          <p class="lo-covers"><strong>Learning outcomes:</strong> LO6 and LO7, with LO2 and LO5 applied in your business case.</p>
+          <p class="lo-covers"><strong>Note:</strong> the laws and taxes here are Australian. Elsewhere, the questions are the same but the rules differ.</p>
         </div>
-        <p class="time-note"><strong>About 45 minutes.</strong></p>
+        <p class="time-note"><strong>About 1½ hours</strong>, including about 25 minutes for your business case.</p>
         <div class="callout dark"><strong>While you are learning:</strong> keep your shop in test mode. Never switch to live keys for a class activity or assignment.</div>
         <div class="journey cols-3" aria-label="Part 3 stages">
           <a href="#p3-changes"><strong>What changes for real</strong><span>Area by area, from Stripe to your web address.</span></a>
           <a href="#p3-customers"><strong>Find customers, deliver orders</strong><span>Marketing, what a customer costs, and fulfilment.</span></a>
           <a href="#p3-run"><strong>Rules, running and security</strong><span>The law, daily running and keeping it safe.</span></a>
           <a href="#p3-trust"><strong>Trust, ethics and risk</strong><span>Customer data, fair pricing, copyright and fraud.</span></a>
-          <a href="#p3-review"><strong>Review understanding</strong><span>Five questions to finish the module.</span></a>
+          <a href="#p3-review"><strong>Review and apply</strong><span>Five questions, then a short business case for your shop.</span></a>
         </div>
 
         <section id="p3-changes" class="required-section" data-stage="1">
-          <h2>What changes for real <span class="section-time">About 10 min</span></h2>
+          <h2>What changes for real <span class="section-time">About 12 min</span></h2>
           <div class="scenario-thread story"><div class="scenario-label">Story · forty books later</div><p>Uni Textbook Swap sells 40 books in its first fortnight of testing with friends. Alex wants to turn it into a real side business. Suddenly the questions are not about code. Do I need an ABN? What about GST? Who pays for postage on returns? What does my privacy policy need to say? What does each sale actually earn me?</p></div>
           <div class="comparison-wrap"><table class="comparison">
             <thead><tr><th>Area</th><th>In this module</th><th>In a real shop</th></tr></thead>
@@ -1777,11 +1853,11 @@ Requirements:
             </ul>
             <p><strong>Try it:</strong> estimate the profit on one $45 textbook you bought for $20. Use current fees from the providers' pricing pages. Is it worth it? What would you change?</p>
           </div></details>
-          <div class="quick-check section-check" data-answer="1" data-explanation="Vercel's free Hobby plan is for non-commercial use only. A shop taking real money needs a paid plan."><div class="question-number">Pause and check</div><h3>Your shop starts taking real money. What must change about its Vercel hosting?</h3><div class="choices"><button class="choice">Nothing: the free plan covers any use.</button><button class="choice">It needs a paid plan, because the free plan is for non-commercial use.</button><button class="choice">It must move to Supabase.</button></div><div class="feedback" aria-live="polite"></div></div>
+          <div class="quick-check section-check" data-answer="1" data-explanation="Vercel's free Hobby plan is for non-commercial use only. A shop taking real money needs a paid plan."><div class="question-number">Pause and check</div><h3>Your shop starts taking real money. What must change about its Vercel hosting?</h3><div class="choices"><button class="choice">Nothing: the free plan covers any use.</button><button class="choice">It needs a paid plan, because the free plan is for non-commercial use.</button><button class="choice">It needs a faster server to handle real customers.</button></div><div class="feedback" aria-live="polite"></div></div>
         </section>
 
         <section id="p3-customers" class="required-section" data-stage="2">
-          <h2>Find customers, deliver orders <span class="section-time">About 12 min</span></h2>
+          <h2>Find customers, deliver orders <span class="section-time">About 15 min</span></h2>
           <div class="scenario-thread story"><div class="scenario-label">Story · launch week</div><p>Uni Textbook Swap goes live on a Monday. By Friday it has had eleven visitors, nine of them Alex's friends. The shop works perfectly; nobody knows it exists. The following semester it's the opposite: 60 orders in the first week, and Alex is packing books at midnight while three customers email asking where their book is. Most new online shops meet both problems, in that order.</p></div>
           <h3>Getting found</h3>
           <p>An online shop has no foot traffic. Every visitor has to be brought in, and most ways of doing that cost money, time or both. Permission, viral and affiliate marketing are described in Rainer and Prince (2021).</p>
@@ -1830,38 +1906,40 @@ Requirements:
           <details class="more"><summary>What to tell customers while they wait</summary><div class="details-body">
             <p>Most “where is my order?” emails can be prevented. Send an order confirmation straight away (Stripe can do this), a second email with a tracking number when the book is posted, and say up front how long delivery takes. Under the Australian Consumer Law, if you promise a delivery time you must be able to meet it. If something goes wrong, tell the customer before they have to ask.</p>
           </div></details>
-          <div class="quick-check section-check" data-answer="2" data-explanation="Each customer costs $25 to win ($100 ÷ 4) but earns only $20 profit, so the campaign loses money unless customers come back and buy again."><div class="question-number">Pause and check</div><h3>Uni Textbook Swap spends $100 on ads and wins 4 customers. Each order earns $20 profit before ads. What is the problem?</h3><div class="choices"><button class="choice">There is no problem: four sales is a good result.</button><button class="choice">The ads should be free on social media.</button><button class="choice">Each customer costs $25 to win but earns $20, so it loses money unless customers buy again.</button></div><div class="feedback" aria-live="polite"></div></div>
+          <div class="quick-check section-check" data-answer="2" data-explanation="Each customer costs $25 to win ($100 ÷ 4) but earns only $20 profit, so the campaign loses money unless customers come back and buy again."><div class="question-number">Pause and check</div><h3>Uni Textbook Swap spends $100 on ads and wins 4 customers. Each order earns $20 profit before ads. What is the problem?</h3><div class="choices"><button class="choice">There is no problem: four sales is a good result.</button><button class="choice">Four customers is too few to tell anything.</button><button class="choice">Each customer costs $25 to win but earns $20, so it loses money unless customers buy again.</button></div><div class="feedback" aria-live="polite"></div></div>
         </section>
 
         <section id="p3-run" class="required-section" data-stage="3">
-          <h2>Rules, running and security <span class="section-time">About 8 min</span></h2>
+          <h2>Rules, running and security <span class="section-time">About 10 min</span></h2>
           <div class="grid two">
             <div class="card"><div class="icon-badge" aria-hidden="true">§</div><h3>Follow Australian law</h3><p>Under the <strong>Australian Consumer Law</strong>, customers have rights to a refund or repair when goods are faulty or not as described. Describe items honestly. A <strong>privacy policy</strong> must say what customer data you collect, such as names and addresses, and why.</p></div>
             <div class="card"><div class="icon-badge" aria-hidden="true">$</div><h3>Switch to live, carefully</h3><p>Add the live keys to Vercel, set up the live webhook, and redeploy. Then make one small real purchase yourself and refund it from Stripe's dashboard. Keep your sandbox for trying out changes.</p></div>
             <div class="card"><div class="icon-badge" aria-hidden="true">✉</div><h3>Run it day to day</h3><p>Turn on Stripe's email receipts. Add an orders page so you know what to post, and buy postage. Handle refunds in Stripe's dashboard, and remember to put the item back on sale.</p></div>
             <div class="card"><div class="icon-badge" aria-hidden="true">✓</div><h3>Keep it secure</h3><p>Turn on two-step login for GitHub, Stripe, Supabase and Vercel. Limit who has access. If a secret key leaks, create a new one straight away (called <strong>rotating</strong> the key) and delete the old one.</p></div>
             <div class="card"><div class="icon-badge" aria-hidden="true">!</div><h3>Watch for problems</h3><p>Check Stripe's <strong>Event deliveries</strong> for failed payment messages, and Vercel's logs for errors. A failed message means a paid order that wasn't recorded.</p></div>
-            <div class="card"><div class="icon-badge" aria-hidden="true">↗</div><h3>Grow it</h3><p>Add a cart, photos, discount codes and emails to customers who opted in. Marketing emails need consent under Australia's <strong>Spam Act</strong>. Ask your AI to plan each change before writing code, and test it in your sandbox first.</p></div>
+            <div class="card"><div class="icon-badge" aria-hidden="true">↗</div><h3>Grow it</h3><p>Add a cart, photos, discount codes and emails to customers who opted in. Marketing emails need consent (see Stage 2). Ask your AI to plan each change before writing code, and test it in your sandbox first.</p></div>
           </div>
           <h3>Ten habits of successful online shops</h3>
-          <figure class="photo"><img src="shots/ecommerce-tips.png" alt="Ten tips for e-commerce business success: test everything, focus on your customers, leverage social media, prioritise mobile experience, be creative, be adaptable, collect customer information, leverage SEO, use testimonials, don't rush" loading="lazy"><figcaption><strong>Ten tips for e-commerce success.</strong> The table below explains what each one means in practice. Image shown for teaching.</figcaption></figure>
-          <p>Running a shop well is a set of habits, not a one-off build. The ten tips fall into three groups, and many connect to what you did in Part 2.</p>
-          <div class="comparison-wrap"><table class="comparison">
-            <thead><tr><th>Tip</th><th>What it means in practice</th></tr></thead>
-            <tbody>
-              <tr><td>Focus on your customers</td><td>Design around what buyers need: clear descriptions, honest condition notes and easy returns.</td></tr>
-              <tr><td>Use testimonials</td><td>Show genuine reviews from real customers. Never fake them; that breaches the Australian Consumer Law.</td></tr>
-              <tr><td>Collect customer information</td><td>Learn from orders and feedback, but only collect what you need, with a privacy policy and consent.</td></tr>
-              <tr><td>Leverage social media</td><td>Go where your customers already are. For textbooks, that might be student groups at the start of semester.</td></tr>
-              <tr><td>Leverage SEO</td><td><strong>Search engine optimisation</strong>: clear titles and descriptions so people (and AI assistants) searching for an item find your shop.</td></tr>
-              <tr><td>Prioritise mobile experience</td><td>Most shoppers browse on phones, so check every page and the checkout on a small screen.</td></tr>
-              <tr><td>Test everything</td><td>Just as you did in Part 2: try declined cards, walk-aways and two buyers at once, before customers find the problems.</td></tr>
-              <tr><td>Don't rush</td><td>Launch when it works, not when it's perfect, but never before payments and orders are reliable.</td></tr>
-              <tr><td>Be adaptable</td><td>Watch what sells and change your range, prices or delivery options to match.</td></tr>
-              <tr><td>Be creative</td><td>Stand out from big competitors: bundles, study notes with books, or a buy-back offer at semester's end.</td></tr>
-            </tbody>
-          </table></div>
-          <div class="callout"><strong>Reality check:</strong> rules and costs change. Before going live, check the current details with the ATO (<a href="https://www.ato.gov.au" target="_blank" rel="noopener">ato.gov.au</a>), the ACCC (<a href="https://www.accc.gov.au" target="_blank" rel="noopener">accc.gov.au</a>) and each provider's pricing page.</div>
+          <p>Running a shop well is a set of habits, not a one-off build. These ten fall into three groups, and many connect to what you have already done.</p>
+          <div class="tips-groups">
+            <div class="tips-group"><h4>Put customers first</h4><ol>
+              <li><strong>Focus on your customers.</strong> Clear descriptions, honest condition notes, easy returns.</li>
+              <li><strong>Use genuine testimonials.</strong> Real reviews only; fake ones breach consumer law (Part 1, Web 2.0).</li>
+              <li><strong>Collect only what you need.</strong> Learn from orders and feedback, with consent (Stage 4).</li>
+              <li><strong>Prioritise mobile.</strong> Most shoppers browse on phones, so test every page on a small screen.</li>
+            </ol></div>
+            <div class="tips-group"><h4>Get found</h4><ol start="5">
+              <li><strong>Use search (SEO).</strong> Clear titles so people and AI assistants find you (Stage 2).</li>
+              <li><strong>Use social media.</strong> Go where customers already gather, such as student groups (Stage 2).</li>
+              <li><strong>Be creative.</strong> Stand out from big rivals: bundles, study notes, a buy-back offer.</li>
+            </ol></div>
+            <div class="tips-group"><h4>Run it well</h4><ol start="8">
+              <li><strong>Test everything.</strong> Declined cards, walk-aways, two buyers at once, as in Part 2.</li>
+              <li><strong>Don't rush.</strong> Launch when payments and orders are reliable, not when everything is perfect.</li>
+              <li><strong>Be adaptable.</strong> Watch what sells and change range, prices or delivery to match.</li>
+            </ol></div>
+          </div>
+          <div class="callout"><strong>Reality check:</strong> rules and costs change (last checked October 2026). Before going live, check the current details with the ATO (<a href="https://www.ato.gov.au" target="_blank" rel="noopener">ato.gov.au</a>), the ACCC (<a href="https://www.accc.gov.au" target="_blank" rel="noopener">accc.gov.au</a>) and each provider's pricing page.</div>
           <div class="why-matters">
             <div class="why-label">Why this matters to you</div>
             <p>Trust is the core asset of an online business. Customers can't see you or hold the product before they pay. Honest descriptions, fair refunds, careful handling of their data and quick action when something goes wrong are what make them come back and recommend you.</p>
@@ -1875,11 +1953,11 @@ Requirements:
               <li><strong>Learn:</strong> write down what happened and what will stop it happening again.</li>
             </ol>
           </div></details>
-          <div class="quick-check section-check" data-answer="2" data-explanation="A leaked key must be replaced straight away. Rotating means creating a new key, updating your settings, and deleting the old one so it stops working."><div class="question-number">Pause and check</div><h3>You accidentally post your live secret key in a public chat. What should you do first?</h3><div class="choices"><button class="choice">Delete the chat message and carry on.</button><button class="choice">Wait to see whether anyone uses it.</button><button class="choice">Rotate the key: create a new one, update your settings, delete the old one.</button></div><div class="feedback" aria-live="polite"></div></div>
+          <div class="quick-check section-check" data-answer="2" data-explanation="A leaked key must be replaced straight away. Rotating means creating a new key, updating your settings, and deleting the old one so it stops working."><div class="question-number">Pause and check</div><h3>You accidentally post your live secret key in a public chat. What should you do first?</h3><div class="choices"><button class="choice">Delete the chat message and carry on.</button><button class="choice">Change your Stripe account password.</button><button class="choice">Rotate the key: create a new one, update your settings, delete the old one.</button></div><div class="feedback" aria-live="polite"></div></div>
         </section>
 
                 <section id="p3-trust" class="required-section" data-stage="4">
-          <h2>Trust, ethics and risk <span class="section-time">About 10 min</span></h2>
+          <h2>Trust, ethics and risk <span class="section-time">About 12 min</span></h2>
           <div class="scenario-thread story"><div class="scenario-label">Story · the clever idea</div><p>Alex reads that some shops show different prices to different visitors. The shop already knows which students browse on the newest phones, come back three times before buying, and always buy in week one. “What if those people saw slightly higher prices? Nobody would know.” It is technically easy. Is it legal? Is it fair? And what happens to the shop's reputation if a student posts screenshots of two different prices for the same book?</p></div>
           <p>Online shops can collect far more about their customers than a physical shop ever could. That creates new ways to help customers, and new ways to let them down. The issues below draw on Rainer and Prince’s (2021) discussion of ethical and legal issues in e-business, including its case on scoring customers with data and its tips for shopping safely online.</p>
           <div class="grid two">
@@ -1915,23 +1993,23 @@ Requirements:
               <li><strong>The environment:</strong> free returns and fast delivery create packaging waste and emissions. Who should pay for that?</li>
             </ul>
           </div></details>
-          <div class="quick-check section-check" data-answer="1" data-explanation="Fake scarcity misleads customers, which breaches the Australian Consumer Law, whatever the size of the shop."><div class="question-number">Pause and check</div><h3>Alex wants to show “Only 1 left!” on every listing to create urgency, even when there are more. What is the problem?</h3><div class="choices"><button class="choice">None: all shops do it.</button><button class="choice">It misleads customers, which breaches the Australian Consumer Law.</button><button class="choice">It is only a problem for large companies.</button></div><div class="feedback" aria-live="polite"></div></div>
+          <div class="quick-check section-check" data-answer="1" data-explanation="Fake scarcity misleads customers, which breaches the Australian Consumer Law, whatever the size of the shop."><div class="question-number">Pause and check</div><h3>Alex wants to show “Only 1 left!” on every listing to create urgency, even when there are more. What is the problem?</h3><div class="choices"><button class="choice">None, as long as the price shown is correct.</button><button class="choice">It misleads customers, which breaches the Australian Consumer Law.</button><button class="choice">It is only a problem for large companies.</button></div><div class="feedback" aria-live="polite"></div></div>
         </section>
 
         <section id="p3-review" class="required-section" data-stage="5">
-          <h2>How ready would your shop be? <span class="section-time">About 4 min</span></h2>
-          <p>Five questions to finish the module.</p>
+          <h2>Review and apply <span class="section-time">About 35 min</span></h2>
+          <p>Five questions to finish the module. Answer all five correctly, then apply what you have learned in your business case.</p>
           <div class="knowledge-checks">
             <div class="quick-check" data-answer="1" data-explanation="Under the Australian Consumer Law, customers have rights to a refund or repair when goods are faulty or not as described.">
               <div class="question-number">Question 1</div>
               <h3>A customer receives a textbook with pages missing that you described as “like new”. What applies?</h3>
-              <div class="choices"><button class="choice">Nothing: all online sales are final.</button><button class="choice">The Australian Consumer Law gives them a right to a remedy such as a refund.</button><button class="choice">Only Stripe can decide.</button><button class="choice">The Spam Act.</button></div>
+              <div class="choices"><button class="choice">Nothing, if your listing said “no refunds”.</button><button class="choice">The Australian Consumer Law gives them a right to a remedy such as a refund.</button><button class="choice">Only a refund if they paid by credit card.</button><button class="choice">Only Stripe can decide.</button></div>
               <div class="feedback" aria-live="polite"></div>
             </div>
-            <div class="quick-check" data-answer="0" data-explanation="Live keys go into Vercel's settings, the live webhook gets its own signing secret, and a small real purchase that you refund proves it all works.">
+            <div class="quick-check" data-answer="3" data-explanation="Live keys go into Vercel's settings, the live webhook gets its own signing secret, and a small real purchase that you refund proves it all works.">
               <div class="question-number">Question 2</div>
               <h3>Which is the safest way to switch a finished shop to real payments?</h3>
-              <div class="choices"><button class="choice">Add live keys and a live webhook, redeploy, then test with one small purchase and refund it.</button><button class="choice">Paste the live key into the code on GitHub.</button><button class="choice">Switch the sandbox to live and delete it.</button><button class="choice">Ask customers to test it for you.</button></div>
+              <div class="choices"><button class="choice">Switch to live keys first, and set up the live webhook later.</button><button class="choice">Paste the live key into the code on GitHub.</button><button class="choice">Keep the test webhook and just swap the secret key.</button><button class="choice">Add live keys and a live webhook, redeploy, then test with one small purchase and refund it.</button></div>
               <div class="feedback" aria-live="polite"></div>
             </div>
             <div class="quick-check" data-answer="3" data-explanation="A privacy policy explains what customer data the shop collects, such as names and delivery addresses, and why.">
@@ -1943,21 +2021,34 @@ Requirements:
             <div class="quick-check" data-answer="2" data-explanation="Payment and recording worked; getting the item to the customer did not. That is order fulfilment, often the hardest part of running an online shop.">
               <div class="question-number">Question 4</div>
               <h3>A customer paid, the order was recorded, but the book wasn't posted for two weeks. Which part of the business failed?</h3>
-              <div class="choices"><button class="choice">Payment processing</button><button class="choice">The webhook</button><button class="choice">Order fulfilment</button><button class="choice">Search engine optimisation</button></div>
+              <div class="choices"><button class="choice">Payment processing</button><button class="choice">The webhook</button><button class="choice">Order fulfilment</button><button class="choice">Customer acquisition</button></div>
               <div class="feedback" aria-live="polite"></div>
             </div>
-            <div class="quick-check" data-answer="0" data-explanation="The publisher owns the copyright in its cover photos and descriptions. Your own photos of the actual copy avoid that problem and show buyers its real condition.">
+            <div class="quick-check" data-answer="1" data-explanation="The publisher owns the copyright in its cover photos and descriptions. Your own photos of the actual copy avoid that problem and show buyers its real condition.">
               <div class="question-number">Question 5</div>
               <h3>Can you copy the publisher's cover photo and blurb for your listings?</h3>
-              <div class="choices"><button class="choice">Not without permission. Take your own photos and write your own description.</button><button class="choice">Yes, anything on the internet is free to use.</button><button class="choice">Yes, as long as you sell the book cheaply.</button><button class="choice">Only if you are registered for GST.</button></div>
+              <div class="choices"><button class="choice">Yes, if you credit the publisher in the listing.</button><button class="choice">Not without permission. Take your own photos and write your own description.</button><button class="choice">Yes, anything on the internet is free to use.</button><button class="choice">Yes, as long as you sell the book cheaply.</button></div>
               <div class="feedback" aria-live="polite"></div>
             </div>
+          </div>
+          <h3>Apply it: your business case</h3>
+          <p>Bring the module together by writing a short business case for <strong>your own shop</strong>, about 300–500 words in total. Answer each prompt in a few sentences. Your answers save in this browser as you type. When you're done, copy the whole case and paste it into a document if your teacher asks for it.</p>
+          <div class="case-form" id="business-case">
+            <label><span class="case-q">1 · Your shop and customers <small>LO2</small></span><span class="case-hint">What do you sell, and to whom? Which type is it (B2C, C2C…), and is it pure-play or clicks-and-mortar?</span><textarea data-case="shop" rows="3"></textarea></label>
+            <label><span class="case-q">2 · Business model <small>LO2</small></span><span class="case-hint">Which money model would you use, and why? What is its main risk?</span><textarea data-case="model" rows="3"></textarea></label>
+            <label><span class="case-q">3 · Finding customers <small>LO6</small></span><span class="case-hint">Name two ways you would win customers. Using the calculator in Stage 2, roughly what would one customer cost, and what would they earn you?</span><textarea data-case="customers" rows="3"></textarea></label>
+            <label><span class="case-q">4 · Delivering orders <small>LO6</small></span><span class="case-hint">Who packs and posts orders? What delivery time will you promise, and what is your returns policy?</span><textarea data-case="delivery" rows="3"></textarea></label>
+            <label><span class="case-q">5 · Top three risks and controls <small>LO5 · LO6</small></span><span class="case-hint">Name three risks (technical, legal or ethical) and what controls each one. Include at least one control your Part 2 shop already has.</span><textarea data-case="risks" rows="4"></textarea></label>
+            <label><span class="case-q">6 · Using AI <small>LO7</small></span><span class="case-hint">Did you take Route A or B, and why? Name one thing the AI did well and one thing you had to check or fix. Would you let an AI agent run any part of the real business?</span><textarea data-case="ai" rows="4"></textarea></label>
+            <div class="case-actions"><button type="button" class="viz-btn" id="case-copy">Copy my business case</button><span class="case-count" id="case-count" aria-live="polite"></span></div>
+            <textarea class="case-fallback" id="case-fallback" rows="8" readonly hidden aria-label="Your business case, ready to copy"></textarea>
           </div>
         </section>
         <div class="module-recap" data-closure="part3" hidden>
           <h3>What should you take from Part 3?</h3>
           <ul><li>Going live is mostly business, legal and running work, not new code.</li><li>Real payments need an activated Stripe account, live keys, a live webhook and paid hosting.</li><li>Winning a customer costs money, and delivering the order is often the hardest part.</li><li>Customers have legal rights, their data must be protected, and “can we?” is not the same as “should we?”.</li></ul>
         </div>
+        <div class="completion-card" data-completion-card hidden></div>
         <div class="celebration" data-closure="part3" role="note" hidden><strong>Module complete.</strong><p>You know where e-commerce came from, you built a working shop, and you know what it would take to go live.</p></div>
       </section>
 
@@ -1965,6 +2056,7 @@ Requirements:
       <section class="page-view" id="ai-tools" data-view="ai-tools">
         <div class="section-label">Reference</div>
         <h2 class="section-title">Recap: AI tools for vibe coding</h2>
+        <p class="last-checked">Last checked: October 2026. AI tools change quickly; the official guides below are the most up-to-date source. Supports LO4 and LO7.</p>
         <p><strong>Vibe coding</strong> means describing what you want in plain English and letting an AI assistant write the code. You stay in charge: you brief it, read what it plans, test the result and decide what to keep. This page recaps the two main assistants you can use for Part 2, with official guides and short videos for each.</p>
         <div class="grid two">
           <div class="card"><div class="icon-badge" aria-hidden="true">C</div><h3>Claude (Anthropic)</h3>
@@ -2064,6 +2156,12 @@ Requirements:
           <li><a href="https://www.acma.gov.au/avoid-sending-spam" target="_blank" rel="noopener">ACMA: the Spam Act and sending marketing emails</a></li>
           <li><a href="https://www.auda.org.au" target="_blank" rel="noopener">auDA (rules for .au web addresses)</a></li>
         </ul>
+        <h3>Logos, screenshots and images</h3>
+        <ul>
+          <li>Amazon logos: Amazon.com, Inc. Stripe logo and dashboard screenshots: Stripe, Inc. GitHub logo: GitHub, Inc. Vercel logo: Vercel Inc. Supabase logo: Supabase, Inc. The logo collection in Part 1 shows trademarks of the companies named.</li>
+          <li>All logos are trademarks of their owners. They are used only to identify the companies and products discussed, for teaching, and their use implies no endorsement.</li>
+          <li>Screenshots of the shop and checkout come from the worked example built for this module, in Stripe's test mode. Diagrams and illustrations were made for this module.</li>
+        </ul>
         <h3>E-commerce concepts</h3>
         <ul>
           <li>Rainer, R. K., &amp; Prince, B. (2021). <em>Introduction to information systems</em>. John Wiley &amp; Sons. Chapter 7, “E-Business and E-Commerce”, is the source for the six-majors cards, physical and online businesses, B2E and e-government, business models, B2B, the card payment steps, payment types, showrooming and channels, online marketing, order fulfilment, the Flash Crash case, and the ethical and legal issues.</li>
@@ -2082,10 +2180,10 @@ Requirements:
       </section>
     </div>
 
-    <footer><strong>Build Your Own Online Shop</strong> · A hands-on e-commerce module · Test mode only, no real payments. The diagrams are illustrations, and the screenshots come from an example shop built the same way.</footer>
+    <footer><strong>Build Your Own Online Shop</strong> · A hands-on e-commerce module · Test mode only, no real payments. The diagrams are illustrations, and the screenshots come from an example shop built the same way. Logos are trademarks of their owners, used for identification and teaching (see Sources).</footer>
   </main>
 </div>
-<button class="top-button" id="top-button" aria-label="Back to top">↑</button>
+<button type="button" class="top-button" id="top-button" aria-label="Back to top"><span aria-hidden="true">↑</span><span class="top-label">Top</span></button>
 <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Enlarged screenshot">
   <div class="lb-bar"><span class="lb-cap" id="lb-cap"></span><button type="button" class="lb-btn" id="lb-close">Close</button></div>
   <div class="lb-stage" id="lb-stage"><img id="lb-img" alt=""></div>
@@ -2131,7 +2229,7 @@ Requirements:
       { first:'p1-review', title:'Review understanding', purpose:'Apply ideas from across Part 1 to six new questions.', output:'Part 1 complete', takeaway:'You are ready to build your own shop.' }
     ],
     part2: [
-      { first:'p2-ready', title:'Get ready', purpose:'Set up five free accounts, learn four safety rules, choose step-by-step or all-in-one (connectors), and see how one sale works from start to finish.', output:'Accounts and the big picture', takeaway:'You know what each tool does and how a sale flows through them.' },
+      { first:'p2-ready', title:'Get ready', purpose:'Set up five accounts, see how one sale works from start to finish, learn four safety rules, then choose step by step or all in one (connectors).', output:'Accounts and the big picture', takeaway:'You know what each tool does and how a sale flows through them.' },
       { first:'p2-stripe', title:'Plan your products', purpose:'Choose what your shop sells and add each item, with an AUD price, to a Stripe sandbox.', output:'Products and price IDs', takeaway:'Your products and prices are ready in Stripe.' },
       { first:'p2-build', title:'Build it with AI', purpose:'Create a GitHub repository and brief your AI assistant with a ready-made prompt.', output:'Your shop’s code on GitHub', takeaway:'Your AI assistant has written the shop’s code.' },
       { first:'p2-data', title:'Database and codes', purpose:'Create your Supabase tables and collect the codes your shop needs.', output:'A database and four codes', takeaway:'Your database is ready and your codes are collected.' },
@@ -2144,7 +2242,7 @@ Requirements:
       { first:'p3-customers', title:'Find customers, deliver orders', purpose:'See how online shops find customers, what each customer costs to win, and why delivery is the hard part.', output:'A marketing and delivery plan', takeaway:'You can weigh what a customer costs against what they earn, and plan how orders reach them.' },
       { first:'p3-run', title:'Rules, running and security', purpose:'Learn the main legal rules, how to run the shop each day, and how to keep it secure.', output:'Rules and routines', takeaway:'You know the obligations that come with a real shop.' },
       { first:'p3-trust', title:'Trust, ethics and risk', purpose:'Weigh up how a shop uses customer data, sets prices and protects itself from fraud and legal trouble.', output:'An ethics and risk check', takeaway:'You can tell what a shop can do from what it should do.' },
-      { first:'p3-review', title:'Review understanding', purpose:'Five questions to finish the module.', output:'Module complete', takeaway:'You have completed the module.' }
+      { first:'p3-review', title:'Review and apply', purpose:'Answer five questions, then write a short business case for your own shop.', output:'Your business case', takeaway:'You can make the case for an online business, and you have completed the module.' }
     ]
   };
   var nextPart = { part1:'part2', part2:'part3', part3:null };
@@ -2362,7 +2460,7 @@ Requirements:
     var pct = max ? Math.min(100, Math.max(0, window.scrollY / max * 100)) : 100;
     readFill.style.width = pct + '%'; readBar.setAttribute('aria-valuenow', String(Math.round(pct)));
   }
-  window.addEventListener('scroll', function () { topBtn.classList.toggle('show', window.scrollY > 700); updateReading(); }, { passive: true });
+  window.addEventListener('scroll', function () { topBtn.classList.toggle('show', window.scrollY > 400); updateReading(); }, { passive: true });
   window.addEventListener('resize', updateReading);
   topBtn.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
@@ -2438,7 +2536,7 @@ Requirements:
     ["Disintermediation and reintermediation", "Cutting out a middleman; then a new kind of middleman appearing, often online.", "skipping the travel agent, then booking through a travel website."],
     ["Unit economics", "The money made or lost on a single sale once every cost is counted.", "checking whether each cup of coffee actually earns you money."],
     ["Supply chain management", "Getting the right stock from suppliers at the right time and price.", "keeping the pantry stocked."],
-    ["Fulfilment", "Storing, packing and posting orders, and handling returns.", "the back room where parcels get packed."],
+    ["Fulfilment (order fulfilment)", "Everything between payment and a happy customer: storing, picking, packing, posting, tracking and handling returns.", "the kitchen, not the menu."],
     ["SEO (search engine optimisation)", "Making your pages easy for search engines, and AI assistants, to find and understand.", "a clear sign above your shop door."],
     ["Build vs buy", "Deciding whether to create your own system or pay for a ready-made one.", "cooking at home vs eating out."],
     ["Staging and user acceptance testing", "A test copy of a system, and business staff checking it does what the business needs before launch.", "a dress rehearsal before opening night."],
@@ -2463,6 +2561,7 @@ Requirements:
     ["Fraud detection", "Checking payments for signs of stolen cards. Stripe's Radar uses machine learning for this.", "a bouncer checking IDs."],
     ["AI agent and agentic commerce", "An AI agent is AI that can take actions, not just answer. Agentic commerce is AI agents finding and buying products for people.", "a personal shopper who can use your card."],
     ["Vibe coding", "Building software by describing what you want to an AI assistant, testing the result, and asking for changes.", "directing a builder instead of laying the bricks yourself."],
+    ["Learning outcome", "A statement of what you will be able to do by the end of a module, such as “evaluate” or “build”.", "the destination on a map."],
     ["Connector", "A link that plugs an outside service, such as Stripe or Supabase, into an AI assistant so it can look things up and take actions there, using your login.", "giving an assistant a key card to certain rooms."],
     ["MCP (Model Context Protocol)", "An open standard, introduced by Anthropic in 2024, that most AI connectors use. Any AI assistant and any service that support it can work together.", "USB for AI: one common plug."],
     ["Prompt", "The instructions you give an AI assistant. A clear, specific prompt gets better results.", "a written brief for a contractor."],
@@ -2508,7 +2607,6 @@ Requirements:
     ["Customer acquisition cost", "What a business spends on marketing to win one new customer.", "the price of a first date."],
     ["Permission marketing and spam", "Permission marketing means contacting only people who have opted in. Spam is unwanted marketing messages, which are illegal in Australia without consent.", "an invitation versus junk mail."],
     ["Viral and referral marketing", "Customers spreading the word for you, often rewarded with a discount or credit.", "word of mouth with a thank-you gift."],
-    ["Order fulfilment", "Everything between payment and a happy customer: picking, packing, posting, tracking and returns.", "the kitchen, not the menu."],
     ["Last mile", "The final step of delivery, from the local depot to the customer's door. Usually the most expensive part.", "the last few metres of a relay race."],
     ["Third-party logistics (3PL)", "A company that stores, packs and posts orders for other businesses, for a fee.", "renting someone else's warehouse and staff."],
     ["Dropshipping", "Selling products that the supplier posts direct to your customer, so you never hold the stock.", "taking orders for someone else's kitchen."],
@@ -2742,6 +2840,75 @@ Requirements:
     ids.forEach(function (id) { el[id].addEventListener('input', calc); });
     calc();
   })();
+
+  // ---------- reset progress (two-step, no confirm dialog) ----------
+  (function () {
+    var btn = document.getElementById('reset-progress'), timer;
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      if (!btn.classList.contains('confirming')) {
+        btn.classList.add('confirming');
+        btn.textContent = 'Click again to clear all progress and answers';
+        timer = setTimeout(function () { btn.classList.remove('confirming'); btn.textContent = 'Reset my progress'; }, 5000);
+        return;
+      }
+      clearTimeout(timer);
+      try {
+        Object.keys(localStorage).forEach(function (k) { if (k.indexOf(KEY + '-') === 0) localStorage.removeItem(k); });
+      } catch (e) {}
+      location.hash = ''; location.reload();
+    });
+  })();
+
+  // ---------- business case ----------
+  (function () {
+    var form = document.getElementById('business-case');
+    if (!form) return;
+    var fields = Array.prototype.slice.call(form.querySelectorAll('textarea[data-case]'));
+    var saved = load('case', {}), count = document.getElementById('case-count');
+    function words() {
+      var n = fields.reduce(function (t, f) { var w = f.value.trim(); return t + (w ? w.split(/\s+/).length : 0); }, 0);
+      count.textContent = n + ' words';
+    }
+    fields.forEach(function (f) {
+      f.value = saved[f.dataset.case] || '';
+      f.addEventListener('input', function () { saved[f.dataset.case] = f.value; save('case', saved); words(); });
+    });
+    words();
+    document.getElementById('case-copy').addEventListener('click', function () {
+      var text = 'My business case: Build Your Own Online Shop\n\n' + fields.map(function (f) {
+        return f.closest('label').querySelector('.case-q').firstChild.textContent.trim() + '\n' + (f.value.trim() || '(not answered)');
+      }).join('\n\n');
+      var fb = document.getElementById('case-fallback'), btn = this;
+      function fallback() { fb.hidden = false; fb.value = text; fb.focus(); fb.select(); btn.textContent = 'Select all and copy below'; }
+      try {
+        navigator.clipboard.writeText(text).then(function () { btn.textContent = 'Copied ✓'; setTimeout(function () { btn.textContent = 'Copy my business case'; }, 2500); }, fallback);
+      } catch (e) { fallback(); }
+    });
+  })();
+
+  // ---------- module completion card ----------
+  function renderCompletion() {
+    var all = ['part1', 'part2', 'part3'].every(function (k) { return complete[k] === true; });
+    var cards = document.querySelectorAll('[data-completion-card]');
+    if (!all) { cards.forEach(function (c) { c.hidden = true; }); return; }
+    var fin = load('finished', null);
+    if (!fin) {
+      var d = new Date(), chars = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789', r = '';
+      for (var i = 0; i < 4; i++) r += chars.charAt(Math.floor(Math.random() * chars.length));
+      var ymd = d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0');
+      fin = { date: d.toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' }), code: 'SHOP-' + ymd + '-' + r };
+      save('finished', fin);
+    }
+    cards.forEach(function (c) {
+      c.innerHTML = '<h3>Module complete</h3><p>You finished all three parts on <strong></strong>.</p><span class="code"></span><p><small>If your teacher asks, take a screenshot of this card or copy the code. It is saved in this browser only, and is a record of your own progress rather than an official result.</small></p>';
+      c.querySelector('p strong').textContent = fin.date;
+      c.querySelector('.code').textContent = fin.code;
+      c.hidden = false;
+    });
+  }
+  renderCompletion();
+  document.addEventListener('check-attempted', function () { setTimeout(renderCompletion, 0); });
 })();
 </script>
 
