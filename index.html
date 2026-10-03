@@ -455,7 +455,14 @@
   .chat-actions { display:flex; gap:8px; margin-top:10px; }
   .chat-actions span { flex:1; text-align:center; padding:8px; border:2px solid var(--black); font-weight:900; font-size:.85rem; background:#fff; }
   .chat-actions span.go { background:var(--yellow); }
-  .msg.reveal { animation:msg-in .35s ease-out both; }
+  .msg.reveal { animation:msg-in .45s ease-out both; }
+  .msg.pending { display:none; }
+  .msg.typing { width:max-content; padding:10px 14px; }
+  .msg.typing span { display:inline-block; width:7px; height:7px; margin:0 2px; border-radius:50%; background:#9a9a9a; animation:typing-dot 1.2s infinite ease-in-out; }
+  .msg.typing span:nth-child(2) { animation-delay:.2s; }
+  .msg.typing span:nth-child(3) { animation-delay:.4s; }
+  @keyframes typing-dot { 0%, 80%, 100% { opacity:.3; transform:translateY(0); } 40% { opacity:1; transform:translateY(-3px); } }
+  @media (prefers-reduced-motion:reduce) { .msg.typing span { animation:none; } }
   @keyframes msg-in { from { opacity:.15; transform:translateY(8px); } to { opacity:1; transform:none; } }
 
   /* annotated order */
@@ -594,6 +601,20 @@
   .part-audio h3 { margin:.2rem 0 .55rem; font-size:1.15rem; }
   .part-audio audio { display:block; width:100%; max-width:560px; }
 
+  /* human oversight */
+  .oversight-levels .icon-badge { display:inline-grid; width:auto; min-width:46px; padding:0 .6rem; font-size:.9rem; letter-spacing:.04em; }
+  .consequence-scale { list-style:none; margin:16px 0 20px; padding:0; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; }
+  .consequence-scale li { min-width:0; padding:10px 12px; background:#fff; border:1px solid var(--line); border-top:6px solid var(--black); font-size:.9rem; }
+  .consequence-scale li:nth-child(1) { border-top-color:#9fd3a8; }
+  .consequence-scale li:nth-child(2) { border-top-color:var(--yellow); }
+  .consequence-scale li:nth-child(3) { border-top-color:#f0a35e; }
+  .consequence-scale li:nth-child(4) { border-top-color:var(--red); }
+  .consequence-scale .cs-level { display:block; margin-bottom:3px; font-size:.7rem; font-weight:900; letter-spacing:.07em; text-transform:uppercase; color:var(--muted); }
+  .consequence-scale strong { display:block; line-height:1.35; }
+  .shot-btn.shot-full { aspect-ratio:auto; cursor:zoom-in; }
+  .shot-btn.shot-full img { height:auto; object-fit:contain; }
+  .oversight-fig img { max-height:none; }
+
   /* majors */
   .majors-lead { margin:.4rem 0 .2rem; font-size:1.25rem; font-weight:900; }
   .major-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin:18px 0 26px; }
@@ -704,6 +725,7 @@
     .module-recap ul { grid-template-columns:1fr; }
     .media-lesson { grid-template-columns:1fr; }
     .tips-groups, .outcomes li, .case-who, .sale-flow { grid-template-columns:1fr; }
+    .consequence-scale { grid-template-columns:1fr 1fr; }
     .sale-flow li:not(:last-child)::after { content:"↓"; right:auto; left:14px; top:auto; bottom:-20px; display:block; }
     .is-note, .case-intro, .case-bg, .case-figs { grid-template-columns:1fr; }
     .case-timeline { grid-template-columns:repeat(3,minmax(0,1fr)); }
@@ -1420,6 +1442,28 @@
             <div class="card"><div class="icon-badge" aria-hidden="true">→</div><h3>AI agents that shop</h3><p>An <strong>AI agent</strong> is AI that can take actions, not just answer. Since 2025, some AI assistants can find a product and complete the purchase for a person. This is called <strong>agentic commerce</strong>.</p></div>
             <div class="card"><div class="icon-badge" aria-hidden="true">?</div><h3>New questions</h3><p>If an AI agent buys the wrong thing, who is responsible? How does a shop get noticed when an AI is choosing? How is customer data protected?</p></div>
           </div>
+          <h3>How much human oversight should AI have?</h3>
+          <p>AI involvement isn't simply on or off. The same shop might let AI act alone on some tasks and need a person's approval for others. A useful way to describe this is how close a person sits to each decision, from <strong>in</strong> the loop to <strong>out</strong> of it.</p>
+          <div class="grid two oversight-levels">
+            <div class="card"><div class="icon-badge" aria-hidden="true">IN</div><h3>Human in the loop</h3><p>A person is directly involved in the decision before the AI acts.</p><p><em>Example:</em> the AI drafts a product description, proposes a refund or recommends a price change, and a person reviews and approves it first.</p></div>
+            <div class="card"><div class="icon-badge" aria-hidden="true">ON</div><h3>Human on the loop</h3><p>The AI performs or prepares routine actions while a person monitors and can step in.</p><p><em>Example:</em> the AI proposes discounts, flags suspicious orders or drafts customer replies, and staff review the exceptions or stop an action that looks wrong.</p></div>
+            <div class="card"><div class="icon-badge" aria-hidden="true">OVER</div><h3>Human over the loop</h3><p>People don't review each action. They govern the AI through rules, limits, permissions and regular review.</p><p><em>Example:</em> discounts up to 10% only, human approval for refunds over $100, approved suppliers only, and unusual activity escalated to staff.</p></div>
+            <div class="card"><div class="icon-badge" aria-hidden="true">OUT</div><h3>Human out of the loop</h3><p>The AI acts without a person involved in each individual decision.</p><p><em>Example:</em> ranking product recommendations, personalising the shopping experience, monitoring stock or sending routine order confirmations.</p></div>
+          </div>
+          <p><strong>Out of the loop isn't automatically bad.</strong> Many low-risk, routine tasks can sensibly be automated. What matters is matching the level of oversight to what is at stake.</p>
+          <div class="callout"><strong>The principle:</strong> the greater the potential consequence of an AI action, the stronger the human oversight should usually be.</div>
+          <ol class="consequence-scale" aria-label="Examples from lower to higher consequence">
+            <li><span class="cs-level">Lower consequence</span><strong>Recommending products</strong></li>
+            <li><span class="cs-level">Moderate</span><strong>Suggesting a small discount</strong></li>
+            <li><span class="cs-level">Higher</span><strong>Issuing a large refund</strong></li>
+            <li><span class="cs-level">Strong oversight needed</span><strong>Changing prices substantially, cancelling orders, buying stock, or decisions affecting customer rights</strong></li>
+          </ol>
+          <figure class="photo oversight-fig">
+            <button type="button" class="shot-btn shot-full" data-full="shots/human-oversight-ai.webp" data-cap="Human involvement in AI decisions for an e-commerce shop: in, on, over and out of the loop." aria-label="Enlarge infographic: human involvement in AI decisions for an e-commerce shop"><img src="shots/human-oversight-ai.webp" alt="Infographic: four levels of human involvement in AI decisions for an e-commerce shop. Human IN the loop: you work with the AI on the decision, for example drafting product descriptions or analysing sales data. Human ON the loop: you review and can intervene, for example approving a suggested price change from $45 to $42. Human OVER the loop: you set the rules, controls and limits, for example a 10% discount limit and approval for refunds over $100. Human OUT of the loop: the AI acts within the boundaries you set, for example monitoring stock and sending order confirmations. An arrow runs from closest to furthest human involvement." loading="lazy"><span class="zoom">Click to enlarge</span></button>
+            <figcaption><strong>From in to out of the loop.</strong> Human oversight can range from direct involvement in every decision to largely autonomous AI action. The appropriate level depends on the risk and consequences of the task. Infographic created by the module author.</figcaption>
+          </figure>
+          <div class="callout" data-no-copy="true"><strong>Reflect:</strong> for a task in your own shop, should the AI <em>recommend</em>, <em>act within limits</em>, or <em>act independently</em>? And what could go wrong if the level of human oversight is too low for the decision being made?</div>
+          <p>You will return to this idea in Part 2 when deciding which actions an AI assistant can perform through connected business systems and which actions should require your approval.</p>
           <div class="why-matters">
             <div class="why-label">Why this matters to you</div>
             <p>You will join workplaces where AI is already used in marketing, customer service and operations. Employers need graduates who can judge where AI adds value, what it costs, and where it creates risk for customers and the business. Understanding the business case, not just the technology, is what makes that judgement useful.</p>
@@ -2589,7 +2633,7 @@ Requirements:
       </section>
     </div>
 
-    <footer><strong>Build Your Own Online Shop</strong> · Version 3 October 2026 (part audio introductions) · A hands-on e-commerce module · Test mode only, no real payments. The diagrams are illustrations, and the screenshots come from an example shop built the same way. Logos are trademarks of their owners, used for identification and teaching (see Sources).</footer>
+    <footer><strong>Build Your Own Online Shop</strong> · Version 3 October 2026 (human oversight of AI) · A hands-on e-commerce module · Test mode only, no real payments. The diagrams are illustrations, and the screenshots come from an example shop built the same way. Logos are trademarks of their owners, used for identification and teaching (see Sources).</footer>
   </main>
 </div>
 <div class="copy-toast" id="copy-toast" role="status" aria-live="polite"></div>
@@ -2635,7 +2679,7 @@ Requirements:
       { first:'p1-dotcom', title:'The dot-com era', purpose:'See how Amazon and eBay started, what Web 1.0 was, and why the dot-com crash happened.', output:'The story of Web 1.0', takeaway:'You can explain why some early online shops survived and many did not.' },
       { first:'p1-web2', title:'Web 2.0 and channels', purpose:'See how customers began creating content, how shops became platforms, and how shoppers now compare across every channel.', output:'The shift to Web 2.0', takeaway:'You can explain user-generated content, network effects, showrooming and disintermediation.' },
       { first:'p1-payments', title:'Payments get easy', purpose:'Compare taking card payments in 2000 with doing it through Stripe today, and follow one payment through nine steps.', output:'Why payment platforms matter', takeaway:'You can explain what Stripe made easier for small businesses.' },
-      { first:'p1-ai', title:'AI changes the game', purpose:'See six ways AI is used in e-commerce today, from recommendations to AI agents that shop.', output:'AI in e-commerce', takeaway:'You can describe how AI is changing online shopping, and the questions it raises.' },
+      { first:'p1-ai', title:'AI changes the game', purpose:'See how AI is used in e-commerce today, from recommendations to AI agents that shop, and how much human oversight different AI decisions need.', output:'AI in e-commerce', takeaway:'You can describe how AI is changing online shopping, and the questions it raises.' },
       { first:'p1-review', title:'Review understanding', purpose:'Apply ideas from across Part 1 to six new questions.', output:'Part 1 reviewed', takeaway:'Next, apply these ideas to a real business case.' },
       { first:'p1-case', title:'Teaching case: AMARO', purpose:'Read a teaching case about AMARO, a Brazilian digitally native fashion brand deciding whether to become a platform, and analyse it with the ideas from Part 1.', output:'Part 1 complete', takeaway:'You are ready to build your own shop.' }
     ],
@@ -2981,6 +3025,7 @@ Requirements:
     ["Purchasing card and virtual card", "A company card with spending limits for staff purchases; a virtual card is a card number that works only once or at one shop.", "a company credit card with rules; a single-use key."],
     ["Artificial intelligence (AI)", "Computer systems that do tasks which normally need human judgement.", "a very fast assistant that has read a lot."],
     ["Machine learning", "A kind of AI that learns patterns from large amounts of data, used for recommendations and fraud checks.", "a shopkeeper who remembers what every customer bought."],
+    ["Human in, on, over and out of the loop", "Four levels of human oversight of AI: approving each decision (in), monitoring and able to step in (on), setting rules and limits (over), or not involved in individual decisions (out).", "a learner driver, a driving instructor, the road rules, and a self-driving car."],
     ["Generative AI", "AI that creates new text, images or code, such as ChatGPT or Claude.", "a writer and designer on call."],
     ["Recommendation engine", "Software that suggests products based on what similar shoppers bought.", "a staff member who says “you might also like…”."],
     ["Fraud detection", "Checking payments for signs of stolen cards. Stripe's Radar uses machine learning for this.", "a bouncer checking IDs."],
@@ -3119,15 +3164,47 @@ Requirements:
     if (reduce) stop(); else play();
   })();
 
-  // ---------- AI chat replay ----------
-  document.getElementById('chat-replay').addEventListener('click', function () {
-    var msgs = document.querySelectorAll('#ai-chat .msg');
-    msgs.forEach(function (m, i) {
-      m.classList.remove('reveal'); void m.offsetWidth;
-      m.style.animationDelay = (i * 0.9) + 's';
-      m.classList.add('reveal');
-    });
-  });
+  // ---------- AI chat: paced conversation ----------
+  // Plays once when the chat scrolls into view, and again on "Replay". Each AI reply shows a
+  // "typing" indicator first, and pauses scale with message length so students can read along.
+  (function () {
+    var chat = document.getElementById('ai-chat');
+    if (!chat) return;
+    var phone = chat.querySelector('.chat-phone'), msgs = Array.prototype.slice.call(chat.querySelectorAll('.msg'));
+    var btn = document.getElementById('chat-replay'), timers = [], played = false;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function clear() { timers.forEach(clearTimeout); timers = []; var t = phone.querySelector('.msg.typing'); if (t) t.remove(); }
+    function showAll() { clear(); msgs.forEach(function (m) { m.classList.remove('pending', 'reveal'); }); btn.disabled = false; }
+    function words(m) { return (m.textContent || '').trim().split(/\s+/).length; }
+    function play() {
+      if (reduce) { showAll(); return; }
+      clear(); played = true; btn.disabled = true;
+      msgs.forEach(function (m) { m.classList.add('pending'); m.classList.remove('reveal'); });
+      var t = 700;
+      msgs.forEach(function (m, i) {
+        if (m.classList.contains('ai')) {
+          timers.push(setTimeout(function () {
+            var ty = document.createElement('div'); ty.className = 'msg ai typing'; ty.setAttribute('aria-hidden', 'true');
+            ty.innerHTML = '<span></span><span></span><span></span>';
+            m.parentNode.insertBefore(ty, m);
+          }, t));
+          t += 1800;
+        }
+        timers.push(setTimeout(function () {
+          var ty = phone.querySelector('.msg.typing'); if (ty) ty.remove();
+          m.classList.remove('pending'); void m.offsetWidth; m.classList.add('reveal');
+          if (i === msgs.length - 1) btn.disabled = false;
+        }, t));
+        t += Math.min(7000, Math.max(2200, words(m) * 170));
+      });
+    }
+    btn.addEventListener('click', play);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (e) { if (e.isIntersecting && !played) { obs.disconnect(); play(); } });
+      }, { threshold: 0.5 }).observe(phone);
+    }
+  })();
 
   // ---------- profit calculator ----------
   (function () {
