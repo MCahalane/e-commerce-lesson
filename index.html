@@ -618,7 +618,7 @@
     <nav>
       <div class="nav-group" data-group="start">
         <a class="nav-group-link" href="#overview">Start here</a>
-        <div class="nav-section-links"><a href="#overview">How this module works</a><a href="#glossary">Key terms</a><a href="#sources">Sources and further reading</a></div>
+        <div class="nav-section-links"><a href="#overview">How this module works</a><a href="#ai-tools">AI tools for vibe coding</a><a href="#glossary">Key terms</a><a href="#sources">Sources and further reading</a></div>
       </div>
       <div class="nav-group" data-group="part1">
         <a class="nav-group-link" href="#part1">Part 1 · From dot-com to AI</a>
@@ -659,7 +659,7 @@
       </div>
       <div class="nav-group" data-group="reference">
         <a class="nav-group-link" href="#glossary">Reference</a>
-        <div class="nav-section-links"><a href="#glossary">Key terms</a><a href="#sources">Sources and further reading</a></div>
+        <div class="nav-section-links"><a href="#ai-tools">AI tools for vibe coding</a><a href="#glossary">Key terms</a><a href="#sources">Sources and further reading</a></div>
       </div>
     </nav>
     <div class="rail-note"><strong>How to progress:</strong> each stage ends with a short check. Answer it correctly to unlock the next stage. You can retry as many times as you like. Your progress is saved in this browser.</div>
@@ -1268,12 +1268,12 @@
               <tr><td>Watch out for</td><td>Copy-and-paste mistakes, such as a code with a missing character</td><td>Approving actions without reading them; some steps may still need you</td></tr>
             </tbody>
           </table></div>
-          <p><strong>This lesson's steps are written for Route A.</strong> If you take Route B, look for the blue <em>Using connectors?</em> notes in each stage: they tell you what to ask your AI to do, and what to check yourself afterwards. Either way, you should understand every step, because you are responsible for the shop.</p>
+          <p><strong>This lesson's steps are written for Route A.</strong> If you take Route B, look for the blue <em>Using connectors?</em> notes in each stage: they tell you what to ask your AI to do, and what to check yourself afterwards. Either way, you should understand every step, because you are responsible for the shop. For setup guides and videos on Claude and ChatGPT, see the <a href="#ai-tools">AI tools for vibe coding</a> recap.</p>
           <h3>What are connectors and MCP?</h3>
           <p>On its own, an AI assistant can only talk and write code. A <strong>connector</strong> plugs an outside service, such as Stripe or Supabase, into the assistant so it can look things up and take actions there, using your login. Most connectors use <strong>MCP</strong> (Model Context Protocol), an open standard that Anthropic introduced in 2024 and other AI companies have since adopted. MCP is a common plug that any AI assistant and any service can use, much like USB for devices.</p>
           <p>This is the <strong>AI agent</strong> idea from Part 1: AI that takes actions, not just answers. Stripe, Supabase, Vercel and GitHub all offer official connectors.</p>
           <div class="grid two">
-            <div class="card"><div class="icon-badge" aria-hidden="true">1</div><h3>Switch the connectors on</h3><p>In <strong>Claude</strong>, connectors are in the app's settings, and Claude Code can use them too. <strong>ChatGPT</strong> and OpenAI's coding tool <strong>Codex</strong> also support MCP connectors. Menus change often, so search your assistant's help pages for “connectors” or “MCP”.</p></div>
+            <div class="card"><div class="icon-badge" aria-hidden="true">1</div><h3>Switch the connectors on</h3><p>In <strong>Claude</strong>, connectors are in the app's settings, and Claude Code can use them too. <strong>ChatGPT</strong> and OpenAI's coding tool <strong>Codex</strong> also support MCP connectors. Menus change often: the <a href="#ai-tools">AI tools recap</a> has the official guides. On a university (EDU) account, some connectors and apps may be disabled by your university.</p></div>
             <div class="card"><div class="icon-badge" aria-hidden="true">2</div><h3>Sign in and approve</h3><p>Each connector asks you to sign in to that service and approve what the AI may do. Choose the narrowest access offered. For Stripe, connect your <strong>sandbox</strong>, never a live account.</p></div>
             <div class="card"><div class="icon-badge" aria-hidden="true">3</div><h3>Check the AI is working in the right place</h3><p>Before it creates anything, ask it to tell you which Stripe account, Supabase project and Vercel team it is about to use. It is easy to build in the wrong project.</p></div>
             <div class="card"><div class="icon-badge" aria-hidden="true">4</div><h3>Read, then approve</h3><p>The assistant shows each action before running it. Read it. Anything that deletes, uses live keys or costs money deserves a hard look, or a no.</p></div>
@@ -1959,6 +1959,75 @@ Requirements:
           <ul><li>Going live is mostly business, legal and running work, not new code.</li><li>Real payments need an activated Stripe account, live keys, a live webhook and paid hosting.</li><li>Winning a customer costs money, and delivering the order is often the hardest part.</li><li>Customers have legal rights, their data must be protected, and “can we?” is not the same as “should we?”.</li></ul>
         </div>
         <div class="celebration" data-closure="part3" role="note" hidden><strong>Module complete.</strong><p>You know where e-commerce came from, you built a working shop, and you know what it would take to go live.</p></div>
+      </section>
+
+      <!-- AI TOOLS RECAP -->
+      <section class="page-view" id="ai-tools" data-view="ai-tools">
+        <div class="section-label">Reference</div>
+        <h2 class="section-title">Recap: AI tools for vibe coding</h2>
+        <p><strong>Vibe coding</strong> means describing what you want in plain English and letting an AI assistant write the code. You stay in charge: you brief it, read what it plans, test the result and decide what to keep. This page recaps the two main assistants you can use for Part 2, with official guides and short videos for each.</p>
+        <div class="grid two">
+          <div class="card"><div class="icon-badge" aria-hidden="true">C</div><h3>Claude (Anthropic)</h3>
+            <p><strong>Claude Code</strong> is Anthropic's coding assistant. You can use it in a browser at <a href="https://claude.ai/code" target="_blank" rel="noopener">claude.ai/code</a>, in the Claude desktop app, or in a terminal. It works inside a GitHub repository: it reads the code, makes changes and saves them as commits.</p>
+            <p><strong>Connectors</strong> let Claude work directly in services such as GitHub, Stripe, Supabase and Vercel, using MCP (see Part 2, Stage 1).</p>
+            <p><strong>Note:</strong> running Claude Code in the browser needs a paid Claude plan.</p></div>
+          <div class="card"><div class="icon-badge" aria-hidden="true">O</div><h3>ChatGPT (OpenAI)</h3>
+            <p><strong>Codex</strong> is OpenAI's coding assistant. It can work on a GitHub repository from inside ChatGPT, and also has its own app and terminal versions.</p>
+            <p><strong>Apps and plugins</strong> connect ChatGPT and Codex to outside services, much like Claude's connectors. Many also use MCP behind the scenes.</p>
+            <p><strong>Note:</strong> which features you get depends on your ChatGPT plan.</p></div>
+        </div>
+        <div class="callout dark"><strong>Using a university (EDU) account?</strong> If you sign in to ChatGPT with a university-provided account (ChatGPT Edu), your university's administrators control which apps, plugins and coding tools are switched on. Some may be <strong>disabled</strong>. If an app or plugin you need is missing, that is probably why. Ask your university's IT service, or follow Route A (step by step) instead, which needs no connections. University Claude accounts work the same way: administrators decide which connectors are available. Follow your university's rules about which account to use for coursework.</div>
+        <h3>Habits that make vibe coding work</h3>
+        <div class="grid three">
+          <div class="card"><div class="icon-badge" aria-hidden="true">1</div><h3>Brief clearly</h3><p>Say what you are building, for whom, and what must never happen. The ready-made prompt in Part 2, Stage 3 is a model.</p></div>
+          <div class="card"><div class="icon-badge" aria-hidden="true">2</div><h3>Plan, then build</h3><p>Ask for a plan before any code. Read it. It is far cheaper to fix a plan than a finished shop.</p></div>
+          <div class="card"><div class="icon-badge" aria-hidden="true">3</div><h3>Small steps, saved often</h3><p>One change at a time, each saved as a commit, so you can always go back.</p></div>
+          <div class="card"><div class="icon-badge" aria-hidden="true">4</div><h3>Test it yourself</h3><p>The AI saying “it works” is not proof. Click through it, use the test cards, and check the database.</p></div>
+          <div class="card"><div class="icon-badge" aria-hidden="true">5</div><h3>Secrets stay out of chat</h3><p>Never paste secret keys into a conversation. They go into Vercel's settings, or are handled through a connector.</p></div>
+          <div class="card"><div class="icon-badge" aria-hidden="true">6</div><h3>Ask it to explain</h3><p>If you don't understand a step, ask “Explain this in plain English.” You are responsible for what you ship.</p></div>
+        </div>
+        <h3>Official guides</h3>
+        <div class="grid two">
+          <div class="card"><h3>Anthropic (Claude)</h3><ul>
+            <li><a href="https://code.claude.com/docs/en/overview" target="_blank" rel="noopener">Claude Code overview</a></li>
+            <li><a href="https://code.claude.com/docs/en/web-quickstart" target="_blank" rel="noopener">Get started with Claude Code in the browser</a></li>
+            <li><a href="https://code.claude.com/docs/en/mcp" target="_blank" rel="noopener">Connect Claude Code to tools with MCP</a></li>
+            <li><a href="https://support.claude.com/en/articles/11176164-use-connectors-to-extend-claude-s-capabilities" target="_blank" rel="noopener">Use connectors to extend Claude's capabilities</a></li>
+            <li><a href="https://academy.claude.com/courses/claude-code-101" target="_blank" rel="noopener">Claude Code 101 (free course, Claude Academy)</a></li>
+          </ul></div>
+          <div class="card"><h3>OpenAI (ChatGPT)</h3><ul>
+            <li><a href="https://developers.openai.com/codex" target="_blank" rel="noopener">Codex documentation</a></li>
+            <li><a href="https://openai.com/codex/" target="_blank" rel="noopener">Codex overview</a></li>
+            <li><a href="https://help.openai.com" target="_blank" rel="noopener">OpenAI Help Center</a> (search “apps in ChatGPT”, “plugins” or “ChatGPT Edu”)</li>
+            <li><a href="https://modelcontextprotocol.io" target="_blank" rel="noopener">Model Context Protocol (MCP), the open standard</a></li>
+          </ul></div>
+        </div>
+        <h3>Videos</h3>
+        <p>Optional. Watch the ones for the assistant you plan to use.</p>
+        <div class="media-lesson">
+          <div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/fl1DSmwQKKY" title="Claude Code basics" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe><a class="video-fallback" href="https://www.youtube.com/watch?v=fl1DSmwQKKY" target="_blank" rel="noopener">Not playing? Open it on YouTube ↗</a></div>
+          <div class="media-guidance"><div class="type">CLAUDE · CLAUDE CODE BASICS</div><h3>What should you notice?</h3><ul><li>Where you type your request, and how Claude shows its plan before acting.</li><li>How it asks permission before changing files or running commands.</li><li>How changes are saved so you can review or undo them.</li></ul></div>
+        </div>
+        <div class="media-lesson">
+          <div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/_jjSS0qGFbI" title="Claude connectors" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe><a class="video-fallback" href="https://www.youtube.com/watch?v=_jjSS0qGFbI" target="_blank" rel="noopener">Not playing? Open it on YouTube ↗</a></div>
+          <div class="media-guidance"><div class="type">CLAUDE · CONNECTORS</div><h3>What should you notice?</h3><ul><li>Where connectors are switched on, and what you are asked to approve.</li><li>What Claude can do once a service is connected that it couldn't before.</li><li>How you would connect Stripe, Supabase, Vercel and GitHub for Route B.</li></ul></div>
+        </div>
+        <div class="media-lesson">
+          <div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/7Bv68f5szSU" title="ChatGPT Codex" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe><a class="video-fallback" href="https://www.youtube.com/watch?v=7Bv68f5szSU" target="_blank" rel="noopener">Not playing? Open it on YouTube ↗</a></div>
+          <div class="media-guidance"><div class="type">CHATGPT · CODEX</div><h3>What should you notice?</h3><ul><li>How Codex connects to a GitHub repository.</li><li>How you give it a task, and how you review what it changed.</li><li>What is similar to and different from Claude Code.</li></ul></div>
+        </div>
+        <div class="media-lesson">
+          <div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/2C4Cs6503gw" title="ChatGPT apps" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe><a class="video-fallback" href="https://www.youtube.com/watch?v=2C4Cs6503gw" target="_blank" rel="noopener">Not playing? Open it on YouTube ↗</a></div>
+          <div class="media-guidance"><div class="type">CHATGPT · APPS</div><h3>What should you notice?</h3><ul><li>Where apps are found and switched on in ChatGPT.</li><li>What an app lets ChatGPT see or do in another service.</li><li>Which apps might be missing on a university (EDU) account.</li></ul></div>
+        </div>
+        <div class="media-lesson">
+          <div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/pKwRNdDtai0" title="ChatGPT plugins" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe><a class="video-fallback" href="https://www.youtube.com/watch?v=pKwRNdDtai0" target="_blank" rel="noopener">Not playing? Open it on YouTube ↗</a></div>
+          <div class="media-guidance"><div class="type">CHATGPT · PLUGINS</div><h3>What should you notice?</h3><ul><li>What a plugin adds to ChatGPT or Codex.</li><li>What permissions it asks for, and how to remove it.</li><li>How this compares with Claude's connectors.</li></ul></div>
+        </div>
+        <div class="why-matters">
+          <div class="why-label">Why this matters to you</div>
+          <p>AI coding assistants are changing who can build software at work. Marketers, analysts and founders now build prototypes, internal tools and simple shops themselves. Knowing how to brief an assistant, check its work and keep data safe is quickly becoming a core business skill, not just a technical one.</p>
+        </div>
       </section>
 
       <!-- GLOSSARY -->
