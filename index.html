@@ -526,6 +526,10 @@
   .case-form textarea:focus { outline:3px solid var(--focus); outline-offset:1px; }
   .case-actions { display:flex; flex-wrap:wrap; align-items:center; gap:12px; }
   .case-count { font-size:.85rem; color:var(--muted); }
+  .copy-toast { position:fixed; left:50%; bottom:calc(84px + env(safe-area-inset-bottom, 0px)); z-index:96; max-width:min(92vw, 520px); padding:.6rem .9rem; background:var(--black); color:#fff; border-left:6px solid var(--yellow); font-size:.9rem; font-weight:700; line-height:1.4; box-shadow:0 6px 18px rgba(0,0,0,.2); opacity:0; transform:translate(-50%, 6px); transition:opacity .2s ease, transform .2s ease; pointer-events:none; }
+  .copy-toast.show { opacity:1; transform:translate(-50%, 0); }
+  @media (prefers-reduced-motion:reduce) { .copy-toast { transition:none; } }
+  .no-copy-zone > h3 { margin-top:28px; margin-bottom:12px; }
   .field-wrap { position:relative; }
   .field-wrap textarea { display:block; }
   .field-meta { margin-top:3px; font-size:.8rem; }
@@ -1419,7 +1423,7 @@
             <p><strong>The $23 million textbook.</strong> In 2011, a biology book called <em>The Making of a Fly</em> was listed on Amazon for more than US$23 million. Two sellers were using automatic repricing software. One always priced slightly below the other; the other always priced well above the first. Each day the two programs pushed each other's price higher, and nobody was checking.</p>
             <p><strong>The lesson for Uni Textbook Swap:</strong> if you let software, or an AI agent, set prices or make purchases, give it limits. Set a maximum and minimum price, cap how much it can spend, require a human to approve anything unusual, and keep a way to switch it off quickly. Automation makes mistakes faster, not just decisions.</p>
           </div></details>
-          <div class="callout"><strong>Discuss:</strong> what problem did each era solve for a small business? What problem is AI solving now, and what new risks does it bring?</div>
+          <div class="callout" data-no-copy="true"><strong>Discuss:</strong> what problem did each era solve for a small business? What problem is AI solving now, and what new risks does it bring?</div>
           <div class="quick-check section-check" data-answer="1" data-explanation="An AI agent can take actions, such as completing a purchase. Agentic commerce is AI agents finding and buying products on a person's behalf."><div class="question-number">Pause and check</div><h3>What is agentic commerce?</h3><div class="choices"><button class="choice">AI writing product descriptions and answering customer questions.</button><button class="choice">AI agents finding and buying products on a person's behalf.</button><button class="choice">Recommendation engines suggesting what to buy next.</button></div><div class="feedback" aria-live="polite"></div></div>
         </section>
 
@@ -1507,7 +1511,7 @@
           <div class="case-bg">
             <div class="case-bg-text">
               <h3 style="margin-top:0;">The case at a glance</h3>
-              <dl class="case-glance">
+              <dl class="case-glance" data-no-copy="true">
                 <dt>Company</dt><dd>AMARO, a fashion and lifestyle brand for women</dd>
                 <dt>Where</dt><dd>São Paulo, Brazil</dd>
                 <dt>Founded</dt><dd>2012, by Dominique Oliver, Lodovico Brioschi and Roberto Thiele</dd>
@@ -1522,6 +1526,8 @@
             </figure>
           </div>
 
+          <!-- Copy-restricted: AMARO case narrative (data-no-copy) -->
+          <div class="no-copy-zone" data-no-copy="true">
           <h3>The case</h3>
           <div class="case-reading">
             <h4>A fashion brand built on e-commerce</h4>
@@ -1560,6 +1566,7 @@
           <div class="case-timeline" role="img" aria-label="AMARO timeline: 2011 Dominique Oliver moves to Brazil; 2012 operations begin in São Paulo and first sale; 2013 dedicated distribution centre; 2015 first Guide Shop; 2017 iOS and Android apps; 2020 17 Guide Shops, COVID-19 and WhatsApp service; 2020 AMARO Collective launches with seven partner brands; end of 2020 the strategic decision.">
             <span><strong>2011</strong>Oliver moves to Brazil</span><span><strong>2012</strong>Opens in São Paulo; first sale</span><span><strong>2013</strong>Own distribution centre</span><span><strong>2015</strong>First Guide Shop</span><span><strong>2017</strong>Mobile apps launch</span><span><strong>2020</strong>17 Guide Shops; COVID-19</span><span><strong>2020</strong>AMARO Collective, 7 brands</span><span><strong>End 2020</strong>The decision</span>
           </div>
+          </div>
 
           <h3>Where AMARO competes</h3>
           <p>The case's authors used two positioning maps to show where AMARO sat in Brazil's markets. Use them to see who AMARO competed with as a brand, and who it would compete with as a platform.</p>
@@ -1595,6 +1602,8 @@
             </tbody>
           </table></div>
 
+          <!-- Copy-restricted: AMARO activity prompt; answer boxes stay editable -->
+          <div class="no-copy-zone" data-no-copy="true">
           <h3>Activity: from online retailer to digital platform</h3>
           <p><strong>Instructions:</strong> read the AMARO case above and consider how its e-commerce business model evolved. Answer the question using specific examples from the case. Aim to explain not only <em>what</em> changed, but <em>why</em> the change mattered for the business. Type your answer in your own words: pasting is turned off for this activity.</p>
           <div class="callout"><strong>Question:</strong> How did AMARO's use of e-commerce change as it moved from being a digitally native retailer to operating more like a platform, and what new opportunities and challenges did this create?</div>
@@ -1604,6 +1613,7 @@
             <label><span class="case-q">3 · Impact <small>LO2 · LO6</small></span><span class="case-hint">Identify at least one opportunity and one challenge created by this shift, using examples from the case.</span><textarea data-no-paste="true" data-suggested="80–120" data-mcase="impact" rows="4"></textarea></label>
             <div class="case-actions"><button type="button" class="viz-btn" id="mcase-copy">Copy my answers</button><span class="case-count" id="mcase-count" aria-live="polite"></span></div>
             <textarea class="case-fallback" id="mcase-fallback" rows="8" readonly hidden aria-label="Your case answers, ready to copy"></textarea>
+          </div>
           </div>
           <div class="why-matters">
             <div class="why-label">Why this matters to you</div>
@@ -2194,7 +2204,7 @@ Requirements:
               <li>refunds and returns</li>
               <li>your own time</li>
             </ul>
-            <p><strong>Try it:</strong> estimate the profit on one $45 textbook you bought for $20. Use current fees from the providers' pricing pages. Is it worth it? What would you change?</p>
+            <p data-no-copy="true"><strong>Try it:</strong> estimate the profit on one $45 textbook you bought for $20. Use current fees from the providers' pricing pages. Is it worth it? What would you change?</p>
           </div></details>
           <div class="quick-check section-check" data-answer="1" data-explanation="Vercel's free Hobby plan is for non-commercial use only. A shop taking real money needs a paid plan."><div class="question-number">Pause and check</div><h3>Your shop starts taking real money. What must change about its Vercel hosting?</h3><div class="choices"><button class="choice">Nothing: the free plan covers any use.</button><button class="choice">It needs a paid plan, because the free plan is for non-commercial use.</button><button class="choice">It needs a faster server to handle real customers.</button></div><div class="feedback" aria-live="polite"></div></div>
         </section>
@@ -2374,6 +2384,8 @@ Requirements:
               <div class="feedback" aria-live="polite"></div>
             </div>
           </div>
+          <!-- Copy-restricted: business case activity; answer boxes stay editable -->
+          <div class="no-copy-zone" data-no-copy="true">
           <h3>Apply it: your business case</h3>
           <p>Bring the module together by writing a short business case for <strong>your own shop</strong>, about 300–500 words in total. Answer each prompt in a few sentences, typed in your own words (pasting is turned off). Your answers save in this browser as you type. When you're done, add your name and email and use <strong>Email it to the convenor</strong>, or copy it and send it yourself. <strong>Your business case is what you submit to show you have completed the module.</strong></p>
           <div class="case-form" id="business-case">
@@ -2402,6 +2414,7 @@ Requirements:
               <p><strong>Privacy:</strong> your name and email are saved only in this browser, and are shared only when you send the email yourself.</p>
             </div>
             <textarea class="case-fallback" id="case-fallback" rows="8" readonly hidden aria-label="Your business case, ready to copy"></textarea>
+          </div>
           </div>
         </section>
         <div class="module-recap" data-closure="part3" hidden>
@@ -2545,9 +2558,10 @@ Requirements:
       </section>
     </div>
 
-    <footer><strong>Build Your Own Online Shop</strong> · Version 3 October 2026 (typed responses) · A hands-on e-commerce module · Test mode only, no real payments. The diagrams are illustrations, and the screenshots come from an example shop built the same way. Logos are trademarks of their owners, used for identification and teaching (see Sources).</footer>
+    <footer><strong>Build Your Own Online Shop</strong> · Version 3 October 2026 (copy-restricted activities) · A hands-on e-commerce module · Test mode only, no real payments. The diagrams are illustrations, and the screenshots come from an example shop built the same way. Logos are trademarks of their owners, used for identification and teaching (see Sources).</footer>
   </main>
 </div>
+<div class="copy-toast" id="copy-toast" role="status" aria-live="polite"></div>
 <button type="button" class="top-button" id="top-button" aria-label="Back to top"><span aria-hidden="true">↑</span><span class="top-label">Top</span></button>
 <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Enlarged screenshot">
   <div class="lb-bar"><span class="lb-cap" id="lb-cap"></span><button type="button" class="lb-btn" id="lb-close">Close</button></div>
@@ -3415,6 +3429,46 @@ Requirements:
       field.addEventListener('dragover', function (e) { e.preventDefault(); if (e.dataTransfer) e.dataTransfer.dropEffect = 'none'; });
       field.addEventListener('input', update);
       update();
+    });
+  })();
+
+  // ---------- selective copy restriction (data-no-copy) ----------
+  // Learning-design friction, not security. Marks case/scenario material and activity prompts
+  // with data-no-copy="true". Text stays selectable (for reading aids); copy, cut and dragging
+  // out are blocked. Form fields inside protected areas keep normal behaviour.
+  (function () {
+    var zones = Array.prototype.slice.call(document.querySelectorAll('[data-no-copy="true"]'));
+    if (!zones.length) return;
+    var toast = document.getElementById('copy-toast'), timer;
+    var MSG = 'Please work with this material on the page rather than copying it elsewhere.';
+    function isField(el) { return !!(el && el.closest && el.closest('textarea, input, select, [contenteditable="true"]')); }
+    function touchesZone() {
+      var sel = window.getSelection && window.getSelection();
+      if (!sel || !sel.rangeCount || sel.isCollapsed) return false;
+      for (var r = 0; r < sel.rangeCount; r++) {
+        var range = sel.getRangeAt(r);
+        for (var i = 0; i < zones.length; i++) if (range.intersectsNode(zones[i])) return true;
+      }
+      return false;
+    }
+    function notify() {
+      toast.textContent = MSG; toast.classList.add('show');
+      clearTimeout(timer);
+      timer = setTimeout(function () { toast.classList.remove('show'); toast.textContent = ''; }, 4000);
+    }
+    function guard(e) {
+      if (isField(e.target)) return;
+      if (touchesZone()) { e.preventDefault(); notify(); }
+    }
+    document.addEventListener('copy', guard);
+    document.addEventListener('cut', guard);
+    document.addEventListener('dragstart', function (e) {
+      var el = e.target.nodeType === 3 ? e.target.parentNode : e.target;
+      if (isField(el)) return;
+      if ((el.closest && el.closest('[data-no-copy="true"]')) || touchesZone()) {
+        if (el.closest && el.closest('a[href]') && !touchesZone()) return;
+        e.preventDefault(); notify();
+      }
     });
   })();
 })();
