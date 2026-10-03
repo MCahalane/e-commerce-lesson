@@ -2278,6 +2278,13 @@ Requirements:
   var times = load('times', {});
   function stamp(name, always) { if (always || !times[name]) { times[name] = new Date().toISOString(); save('times', times); } }
   Object.keys(plans).forEach(function (k) { unlocked[k] = Math.max(1, Math.min(plans[k].length, Number(unlocked[k]) || 1)); });
+  // Teacher preview: opening the page at #teacher-preview unlocks every stage in this browser only,
+  // then jumps to the business case at the end of Part 3.
+  if (location.hash === '#teacher-preview') {
+    Object.keys(plans).forEach(function (k) { unlocked[k] = plans[k].length; started[k] = true; });
+    save('unlocked', unlocked); save('started', started);
+    try { history.replaceState(null, '', '#p3-review'); } catch (e) { location.hash = 'p3-review'; }
+  }
 
   var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-section-links a'));
   var navGroups = Array.prototype.slice.call(document.querySelectorAll('.nav-group'));
