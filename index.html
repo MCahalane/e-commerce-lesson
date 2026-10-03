@@ -2208,7 +2208,7 @@ Requirements:
       </section>
     </div>
 
-    <footer><strong>Build Your Own Online Shop</strong> · A hands-on e-commerce module · Test mode only, no real payments. The diagrams are illustrations, and the screenshots come from an example shop built the same way. Logos are trademarks of their owners, used for identification and teaching (see Sources).</footer>
+    <footer><strong>Build Your Own Online Shop</strong> · Version 3 October 2026 (with business case email) · A hands-on e-commerce module · Test mode only, no real payments. The diagrams are illustrations, and the screenshots come from an example shop built the same way. Logos are trademarks of their owners, used for identification and teaching (see Sources).</footer>
   </main>
 </div>
 <button type="button" class="top-button" id="top-button" aria-label="Back to top"><span aria-hidden="true">↑</span><span class="top-label">Top</span></button>
@@ -2280,11 +2280,14 @@ Requirements:
   Object.keys(plans).forEach(function (k) { unlocked[k] = Math.max(1, Math.min(plans[k].length, Number(unlocked[k]) || 1)); });
   // Teacher preview: opening the page at #teacher-preview unlocks every stage in this browser only,
   // then jumps to the business case at the end of Part 3.
-  if (location.hash === '#teacher-preview') {
+  function teacherPreview() {
+    if (location.hash !== '#teacher-preview') return false;
     Object.keys(plans).forEach(function (k) { unlocked[k] = plans[k].length; started[k] = true; });
     save('unlocked', unlocked); save('started', started);
     try { history.replaceState(null, '', '#p3-review'); } catch (e) { location.hash = 'p3-review'; }
+    return true;
   }
+  teacherPreview();
 
   var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-section-links a'));
   var navGroups = Array.prototype.slice.call(document.querySelectorAll('.nav-group'));
@@ -2489,7 +2492,8 @@ Requirements:
       showView(id);
     });
   });
-  window.addEventListener('popstate', function () { showView(location.hash.slice(1) || 'overview', false); });
+  window.addEventListener('popstate', function () { if (teacherPreview()) { location.reload(); return; } showView(location.hash.slice(1) || 'overview', false); });
+  window.addEventListener('hashchange', function () { if (teacherPreview()) location.reload(); });
 
   var readFill = document.getElementById('page-reading-progress-fill'), readBar = document.getElementById('page-reading-progress'), topBtn = document.getElementById('top-button');
   function updateReading() {
