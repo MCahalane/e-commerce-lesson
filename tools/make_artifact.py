@@ -23,6 +23,8 @@ s = re.sub(r'  \.video-embed \{.*?\n  \.video-fallback \{[^\n]*\n', '', s, flags
 s = re.sub(r'<source src="audio/[^"]+\.m4a" type="audio/mp4">', '', s)
 
 # strip the document wrapper
+# Artifacts block downloads, so link the PDF guides to the copies on GitHub Pages instead.
+s = re.sub(r'href="guides/([\w.-]+\.pdf)" download="[^"]*"', r'href="https://mcahalane.github.io/e-commerce-lesson/guides/\1" target="_blank" rel="noopener"', s)
 s = s[s.index('<title>'):]
 s = s.replace('</head>\n<body>\n', '', 1)
 s = s[:s.rindex('</body>')].rstrip('\n') + '\n'
