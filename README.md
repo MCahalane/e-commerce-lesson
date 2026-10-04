@@ -25,6 +25,7 @@ By the end of the module, students can:
 - `shots/` holds the screenshots and logos.
 - `video/` holds the module introduction video (The Hidden Labyrinth of E-commerce) and the Part 2 Stripe setup screen recording (keys blurred). The Claude version uses a smaller re-encoded copy of the introduction video, because artifacts allow files up to 15 MB.
 - `guides/` holds two optional PDF guides for connecting the project's services to an AI assistant (ChatGPT Codex and Claude connectors, each covering GitHub, Supabase, Vercel and Stripe), linked from the AI tools recap and Part 2, Stage 1. `shots/disabled-by-admin.png` comes from the Codex guide. In the Claude version, these links point to the copies on GitHub Pages, because artifacts block downloads.
+- Part 2 has an optional Stage 8, Improve your shop’s design (`#p2-design`). It sits outside the required stage plan (see `optionalStage` in the script), so it is never locked, has no compulsory checks and does not affect completion: Part 2 still completes at Stage 7. Its images are `shots/design-textbook-concept.png`, `shots/design-textbook-storefront.jpg`, `shots/design-comics-concept.png` and the existing `shots/shop.webp`.
 - `audio/` holds the audio introductions to Parts 1–3 (.m4a originals plus .mp3 copies for browsers without AAC support).
 - `favicon.svg` is the browser-tab icon.
 - Teacher preview: open the site with `#teacher-preview` at the end of the address to unlock every stage (in that browser only) and jump to the business case.

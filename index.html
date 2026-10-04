@@ -147,6 +147,30 @@
   .stage-footer p { margin:0; flex:1; }
   .stage-footer button { flex:0 0 auto; padding:.8rem 1rem; border:2px solid var(--black); background:var(--yellow); color:var(--black); font:900 .9rem/1.2 var(--font); cursor:pointer; }
   .stage-footer button:hover { background:var(--black); color:#fff; }
+  .extra-stage::before { content:"Optional"; display:inline-block; margin-bottom:.55rem; padding:.24rem .5rem; font-size:.69rem; line-height:1.1; font-weight:900; letter-spacing:.08em; text-transform:uppercase; background:var(--black); color:var(--yellow); }
+  .module > section.extra-stage { border:2px dashed var(--black) !important; }
+  .extra-stage > h2 .optional-tag { font-size:.75rem; }
+  .nav-opt-tag { display:inline-block; margin-left:.3rem; padding:.05rem .35rem; border:1px solid currentColor; font-size:.66rem; font-weight:900; letter-spacing:.06em; text-transform:uppercase; vertical-align:middle; }
+  .journey a.journey-optional { border-style:dashed; }
+  .journey a.journey-optional .optional-tag { font-style:normal; font-size:.62rem; margin-left:.25rem; }
+  .type-kicker { font-size:.72rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase; color:var(--yellow-ink); }
+  .design-compare { margin:22px 0; padding:18px 20px; background:#fff; border:2px solid var(--black); }
+  .design-compare-head { margin-bottom:6px; }
+  .design-compare-label { font-size:.72rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase; color:var(--yellow-ink); }
+  .design-compare h4 { margin:.2rem 0 0; font-size:1.15rem; }
+  .design-compare .shots { margin:12px 0; }
+  .design-compare-note { margin:.6rem 0; }
+  .design-prices { max-width:560px; }
+  .shot-kind { display:inline-block; margin-right:.3rem; padding:.12rem .45rem; font-size:.7rem; font-weight:900; letter-spacing:.05em; text-transform:uppercase; border:2px solid var(--black); white-space:nowrap; }
+  .shot-kind.concept { background:var(--orange-pale); border-style:dashed; }
+  .shot-kind.working { background:var(--green-soft); color:var(--green); border-color:var(--green); }
+  .design-checks { list-style:none; padding:0; display:grid; gap:8px; }
+  .design-checks li { position:relative; padding:.55rem .8rem .55rem 2.3rem; background:#fff; border:1px solid var(--line); }
+  .design-checks li::before { content:"✓"; position:absolute; left:.8rem; top:.5rem; font-weight:900; color:var(--green); }
+  .stage-footer .footer-actions { display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end; }
+  .stage-footer button.secondary { background:#fff; }
+  .stage-footer button.secondary:hover { background:var(--black); color:#fff; }
+  @media (max-width:760px) { .stage-footer .footer-actions { justify-content:flex-start; } }
   .stage-footer button:disabled, .stage-footer button:disabled:hover { background:#e4e4e4; border-color:#777; color:#555; cursor:not-allowed; }
   .stage-gate-status { display:block; margin-top:.45rem; color:#5d5200; font-size:.84rem; font-weight:800; }
   .stage-gate-status.ready { color:#1d6b35; }
@@ -850,6 +874,7 @@
           <a href="#p2-online" data-stage-link="5">5 · Put it online</a>
           <a href="#p2-test" data-stage-link="6">6 · Test it</a>
           <a href="#p2-review" data-stage-link="7">7 · Why it works this way</a>
+          <a href="#p2-design" data-stage-link="8" data-optional="true" class="nav-optional">8 · Improve your shop’s design <span class="nav-opt-tag">Optional</span></a>
         </div>
       </div>
       <div class="nav-group" data-group="part3">
@@ -1771,7 +1796,7 @@
           <p><strong>By the end:</strong> your shop is live at its own web address, you have made a test purchase, and you can explain each design choice.</p>
           <p class="lo-covers"><strong>Learning outcomes:</strong> LO3, LO4, LO5 and LO7.</p>
         </div>
-        <p class="time-note"><strong>About 2–2½ hours, depending on your experience.</strong> You can do it in one sitting, or stop after Stage 4 and finish in a second session. Keep this page open beside Stripe, Supabase and Vercel.</p>
+        <p class="time-note"><strong>About 2–2½ hours, depending on your experience.</strong> The optional Stage 8 (about 30–45 minutes) is extra and not part of this total. You can do it in one sitting, or stop after Stage 4 and finish in a second session. Keep this page open beside Stripe, Supabase and Vercel.</p>
         <p class="last-checked">Steps last checked: October 2026. Menus in Stripe, Supabase, Vercel and AI tools change often; if a button has moved, look for the nearest match or ask your AI assistant.</p>
         <div class="scenario-thread"><div class="scenario-label">Running example</div><p><strong>Uni Textbook Swap</strong> sells second-hand textbooks. Each book is a single copy, so if two students click Buy at the same moment, only one may get it. The examples in Part 2 use this shop. You can build it, or choose your own idea in stage 2.</p></div>
         <div class="journey cols-4" aria-label="Part 2 stages">
@@ -1782,6 +1807,7 @@
           <a href="#p2-online"><strong>Put it online</strong><span>Vercel, Stripe's payment messages and a rebuild.</span></a>
           <a href="#p2-test"><strong>Test it</strong><span>A test purchase, then the tricky cases.</span></a>
           <a href="#p2-review"><strong>Why it works this way</strong><span>Eight design choices, then four questions.</span></a>
+          <a href="#p2-design" class="journey-optional"><strong>Improve your shop’s design <em class="optional-tag">Optional</em></strong><span>Try a design plugin on your finished shop. Not needed to complete Part 2.</span></a>
         </div>
 
         <section id="p2-ready" class="required-section" data-stage="1">
@@ -2278,6 +2304,120 @@ Requirements:
             </div>
           </div>
         </section>
+        <section id="p2-design" class="extra-stage" data-stage="8" data-optional-stage="true">
+          <h2>Improve your shop’s design <span class="optional-tag">Optional</span> <span class="section-time">About 30–45 min</span></h2>
+          <p>You have already built and tested your shop, and <strong>Part 2 is complete once you finish Stage 7</strong>. This optional stage shows how design plugins for AI coding assistants can improve how your shop looks and how easy it is to use, while keeping everything that already works. Nothing here is assessed or counted in your progress. You can explore it now, come back later, or go straight to Part 3.</p>
+
+          <h3>Brief, plugin or connector?</h3>
+          <p>You have met three ways to shape what an AI assistant does. They are easy to mix up:</p>
+          <div class="grid three">
+            <div class="card"><div class="icon-badge" aria-hidden="true">1</div><h3>A brief</h3><p>Specifies <strong>what the system must do</strong>. Your Stage 3 build prompt is a brief: sell one-of-a-kind items, hold them during payment, record each order once.</p></div>
+            <div class="card"><div class="icon-badge" aria-hidden="true">2</div><h3>A skill or plugin</h3><p>Gives the assistant <strong>reusable guidance for doing the work</strong>, such as how to plan a design, set out a page and check it in a browser.</p></div>
+            <div class="card"><div class="icon-badge" aria-hidden="true">3</div><h3>A connector</h3><p>Gives the assistant <strong>access to an external service</strong>, such as Stripe or Supabase (Route B in Stage 1).</p></div>
+          </div>
+          <div class="callout"><strong>Think of it as</strong> hiring a designer for your market stall. The brief is the job description. The plugin is the designer’s own style guide and know-how. A connector is a key to your storeroom. A design plugin brings know-how; it does not give the assistant any new keys.</div>
+
+          <h3>Two optional design tools</h3>
+          <div class="grid two">
+            <div class="card"><div class="type-kicker">ChatGPT · Codex</div><h3>Build Web Apps</h3><p>Helps develop visual concepts, implement the interface, and check its appearance and interactions in a browser. In our demonstration, it generated a design concept, built a local storefront and tested its controls.</p></div>
+            <div class="card"><div class="type-kicker">Claude Code · Anthropic</div><h3>Frontend Design</h3><p>Anthropic’s plugin for Claude Code. It helps establish a design direction (who the page is for and what look suits it) and implement considered layouts, typography, colours and interactions.</p><p><a href="https://claude.com/plugins/frontend-design" target="_blank" rel="noopener">Frontend Design plugin (official page)</a></p></div>
+          </div>
+          <p>The two are <strong>similar enhancements, not identical tools</strong>. In our demonstration, Build Web Apps produced a concept image and checked the finished page in a browser. Frontend Design concentrates on choosing a design direction and writing the interface code; do not expect it to generate concept images or compare screenshots for you. With either tool, you still review the result in your own browser.</p>
+          <div class="route-note"><span class="route-label">Works with Route A or Route B</span><p>Either plugin can be used whichever route you took. Neither replaces GitHub, Stripe, Supabase or Vercel, and neither connects those accounts for you. You do not need either plugin to finish the lesson. Availability depends on your plan and account: university- or work-managed accounts may have plugins switched off by administrators (see the <a href="#p2-ready">account note in Stage 1</a>). If you use Claude Code in a browser, check the official page, as not every plugin feature may be available there. For installation, follow the tool’s own official instructions.</p></div>
+          <details class="more"><summary>What about Claude Artifacts?</summary><div class="details-body">
+            <p>An <strong>Artifact</strong> is something Claude makes for you inside a conversation, such as a single interactive web page. It is a quick way to explore and preview a storefront idea before you change any code.</p>
+            <p>But an Artifact lives in the conversation, not in your project. It does not change the code in your GitHub repository, and it is not connected to your Stripe sandbox or Supabase database. An Artifact on its own does not complete the lesson’s deployed shop. To redesign the shop you actually built, Frontend Design in Claude Code is the closer match, because Claude Code works on your real project.</p>
+          </div></details>
+
+          <h3>Two examples</h3>
+          <p>Both examples were made with Codex’s Build Web Apps. Look at the label on each image: an <span class="shot-kind concept">AI-generated concept</span> is a picture of an idea, while a <span class="shot-kind working">Browser screenshot</span> shows a page that really runs.</p>
+
+          <div class="design-compare">
+            <div class="design-compare-head"><span class="design-compare-label">Example A · Uni Textbook Swap</span><h4>Design concept → working interface</h4></div>
+            <div class="shots pair">
+              <figure class="shot"><button type="button" class="shot-btn shot-full" data-full="shots/design-textbook-concept.png" data-cap="AI-generated design concept for Uni Textbook Swap. A picture of a proposed storefront, not a working page." aria-label="Enlarge image: AI-generated design concept for Uni Textbook Swap"><img src="shots/design-textbook-concept.png" alt="AI-generated design concept for a Uni Textbook Swap storefront, showing a proposed layout of second-hand textbook listings with prices. This is an image of an idea, not a working page." loading="lazy"><span class="zoom">Click to enlarge</span></button><figcaption><span class="shot-kind concept">AI-generated concept</span> <strong>The design concept.</strong> An image generated by the AI to propose a look for the storefront. It is a picture, not a working page.</figcaption></figure>
+              <figure class="shot"><button type="button" class="shot-btn shot-full" data-full="shots/design-textbook-storefront.jpg" data-cap="Browser screenshot of the implemented local storefront. Its available-books filter, book-details dialog and simulated reservation and release controls were tested. Payments and inventory are simulated; no checkout is connected." aria-label="Enlarge screenshot: the working Uni Textbook Swap storefront"><img src="shots/design-textbook-storefront.jpg" alt="Browser screenshot of the implemented Uni Textbook Swap storefront running locally, with textbook listings, an available-books filter and reservation controls. Payments and stock are simulated." loading="lazy"><span class="zoom">Click to enlarge</span></button><figcaption><span class="shot-kind working">Browser screenshot</span> <strong>The working interface.</strong> A screenshot of the implemented page running locally. Its available-books filter, book-details dialog and simulated reservation and release controls were tested.</figcaption></figure>
+            </div>
+            <p class="design-compare-note"><strong>Keep in mind:</strong> the products and imagery are illustrative. Payments and stock are simulated, and no checkout is connected, so this page shows a design, not a working shop.</p>
+          </div>
+
+          <div class="design-compare">
+            <div class="design-compare-head"><span class="design-compare-label">Example B · Mike’s Comics</span><h4>Original shop → proposed redesign</h4></div>
+            <div class="shots pair">
+              <figure class="shot"><button type="button" class="shot-btn shot-full" data-full="shots/shop.webp" data-cap="Browser screenshot of the original Mike’s Comics shop, the lesson’s worked example. It is live, takes test payments and has passed the Stage 6 tests." aria-label="Enlarge screenshot: the original Mike’s Comics shop"><img src="shots/shop.webp" alt="Browser screenshot of the original Mike’s Comics shop: a red header, a test-mode notice, and six comic cards in a plain grid, each with a title, short description, AUD price and a blue Buy now button." loading="lazy"><span class="zoom">Click to enlarge</span></button><figcaption><span class="shot-kind working">Browser screenshot</span> <strong>The original shop.</strong> The lesson’s worked example, as built in Part 2. It is live and takes test payments.</figcaption></figure>
+              <figure class="shot"><button type="button" class="shot-btn shot-full" data-full="shots/design-comics-concept.png" data-cap="AI-generated design concept for Mike’s Comics. It keeps the same six listings and sample prices. Its View comic buttons illustrate a proposed interaction; it has not been built or tested." aria-label="Enlarge image: AI-generated redesign concept for Mike’s Comics"><img src="shots/design-comics-concept.png" alt="AI-generated redesign concept for Mike’s Comics, showing the same six comics with their sample AUD prices in a new layout with View comic buttons. This is an image of an idea, not a built or tested page." loading="lazy"><span class="zoom">Click to enlarge</span></button><figcaption><span class="shot-kind concept">AI-generated concept</span> <strong>The proposed redesign.</strong> An image of a possible new look. It has not been built or tested, and it does not replace the working shop.</figcaption></figure>
+            </div>
+            <p class="design-compare-note">The concept keeps the shop’s six listings and their sample prices. These are classroom sample prices, not market valuations:</p>
+            <div class="comparison-wrap"><table class="comparison design-prices">
+              <thead><tr><th>Comic</th><th>Sample price</th></tr></thead>
+              <tbody>
+                <tr><td>Amazing Fantasy #15 (1962)</td><td>A$45.00</td></tr>
+                <tr><td>Batman: Year One #1 (1987)</td><td>A$35.00</td></tr>
+                <tr><td>Watchmen #1 (1986)</td><td>A$28.00</td></tr>
+                <tr><td>Saga #1 (2012)</td><td>A$22.00</td></tr>
+                <tr><td>The Sandman #1 (1989)</td><td>A$30.00</td></tr>
+                <tr><td>Teenage Mutant Ninja Turtles #1 (2011 reprint)</td><td>A$15.00</td></tr>
+              </tbody>
+            </table></div>
+            <p class="design-compare-note">The <strong>View comic</strong> buttons in the concept show a proposed interaction. A button in a picture does not prove that checkout works.</p>
+          </div>
+
+          <h3>Try it: prompts for each tool</h3>
+          <p>Use the prompt for the tool you have. Each starts by naming the plugin, then gives the same instructions so your working shop is protected.</p>
+          <div class="prompt-card">
+            <div class="plabel">Codex · Build Web Apps</div>
+            <pre id="design-prompt-codex">Use Build Web Apps to improve the storefront of my existing online shop.
+Read my existing project and the lesson requirements before making changes. This shop has already been built and tested.
+
+Preserve Stripe test mode, server-side prices, stock reservations, signed payment messages, recording each order only once, existing routes, database structure and required configuration names. Keep the current framework and functioning checkout integration.
+
+First propose a design for me to review, using a visual concept or clear layout description as your tools support. Use my actual shop name, products, descriptions and AUD prices. Do not invent reviews, sales figures, condition claims or product details. Do not present AI-generated imagery as photographs of the actual items.
+
+Make prices, condition and available, reserved and sold states clear. Make the shop readable and usable on a phone.
+
+After I review the proposal, implement the interface changes in small, reviewable steps. Save the current working version before changing it.
+
+Test the layout and controls in a browser if browser tools are available; otherwise give me specific manual checks. Repeat the lesson's Stage 6 tests after the changes. Distinguish tests you actually ran from checks I still need to perform.
+
+Explain what changed and whether any functionality remains unverified. Do not switch to live payments.</pre>
+            <button type="button" class="copy-btn" data-copy="design-prompt-codex">Copy</button>
+          </div>
+          <div class="prompt-card">
+            <div class="plabel">Claude Code · Frontend Design</div>
+            <pre id="design-prompt-claude">Use the Frontend Design plugin to improve the storefront of my existing online shop.
+Read my existing project and the lesson requirements before making changes. This shop has already been built and tested.
+
+Preserve Stripe test mode, server-side prices, stock reservations, signed payment messages, recording each order only once, existing routes, database structure and required configuration names. Keep the current framework and functioning checkout integration.
+
+First propose a design for me to review, using a visual concept or clear layout description as your tools support. Use my actual shop name, products, descriptions and AUD prices. Do not invent reviews, sales figures, condition claims or product details. Do not present AI-generated imagery as photographs of the actual items.
+
+Make prices, condition and available, reserved and sold states clear. Make the shop readable and usable on a phone.
+
+After I review the proposal, implement the interface changes in small, reviewable steps. Save the current working version before changing it.
+
+Test the layout and controls in a browser if browser tools are available; otherwise give me specific manual checks. Repeat the lesson's Stage 6 tests after the changes. Distinguish tests you actually ran from checks I still need to perform.
+
+Explain what changed and whether any functionality remains unverified. Do not switch to live payments.</pre>
+            <button type="button" class="copy-btn" data-copy="design-prompt-claude">Copy</button>
+          </div>
+
+          <h3>Design checks</h3>
+          <p>Before you accept a new design, check:</p>
+          <ul class="design-checks">
+            <li>Can customers quickly understand what is for sale and what it costs?</li>
+            <li>Are item condition and availability clear?</li>
+            <li>Are text and buttons usable on a phone?</li>
+            <li>Do images and descriptions accurately represent the products?</li>
+            <li>Do existing purchase and stock-handling functions still pass the lesson’s tests?</li>
+          </ul>
+          <div class="callout"><strong>Looks are not proof.</strong> An attractive storefront does not prove that payments, reservations or order recording work. After any redesign, repeat the Stage 6 tests: a test purchase, a recorded order, and the tricky cases.</div>
+
+          <h3>Optional reflection</h3>
+          <div class="case-form design-reflection">
+            <label><span class="case-q">Your design decision</span><span class="case-hint">Name one design decision you accepted or changed. Explain how it helps your intended customer.</span><textarea data-no-paste="true" data-suggested="40–80" id="design-reflection" rows="4"></textarea></label>
+            <p class="case-hint">Saved in this browser only. Not assessed.</p>
+          </div>
+        </section>
         <div class="module-recap" data-closure="part2" hidden>
           <h3>What should you take from Part 2?</h3>
           <ul><li>An AI assistant can build a working shop from a clear, specific brief.</li><li>One-of-a-kind stock is held during payment and released if nobody pays.</li><li>Orders come from Stripe's signed message, and secret codes stay in the hosting settings.</li></ul>
@@ -2614,6 +2754,7 @@ Requirements:
         <p>Connecting these tools can save time and give your AI assistant more direct context about your code, database, deployment and payment setup. However, connections also require careful permission decisions, may not be available on university or work accounts, and can make the workflow feel more complex if you are still learning the basics.</p>
         <p><strong>These guides are optional.</strong> You do not need to connect your tools to complete the lesson. The step-by-step route explains how to create the accounts, set up each service and give your AI assistant the information it needs manually. If a connector is missing, disabled or causing problems, return to that route.</p>
         <div class="callout"><strong>Use a private account where permitted.</strong> University- or work-managed accounts may have apps, plugins or connectors disabled by administrators. Read the permission screens carefully, use development or test data, and never paste passwords, API keys or database secrets into chat.</div>
+        <div class="route-note"><span class="route-label">Improve how your shop looks</span><p>Design plugins such as Codex’s Build Web Apps and Claude Code’s Frontend Design are covered in <a href="#p2-design">Part 2, optional Stage 8: Improve your shop’s design</a>.</p></div>
         <h3>Habits that make vibe coding work</h3>
         <div class="grid three">
           <div class="card"><div class="icon-badge" aria-hidden="true">1</div><h3>Brief clearly</h3><p>Say what you are building, for whom, and what must never happen. The ready-made prompt in Part 2, Stage 3 is a model.</p></div>
@@ -2730,7 +2871,7 @@ Requirements:
       </section>
     </div>
 
-    <footer><strong>Build Your Own Online Shop</strong> · Version 4 October 2026 (account restrictions) · A hands-on e-commerce module · Test mode only, no real payments. The diagrams are illustrations, and the screenshots come from an example shop built the same way. Logos are trademarks of their owners, used for identification and teaching (see Sources).</footer>
+    <footer><strong>Build Your Own Online Shop</strong> · Version 4 October 2026 (optional Stage 8) · A hands-on e-commerce module · Test mode only, no real payments. The diagrams are illustrations, and the screenshots come from an example shop built the same way. Logos are trademarks of their owners, used for identification and teaching (see Sources).</footer>
   </main>
 </div>
 <div class="copy-toast" id="copy-toast" role="status" aria-live="polite"></div>
@@ -2798,6 +2939,9 @@ Requirements:
     ]
   };
   var nextPart = { part1:'part2', part2:'part3', part3:null };
+  // Optional stages sit after a part's last required stage. They are never locked, never gated and never
+  // counted in progress or completion, so saved progress is unaffected.
+  var optionalStage = { part2: { id:'p2-design', n:8, title:'Improve your shop’s design', purpose:'Optional. Explore how design plugins can improve your finished shop’s look and usability without breaking what works.', output:'Ideas for your shop’s design (optional)' } };
   var unlocked = load('unlocked', {}), complete = load('complete', {}), started = load('started', {});
   var times = load('times', {});
   function stamp(name, always) { if (always || !times[name]) { times[name] = new Date().toISOString(); save('times', times); } }
@@ -2916,7 +3060,13 @@ Requirements:
       btn.textContent = nextPart[k] ? 'Continue to ' + nextPart[k].replace('part', 'Part ') + ' →' : 'Return to the start ↑';
       btn.addEventListener('click', function () { if (stageReady(k, n)) showView(nextPart[k] || 'overview'); });
     }
-    footer.appendChild(btn);
+    if (isLast && optionalStage[k]) {
+      var actions = document.createElement('div'); actions.className = 'footer-actions';
+      var opt = document.createElement('button'); opt.type = 'button'; opt.className = 'secondary';
+      opt.textContent = 'Explore optional Stage ' + optionalStage[k].n + ': ' + optionalStage[k].title;
+      opt.addEventListener('click', function () { showView(optionalStage[k].id); });
+      actions.appendChild(opt); actions.appendChild(btn); footer.appendChild(actions);
+    } else footer.appendChild(btn);
     function refresh() {
       var checks = stageChecks(k, n), right = checks.filter(function (c) { return c.dataset.correct === 'true'; }).length, ready = right === checks.length;
       btn.disabled = !ready;
@@ -2932,6 +3082,37 @@ Requirements:
     sections[sections.length - 1].insertAdjacentElement('afterend', footer);
     activateNav(plan.first, true);
     if (scroll) requestAnimationFrame(function () { guide.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+    requestAnimationFrame(updateReading);
+  }
+
+  function showOptionalStage(k, section) {
+    var o = optionalStage[k], view = document.getElementById(k);
+    view.classList.add('stage-active');
+    view.querySelectorAll('.part-audio audio, video').forEach(function (a) { a.pause(); });
+    clearStageUi();
+    view.querySelectorAll('section[data-stage]').forEach(function (s) { s.classList.toggle('active-stage', s === section); });
+    var guide = document.createElement('div'); guide.className = 'stage-guide';
+    guide.innerHTML = '<div class="stage-guide-top"><div><div class="stage-kicker">Optional stage ' + o.n + ' · not required to complete Part ' + k.slice(-1) + '</div><h2></h2><p></p></div><div class="stage-output"><strong>This stage produces</strong><span></span></div></div>';
+    guide.querySelector('h2').textContent = o.title;
+    guide.querySelector('.stage-guide-top p').textContent = o.purpose;
+    guide.querySelector('.stage-output span').textContent = o.output;
+    section.insertAdjacentElement('beforebegin', guide);
+    var footer = document.createElement('div'); footer.className = 'stage-footer';
+    var p = document.createElement('p'), strong = document.createElement('strong');
+    strong.textContent = 'Your progress is unchanged: ';
+    p.appendChild(strong); p.appendChild(document.createTextNode('Part ' + k.slice(-1) + ' is complete once Stage ' + plans[k].length + ' is done. This stage is extra.'));
+    footer.appendChild(p);
+    var actions = document.createElement('div'); actions.className = 'footer-actions';
+    var back = document.createElement('button'); back.type = 'button'; back.className = 'secondary';
+    var backN = Math.min(unlocked[k], plans[k].length);
+    back.textContent = '← Back to Stage ' + backN;
+    back.addEventListener('click', function () { showView(plans[k][backN - 1].first); });
+    var next = document.createElement('button'); next.type = 'button';
+    next.textContent = nextPart[k] ? 'Continue to ' + nextPart[k].replace('part', 'Part ') + ' →' : 'Return to the start ↑';
+    next.addEventListener('click', function () { showView(nextPart[k] || 'overview'); });
+    actions.appendChild(back); actions.appendChild(next); footer.appendChild(actions);
+    section.insertAdjacentElement('afterend', footer);
+    activateNav(o.id, true);
     requestAnimationFrame(updateReading);
   }
 
@@ -2957,7 +3138,7 @@ Requirements:
       l.classList.toggle('active', l === link);
       if (l === link) l.setAttribute('aria-current', 'location'); else l.removeAttribute('aria-current');
       var g = l.closest('.nav-group').dataset.group, sn = Number(l.dataset.stageLink || 0);
-      var locked = plans[g] && sn > unlocked[g];
+      var locked = plans[g] && sn > unlocked[g] && !l.dataset.optional;
       l.classList.toggle('locked-stage', !!locked);
       l.setAttribute('aria-disabled', String(!!locked));
     });
@@ -2967,8 +3148,9 @@ Requirements:
     if (plans[gname]) {
       var sn = Number(link.dataset.stageLink || 0), total = plans[gname].length;
       progressCard.hidden = false;
-      progressLabel.textContent = sn ? 'Stage ' + sn + ' of ' + total : 'Part overview';
-      progressFill.style.width = sn ? (sn / total * 100) + '%' : '0%';
+      var isOpt = !!link.dataset.optional;
+      progressLabel.textContent = isOpt ? 'Optional stage ' + sn : sn ? 'Stage ' + sn + ' of ' + total : 'Part overview';
+      progressFill.style.width = isOpt ? '100%' : sn ? (Math.min(sn, total) / total * 100) + '%' : '0%';
     } else progressCard.hidden = true;
     if (keepVisible && window.innerWidth > 900) {
       var top = link.offsetTop - rail.clientHeight / 2 + link.offsetHeight / 2;
@@ -2985,7 +3167,9 @@ Requirements:
     var k = plans[view.id] ? view.id : null;
     var stageEl = target.matches('section[data-stage]') ? target : target.closest('section[data-stage]');
     var stageN = stageEl ? Number(stageEl.dataset.stage) : 0;
-    if (k && stageN) {
+    if (k && stageEl && stageEl.dataset.optionalStage) {
+      showOptionalStage(k, stageEl);
+    } else if (k && stageN) {
       showStage(k, stageN, false);
     } else {
       if (k) {
@@ -3013,7 +3197,7 @@ Requirements:
       e.preventDefault();
       var v = t.closest('.page-view'), k = v && plans[v.id] ? v.id : null;
       var st = t.matches('section[data-stage]') ? t : t.closest('section[data-stage]');
-      if (k && st && Number(st.dataset.stage) > unlocked[k]) { showView(plans[k][unlocked[k] - 1].first); return; }
+      if (k && st && !st.dataset.optionalStage && Number(st.dataset.stage) > unlocked[k]) { showView(plans[k][unlocked[k] - 1].first); return; }
       showView(id);
     });
   });
@@ -3042,6 +3226,12 @@ Requirements:
     while (s.firstChild) body.appendChild(s.firstChild);
     d.appendChild(sum); d.appendChild(body); s.appendChild(d);
   });
+
+  (function () {
+    var t = document.getElementById('design-reflection'); if (!t) return;
+    t.value = load('design-reflection', '');
+    t.addEventListener('input', function () { save('design-reflection', t.value); });
+  })();
 
   document.querySelectorAll('.copy-btn').forEach(function (b) {
     var tx = document.getElementById(b.dataset.copy);
