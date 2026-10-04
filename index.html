@@ -603,6 +603,12 @@
   .intro-video-head p { margin:0; color:#e6e6e6; }
   .intro-video video { display:block; width:100%; max-width:100%; aspect-ratio:16 / 9; height:auto; background:#000; }
   .intro-video-credit { margin:8px 0 0; font-size:.8rem; color:#bdbdbd; }
+  .howto-video { margin:18px 0; max-width:900px; border:2px solid var(--black); background:var(--page); }
+  .howto-video-head { display:block; padding:14px 16px; border-bottom:6px solid var(--yellow); }
+  .howto-video-head strong:first-of-type { display:block; font-size:1.1rem; margin:.2rem 0 .3rem; }
+  .howto-label { font-size:.75rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+  .howto-video video { display:block; width:100%; aspect-ratio:2864 / 1494; height:auto; background:#000; }
+  .howto-video-credit { margin:0; padding:8px 16px; font-size:.8rem; color:var(--muted); }
 
   /* part intro audio */
   .part-audio { display:grid; grid-template-columns:auto minmax(0,1fr); gap:16px; align-items:center; margin:-14px 0 28px; padding:16px 20px; background:#fff; border:2px solid var(--black); border-left:10px solid var(--yellow); }
@@ -1897,6 +1903,11 @@
           <h3>You may see: “Use an AI agent to set up Stripe for you”</h3>
           <p>When you create a sandbox, Stripe may offer a ready-made prompt for AI coding tools such as Claude Code, Cursor, Codex and ChatGPT, and show your sandbox keys underneath. This is Stripe’s own version of Route B (connectors). You can use it, or skip it and follow this lesson’s prompt in Stage 3.</p>
           <div class="shots wide"><figure class="shot"><button type="button" class="shot-btn shot-full" data-full="shots/stripe-ai-setup.webp" data-cap="Stripe’s AI setup screen. Stripe offers a prompt for your AI tool. The keys below it have been blacked out here, and you should treat yours the same way: never paste the secret key into an AI chat or a screenshot you share. It goes into Vercel’s settings in Stage 5." aria-label="Enlarge screenshot: Stripe’s AI setup screen"><img src="shots/stripe-ai-setup.webp" alt="Stripe setup screen titled Use an AI agent to set up Stripe for you, with tabs for Claude Code, Cursor, Codex, ChatGPT and Skills, an integration prompt with a Copy prompt button, and the sandbox publishable and secret keys, which have been blacked out." loading="lazy"><span class="zoom">Click to enlarge</span></button><figcaption><strong>Stripe’s AI setup screen.</strong> Stripe offers a prompt for your AI tool. The keys below it have been blacked out here, and you should treat yours the same way: never paste the secret key into an AI chat or a screenshot you share. It goes into Vercel’s settings in Stage 5.</figcaption></figure></div>
+          <figure class="howto-video">
+            <figcaption class="howto-video-head"><span class="howto-label">Watch · Screen recording · 1:10</span><strong>Setting up Stripe with an AI tool</strong> Follow a new Stripe account from the welcome screen to the AI integration prompt: enter a business name and description, choose <strong>Start with an AI tool</strong>, then pick your tool (Claude Code here) and copy the prompt. The sandbox keys are blurred, as yours should be in anything you share.</figcaption>
+            <video controls preload="none" playsinline poster="shots/stripe-setup-video-poster.jpg" aria-label="Screen recording: setting up Stripe with an AI tool"><source src="video/stripe-setup-ai.mp4" type="video/mp4">Your browser can't play this video. <a href="video/stripe-setup-ai.mp4">Open the video file</a>.</video>
+            <p class="howto-video-credit">Recording created by the module author. It has music but no narration.</p>
+          </figure>
           <div class="why-matters">
             <div class="why-label">Why this matters to you</div>
             <p>Your product list is a business asset. Clear names, honest descriptions and sensible prices drive sales, and they protect you from refunds and complaints. Selling one-of-a-kind items also changes how you think about stock: once an item is sold, it is gone, so every listing counts.</p>
@@ -2673,7 +2684,7 @@ Requirements:
       </section>
     </div>
 
-    <footer><strong>Build Your Own Online Shop</strong> · Version 4 October 2026 (Supabase and Vercel guides) · A hands-on e-commerce module · Test mode only, no real payments. The diagrams are illustrations, and the screenshots come from an example shop built the same way. Logos are trademarks of their owners, used for identification and teaching (see Sources).</footer>
+    <footer><strong>Build Your Own Online Shop</strong> · Version 4 October 2026 (Stripe setup video) · A hands-on e-commerce module · Test mode only, no real payments. The diagrams are illustrations, and the screenshots come from an example shop built the same way. Logos are trademarks of their owners, used for identification and teaching (see Sources).</footer>
   </main>
 </div>
 <div class="copy-toast" id="copy-toast" role="status" aria-live="polite"></div>
@@ -2823,7 +2834,7 @@ Requirements:
     n = Math.min(n, unlocked[k]);
     var view = document.getElementById(k), plan = plans[k][n - 1];
     view.classList.add('stage-active');
-    view.querySelectorAll('.part-audio audio').forEach(function (a) { a.pause(); });
+    view.querySelectorAll('.part-audio audio, video').forEach(function (a) { a.pause(); });
     started[k] = true; save('started', started); stamp('module-start'); stamp(k + '-start'); updateCompletion();
     clearStageUi();
     view.querySelectorAll('section[data-stage]').forEach(function (s) { s.classList.toggle('active-stage', Number(s.dataset.stage) === n); });

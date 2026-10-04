@@ -23,7 +23,7 @@ By the end of the module, students can:
 
 - `index.html` is the whole site and the **master copy**. Edit this file.
 - `shots/` holds the screenshots and logos.
-- `video/` holds the module introduction video (The Hidden Labyrinth of E-commerce). The Claude version uses a smaller re-encoded copy, because artifacts allow files up to 15 MB.
+- `video/` holds the module introduction video (The Hidden Labyrinth of E-commerce) and the Part 2 Stripe setup screen recording (keys blurred). The Claude version uses a smaller re-encoded copy of the introduction video, because artifacts allow files up to 15 MB.
 - `audio/` holds the audio introductions to Parts 1–3 (.m4a originals plus .mp3 copies for browsers without AAC support).
 - `favicon.svg` is the browser-tab icon.
 - Teacher preview: open the site with `#teacher-preview` at the end of the address to unlock every stage (in that browser only) and jump to the business case.
