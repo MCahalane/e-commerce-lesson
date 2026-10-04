@@ -24,7 +24,7 @@ By the end of the module, students can:
 - `index.html` is the whole site and the **master copy**. Edit this file.
 - `shots/` holds the screenshots and logos.
 - `video/` holds the module introduction video (The Hidden Labyrinth of E-commerce) and the Part 2 Stripe setup screen recording (keys blurred). The Claude version uses a smaller re-encoded copy of the introduction video, because artifacts allow files up to 15 MB.
-- `guides/` holds two optional PDF guides for connecting the project's services to an AI assistant (ChatGPT Codex; Claude connectors), linked from the AI tools recap and Part 2, Stage 1. In the Claude version, these links point to the copies on GitHub Pages, because artifacts block downloads.
+- `guides/` holds two optional PDF guides for connecting the project's services to an AI assistant (ChatGPT Codex and Claude connectors, each covering GitHub, Supabase, Vercel and Stripe), linked from the AI tools recap and Part 2, Stage 1. `shots/disabled-by-admin.png` comes from the Codex guide. In the Claude version, these links point to the copies on GitHub Pages, because artifacts block downloads.
 - `audio/` holds the audio introductions to Parts 1–3 (.m4a originals plus .mp3 copies for browsers without AAC support).
 - `favicon.svg` is the browser-tab icon.
 - Teacher preview: open the site with `#teacher-preview` at the end of the address to unlock every stage (in that browser only) and jump to the business case.
