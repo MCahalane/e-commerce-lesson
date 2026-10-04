@@ -622,6 +622,8 @@
   .consequence-scale .cs-level { display:block; margin-bottom:3px; font-size:.7rem; font-weight:900; letter-spacing:.07em; text-transform:uppercase; color:var(--muted); }
   .consequence-scale strong { display:block; line-height:1.35; }
   .shot-btn.shot-full { aspect-ratio:auto; cursor:zoom-in; }
+  .shots.wide { grid-template-columns:minmax(0,900px); }
+  .shots.pair { grid-template-columns:repeat(2,minmax(0,1fr)); align-items:start; }
   .shot-btn.shot-full img { height:auto; object-fit:contain; }
   .oversight-fig img { max-height:none; }
 
@@ -734,7 +736,7 @@
     .guided-start-next { width:100%; }
     .module-recap ul { grid-template-columns:1fr; }
     .media-lesson { grid-template-columns:1fr; }
-    .tips-groups, .outcomes li, .case-who, .sale-flow { grid-template-columns:1fr; }
+    .tips-groups, .outcomes li, .case-who, .sale-flow, .shots.pair { grid-template-columns:1fr; }
     .consequence-scale { grid-template-columns:1fr 1fr; }
     .sale-flow li:not(:last-child)::after { content:"↓"; right:auto; left:14px; top:auto; bottom:-20px; display:block; }
     .is-note, .case-intro, .case-bg, .case-figs { grid-template-columns:1fr; }
@@ -1890,6 +1892,9 @@
             <li>Open each product and copy its <strong>price ID</strong> (it starts with <code>price_</code>) into a note, with the name and price.</li>
           </ol>
           <div class="callout"><strong>Good to know:</strong> price IDs are not secret. It is fine for them to appear in your code.</div>
+          <h3>You may see: “Use an AI agent to set up Stripe for you”</h3>
+          <p>When you create a sandbox, Stripe may offer a ready-made prompt for AI coding tools such as Claude Code, Cursor, Codex and ChatGPT, and show your sandbox keys underneath. This is Stripe’s own version of Route B (connectors). You can use it, or skip it and follow this lesson’s prompt in Stage 3.</p>
+          <div class="shots wide"><figure class="shot"><button type="button" class="shot-btn shot-full" data-full="shots/stripe-ai-setup.webp" data-cap="Stripe’s AI setup screen. Stripe offers a prompt for your AI tool. The keys below it have been blacked out here, and you should treat yours the same way: never paste the secret key into an AI chat or a screenshot you share. It goes into Vercel’s settings in Stage 5." aria-label="Enlarge screenshot: Stripe’s AI setup screen"><img src="shots/stripe-ai-setup.webp" alt="Stripe setup screen titled Use an AI agent to set up Stripe for you, with tabs for Claude Code, Cursor, Codex, ChatGPT and Skills, an integration prompt with a Copy prompt button, and the sandbox publishable and secret keys, which have been blacked out." loading="lazy"><span class="zoom">Click to enlarge</span></button><figcaption><strong>Stripe’s AI setup screen.</strong> Stripe offers a prompt for your AI tool. The keys below it have been blacked out here, and you should treat yours the same way: never paste the secret key into an AI chat or a screenshot you share. It goes into Vercel’s settings in Stage 5.</figcaption></figure></div>
           <div class="why-matters">
             <div class="why-label">Why this matters to you</div>
             <p>Your product list is a business asset. Clear names, honest descriptions and sensible prices drive sales, and they protect you from refunds and complaints. Selling one-of-a-kind items also changes how you think about stock: once an item is sold, it is gone, so every listing counts.</p>
@@ -1951,10 +1956,11 @@ Requirements:
 - Commit after each step, and push to GitHub when finished.</pre>
             <button type="button" class="copy-btn" data-copy="build-prompt">Copy</button>
           </div>
-          <ol class="steps from-4">
+          <ol class="steps from-4" id="build-check-steps">
             <li>Read what the AI made. Ask it to explain anything you don't understand, in plain English.</li>
             <li>Check the code is on GitHub. If the AI worked on a separate branch, open its <strong>pull request</strong> in GitHub and click <strong>Merge</strong>, so the code is on <strong>main</strong>.</li>
           </ol>
+          <div class="shots wide"><figure class="shot"><button type="button" class="shot-btn shot-full" data-full="shots/github-repo.webp" data-cap="What your repository should look like. The example shop’s repository on main. Look for the api, public and supabase folders, a commit message for each step, and, once Stage 5 is done, your Vercel address and deployments in the sidebar." aria-label="Enlarge screenshot: What your repository should look like"><img src="shots/github-repo.webp" alt="GitHub repository page for stripe-checkout-test on the main branch, listing folders api, docs, lib, public, scripts and supabase plus files such as README.md, package.json and vercel.json. Each item shows a commit message such as Step 5: stripe-webhook function. The sidebar shows the live Vercel address and two deployments." loading="lazy"><span class="zoom">Click to enlarge</span></button><figcaption><strong>What your repository should look like.</strong> The example shop’s repository on <strong>main</strong>. Look for the <code>api</code>, <code>public</code> and <code>supabase</code> folders, a commit message for each step, and, once Stage 5 is done, your Vercel address and deployments in the sidebar.</figcaption></figure></div>
           <div class="why-matters">
             <div class="why-label">Why this matters to you</div>
             <p>Writing a clear brief is one of the most valuable skills in business. Whether you brief an AI, a developer, an agency or a supplier, vague requirements lead to expensive surprises. The prompt above is a short specification: it says what to build, the rules it must follow, and what “done” looks like.</p>
@@ -2029,10 +2035,12 @@ Requirements:
           <div class="logo-badge"><img src="shots/vercel-logo.png" alt="Vercel logo" loading="lazy"></div>
           <ol class="steps">
             <li>Go to <a href="https://vercel.com/new" target="_blank" rel="noopener">vercel.com/new</a>. Find your repository and click <strong>Import</strong>. Do this <strong>once</strong> only; importing twice makes two copies.</li>
-            <li>Open <strong>Environment Variables</strong>. Add the first four settings from step 5: the name in the left box, the value in the right box, then <strong>Add</strong>.</li>
+            <li>Open <strong>Environment Variables</strong> and click <strong>Add Environment Variable</strong>. For each of the first four settings from step 5, type the name in <strong>Key</strong> and the value in <strong>Value</strong>. Choose <strong>Secret</strong> for <code>STRIPE_SECRET_KEY</code> and <code>SUPABASE_SERVICE_ROLE_KEY</code> (the others can be <strong>Config</strong>), set <strong>Environments</strong> to <strong>Production and Preview</strong>, then click <strong>Save</strong>.</li>
             <li>Click <strong>Deploy</strong> and wait 1–2 minutes.</li>
             <li>Open the project in Vercel and look under <strong>Domains</strong>. That is your shop's address, for example <code>https://textbook-swap.vercel.app</code>.</li>
           </ol>
+          <div class="shots pair"><figure class="shot"><button type="button" class="shot-btn shot-full" data-full="shots/vercel-add-env.webp" data-cap="The Add Environment Variable box. Choose Secret for secret keys, type the exact name in Key, paste the value, and change Environments from Production to Production and Preview before you save." aria-label="Enlarge screenshot: The Add Environment Variable box"><img src="shots/vercel-add-env.webp" alt="Vercel Add Environment Variable dialog with a choice of Secret or Config type, Key and Value fields, an optional note, an Environments menu set to Production, and a Save button." loading="lazy"><span class="zoom">Click to enlarge</span></button><figcaption><strong>The Add Environment Variable box.</strong> Choose <strong>Secret</strong> for secret keys, type the exact name in <strong>Key</strong>, paste the value, and change <strong>Environments</strong> from Production to Production and Preview before you save.</figcaption></figure><figure class="shot"><button type="button" class="shot-btn shot-full" data-full="shots/vercel-env-list.webp" data-cap="Your first four settings. After this step you should see these four names, spelled exactly like this, each for Production and Preview. You add the last two in step 8." aria-label="Enlarge screenshot: Your first four settings"><img src="shots/vercel-env-list.webp" alt="Vercel Environment Variables page listing STRIPE_SECRET_KEY, SUPABASE_URL, SUPABASE_ANON_KEY and SUPABASE_SERVICE_ROLE_KEY, each for Production and Preview." loading="lazy"><span class="zoom">Click to enlarge</span></button><figcaption><strong>Your first four settings.</strong> After this step you should see these four names, spelled exactly like this, each for Production and Preview. You add the last two in step 8.</figcaption></figure></div>
+          <div class="shots wide"><figure class="shot"><button type="button" class="shot-btn shot-full" data-full="shots/vercel-overview.webp" data-cap="The project overview after deploying. When the status says Ready, your shop is live. The address under Domains is the one you use for SITE_URL and for Stripe in step 7. The Source line shows which GitHub commit is live." aria-label="Enlarge screenshot: The project overview after deploying"><img src="shots/vercel-overview.webp" alt="Vercel project overview for stripe-checkout-test showing a preview of the Mike’s Comics shop, the deployment address, a Domains entry ending in vercel.app, status Ready, and the source branch main with the latest commit." loading="lazy"><span class="zoom">Click to enlarge</span></button><figcaption><strong>The project overview after deploying.</strong> When the status says <strong>Ready</strong>, your shop is live. The address under <strong>Domains</strong> is the one you use for <code>SITE_URL</code> and for Stripe in step 7. The <strong>Source</strong> line shows which GitHub commit is live.</figcaption></figure></div>
           <div class="callout"><strong>Extra letters in your address?</strong> If someone already took the plain name, Vercel adds a few letters, like <code>textbook-swap-i7fr.vercel.app</code>. That is normal. Always copy the exact address Vercel shows.</div>
           <div class="step-heading" data-step="7">Build step 7</div>
           <h3>Tell Stripe where to send payment messages</h3>
@@ -2050,7 +2058,7 @@ Requirements:
           <div class="step-heading" data-step="8">Build step 8</div>
           <h3>Add the last two settings and rebuild</h3>
           <ol class="steps">
-            <li>In Vercel, open your project and go to <strong>Settings → Environment Variables</strong>. Add <code>STRIPE_WEBHOOK_SECRET</code> (the <code>whsec_</code> code) and <code>SITE_URL</code> (your address from step 6, with no <code>/</code> at the end).</li>
+            <li>In Vercel, open your project and click <strong>Environment Variables</strong> in the left menu (in some layouts it is under <strong>Settings</strong>). Add <code>STRIPE_WEBHOOK_SECRET</code> (the <code>whsec_</code> code) and <code>SITE_URL</code> (your address from step 6, with no <code>/</code> at the end).</li>
             <li>Vercel only uses new settings after a rebuild. Go to <strong>Deployments</strong>, click <strong>⋯</strong> next to the newest one, and choose <strong>Redeploy</strong>.</li>
             <li>Wait until it says <strong>Ready</strong>.</li>
           </ol>
@@ -2655,7 +2663,7 @@ Requirements:
       </section>
     </div>
 
-    <footer><strong>Build Your Own Online Shop</strong> · Version 3 October 2026 (oversight questions) · A hands-on e-commerce module · Test mode only, no real payments. The diagrams are illustrations, and the screenshots come from an example shop built the same way. Logos are trademarks of their owners, used for identification and teaching (see Sources).</footer>
+    <footer><strong>Build Your Own Online Shop</strong> · Version 4 October 2026 (Part 2 screenshots) · A hands-on e-commerce module · Test mode only, no real payments. The diagrams are illustrations, and the screenshots come from an example shop built the same way. Logos are trademarks of their owners, used for identification and teaching (see Sources).</footer>
   </main>
 </div>
 <div class="copy-toast" id="copy-toast" role="status" aria-live="polite"></div>
